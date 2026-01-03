@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "m8Anj96tudjhXPQNv2Xs7iTWaPvCjAryJdZSm6970B0=",
+  "Source": "grapevineApi",
+  "BasePath": "_content/grapevineApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

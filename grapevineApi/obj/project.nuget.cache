@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "zryoiUk4XpCRd96TE2FUqNlEAqWU57K6WFOQtxu2PjeeZ5m8IJ1eq/XBO7++n65dp+d2vCGOhZUI7hl15rgmXg==",
+  "success": true,
+  "projectFilePath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\grapevineApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

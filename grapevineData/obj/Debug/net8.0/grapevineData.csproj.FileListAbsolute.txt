@@ -1,0 +1,11 @@
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\bin\Debug\net8.0\grapevineData.deps.json
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\bin\Debug\net8.0\grapevineData.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\bin\Debug\net8.0\grapevineData.pdb
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.GeneratedMSBuildEditorConfig.editorconfig
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.AssemblyInfoInputs.cache
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.AssemblyInfo.cs
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.csproj.CoreCompileInputs.cache
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\refint\grapevineData.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.pdb
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\ref\grapevineData.dll
