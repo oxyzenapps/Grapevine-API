@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "5jm3zzhSSDvCS4ReOHFM2FmwvqRIwjt3vOGeeRmT9iNUMy3Rdl7MRHjOuzaytMhUAnhasgibZlrMUADwOK5l7g==",
+  "dgSpecHash": "e3TkZORop053S0NxADzrbCldoszZ9gAL437CSkplOMV21Bc9cGRtuzfZfHpzJDr3vdLvm/obnZTqLx7Zizc30w==",
   "success": true,
   "projectFilePath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.15.0\\microsoft.identitymodel.abstractions.8.15.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.15.0\\microsoft.identitymodel.jsonwebtokens.8.15.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.identitymodel.logging\\8.15.0\\microsoft.identitymodel.logging.8.15.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.15.0\\microsoft.identitymodel.tokens.8.15.0.nupkg.sha512",
+    "C:\\Users\\HPHP\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.15.0\\system.identitymodel.tokens.jwt.8.15.0.nupkg.sha512"
+  ],
   "logs": []
 }

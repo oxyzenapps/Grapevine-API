@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.22" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="grapevineCommon">
+      <HintPath>..\grapevineCommon\bin\Debug\net8.0\grapevineCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="grapevineData">
+      <HintPath>..\grapevineData\bin\Debug\net8.0\grapevineData.dll</HintPath>
+    </Reference>
     <Reference Include="grapevineServices">
       <HintPath>..\grapevineServices\bin\Debug\net8.0\grapevineServices.dll</HintPath>
     </Reference>

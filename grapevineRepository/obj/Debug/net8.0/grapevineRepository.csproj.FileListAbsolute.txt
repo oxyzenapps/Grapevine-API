@@ -9,3 +9,8 @@ D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\refint\grapevineRepository.dll
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\grapevineRepository.pdb
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\ref\grapevineRepository.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\bin\Debug\net8.0\grapevineData.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\bin\Debug\net8.0\grapevineData.pdb
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\grapevineRepository.csproj.AssemblyReference.cache
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\grapevineRepository.sourcelink.json
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineRepository\obj\Debug\net8.0\grapevin.C3FF2E62.Up2Date

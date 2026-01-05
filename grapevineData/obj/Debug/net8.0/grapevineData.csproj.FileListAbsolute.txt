@@ -9,3 +9,5 @@ D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\gra
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\refint\grapevineData.dll
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.pdb
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\ref\grapevineData.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.csproj.AssemblyReference.cache
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineData\obj\Debug\net8.0\grapevineData.sourcelink.json
