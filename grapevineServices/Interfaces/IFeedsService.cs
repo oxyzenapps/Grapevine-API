@@ -1,4 +1,5 @@
-﻿using System;
+﻿using grapevineCommon.Model.Feed;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace grapevineServices.Interfaces
 {
     public interface IFeedsService
     {
-        Task<string> GetFeedsAsync();
+        Task<FeedResponse> GetFeedAsync(FeedRequest request);
     }
 }

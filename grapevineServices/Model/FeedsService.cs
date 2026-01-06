@@ -1,4 +1,6 @@
-﻿using grapevineServices.Interfaces;
+﻿using grapevineCommon.Model.Feed;
+using grapevineRepository.Interfaces;
+using grapevineServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,16 @@ namespace grapevineServices.Model
 {
     public class FeedsService : IFeedsService
     {
-        public async Task<string> GetFeedsAsync()
+        private readonly IFeedRepository _feedRepository;
+
+        public FeedsService(IFeedRepository feedRepository)
         {
-            // Simulate fetching feeds
-            await Task.Delay(100); // Simulating async work
-            return "Sample Feeds Data";
+            _feedRepository = feedRepository;
+        }
+
+        public async Task<FeedResponse> GetFeedAsync(FeedRequest request)
+        {
+            return await _feedRepository.GetFeedAsync(request);
         }
     }
 }

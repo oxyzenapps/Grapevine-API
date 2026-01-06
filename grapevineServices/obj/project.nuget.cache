@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "e3TkZORop053S0NxADzrbCldoszZ9gAL437CSkplOMV21Bc9cGRtuzfZfHpzJDr3vdLvm/obnZTqLx7Zizc30w==",
+  "dgSpecHash": "3jDe9ffbzZ48+mREqucyhX0bIsruuvEa082aBJb98H+pUmmgICxq012AmTUcYAjS7Q0+M/9kFAVINqzD+kt1sQ==",
   "success": true,
   "projectFilePath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HPHP\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\HPHP\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",

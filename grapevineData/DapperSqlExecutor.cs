@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -80,6 +80,17 @@ namespace grapevineData
             var sql = $"SELECT * FROM {functionName}";
 
             return await conn.QueryFirstOrDefaultAsync<T>(sql, parameters);
+        }
+
+       
+
+        public async Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request, CommandType commandType = CommandType.Text)
+        {
+            using var connection = new SqlConnection(_connStr);
+            using var multi = await connection.QueryMultipleAsync(request.ProcedureName, request.Parameters, commandType: commandType);
+            var first = await multi.ReadAsync<T1>();
+            var second = await multi.ReadAsync<T2>();
+            return (first, second);
         }
     }
 }

@@ -16,3 +16,5 @@ D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\bin\Debug\net8.0
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\bin\Debug\net8.0\grapevineRepository.pdb
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\bin\Debug\net8.0\grapevineData.pdb
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\obj\Debug\net8.0\grapevin.0D5F7AE8.Up2Date
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\bin\Debug\net8.0\grapevineCommon.dll
+D:\Office Projects\Grapevine\grapevineApiCode\grapevineServices\bin\Debug\net8.0\grapevineCommon.pdb
