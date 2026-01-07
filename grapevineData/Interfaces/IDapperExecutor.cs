@@ -20,6 +20,6 @@ namespace grapevineData.Interfaces
         Task<T> ExecuteTableFunctionSingleAsync<T>(
             string functionName,
             object parameters = null);
-        Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request, CommandType commandType = CommandType.Text);
+        Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
     }
 }

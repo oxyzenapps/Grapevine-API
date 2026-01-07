@@ -40,4 +40,5 @@ namespace grapevineCommon.Model.Feed
         public int Query { get; set; } = 1;
         public int searchID { get; set; } = 0;
     }
+
 }

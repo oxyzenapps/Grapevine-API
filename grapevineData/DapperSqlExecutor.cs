@@ -84,10 +84,10 @@ namespace grapevineData
 
        
 
-        public async Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request, CommandType commandType = CommandType.Text)
+        public async Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request)
         {
             using var connection = new SqlConnection(_connStr);
-            using var multi = await connection.QueryMultipleAsync(request.ProcedureName, request.Parameters, commandType: commandType);
+            using var multi = await connection.QueryMultipleAsync(request.ProcedureName, request.Parameters, commandType: CommandType.StoredProcedure);
             var first = await multi.ReadAsync<T1>();
             var second = await multi.ReadAsync<T2>();
             return (first, second);
