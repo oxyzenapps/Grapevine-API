@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("grapevineApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+203bd2945bba6ea576e900f330423cd928e1622c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+273a8f854880f37fc031741e199c72e5930fc18d")]
 [assembly: System.Reflection.AssemblyProductAttribute("grapevineApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("grapevineApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
