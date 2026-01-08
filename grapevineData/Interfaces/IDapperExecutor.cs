@@ -21,5 +21,7 @@ namespace grapevineData.Interfaces
             string functionName,
             object parameters = null);
         Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
+        Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request);
     }
+
 }
