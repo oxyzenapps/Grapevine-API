@@ -62,7 +62,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<ISqlExecutor, SqlExecutor>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IFeedsService, FeedsService>();
 builder.Services.AddScoped<DapperSqlExecutor>();
 
 builder.Services.AddScoped<IDapperExecutor, DapperSqlExecutor>();
