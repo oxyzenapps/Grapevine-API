@@ -90,3 +90,5 @@ publish/
 /grapevineRepository/obj/project.nuget.cache
 /grapevineRepository/obj/Debug/net8.0/ref/grapevineRepository.dll
 /grapevineRepository/obj/Debug/net8.0/refint/grapevineRepository.dll
+/grapevineApi/Properties/PublishProfiles
+/grapevineApi/grapevineApi.csproj.user
