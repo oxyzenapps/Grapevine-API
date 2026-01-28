@@ -1831,11 +1831,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineRepository\\grapevineRepository.csproj",
+      "projectUniqueName": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineRepository\\grapevineRepository.csproj",
       "projectName": "grapevineRepository",
-      "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineRepository\\grapevineRepository.csproj",
+      "projectPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineRepository\\grapevineRepository.csproj",
       "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-      "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineRepository\\obj\\",
+      "outputPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineRepository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",

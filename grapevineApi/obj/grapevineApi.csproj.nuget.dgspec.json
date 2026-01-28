@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\grapevineApi.csproj": {}
+    "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineApi\\grapevineApi.csproj": {}
   },
   "projects": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\grapevineApi.csproj": {
+    "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineApi\\grapevineApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\grapevineApi.csproj",
+        "projectUniqueName": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineApi\\grapevineApi.csproj",
         "projectName": "grapevineApi",
-        "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\grapevineApi.csproj",
+        "projectPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineApi\\grapevineApi.csproj",
         "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-        "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineApi\\obj\\",
+        "outputPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -56,6 +56,10 @@
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.1.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

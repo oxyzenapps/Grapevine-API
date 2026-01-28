@@ -496,11 +496,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
+      "projectUniqueName": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineServices\\grapevineServices.csproj",
       "projectName": "grapevineServices",
-      "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
+      "projectPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineServices\\grapevineServices.csproj",
       "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-      "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\obj\\",
+      "outputPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineServices\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",

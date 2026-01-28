@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+YCYRqnxtTrevW+AkpA+apc7O7ltexrcxFl9nEdbBlRsxu7oNbXZ4LCAslHMJEPbD9a4bikPzWG+XymGIxbeqA==",
+  "dgSpecHash": "H0WktIpU1e1M5BaPIHyluwKfMkajrhTCOSDkn1pdF+z2wjuiCmp0lH0C/JF9o1VW5OOzomDZOUj6e9XwAuauwg==",
   "success": true,
-  "projectFilePath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj",
+  "projectFilePath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
