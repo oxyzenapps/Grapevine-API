@@ -69,6 +69,53 @@ namespace grapevineApi.Controllers
             }
         }
 
+        [Route("lands/in-mh/bhunaksha")]
+        [HttpGet]
+        public async Task<IActionResult> BhuNakshaExtractor(string District, string Taluka, string Village)
+        {
+            //var exePath = @"D:\Office Projects\Grapevine\Grapevine_website\BhulekhExtractor\BhulekhExtractor.exe";
+            var exePath = Path.Combine(
+    _env.ContentRootPath,
+    "BhuNaksha",
+    "publish",
+    "BhuNaksha.exe"
+);
+            string url = "https://igreval.maharashtra.gov.in/eASR2.0/eASRCommon.aspx";
+            
+            var payload = new ScrapeRequest
+            {
+                District = District,
+                Taluka = Taluka,
+                Village = Village,
+                Url = url
+            };
+            var json = JsonConvert.SerializeObject(payload);
+            string escapedJson = json.Replace("\"", "\\\"");
+            var psi = new ProcessStartInfo
+            {
+                FileName = exePath,
+                Arguments = $"\"{escapedJson}\"",   // ✅ quoted
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            using (var process = Process.Start(psi))
+            {
+                var outputTask = process.StandardOutput.ReadToEndAsync();
+                var errorTask = process.StandardError.ReadToEndAsync();
+                process.WaitForExit();
+
+                var output = await outputTask;
+                var error = await errorTask;
+
+                if (!string.IsNullOrWhiteSpace(error))
+                    JsonConvert.DeserializeObject(error);
+
+                return Ok(output);
+            }
+        }
+
         public class ScrapeRequest
         {
             public string Url { get; set; } = "";
