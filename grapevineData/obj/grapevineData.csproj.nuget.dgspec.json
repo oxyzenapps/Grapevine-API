@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineData\\grapevineData.csproj": {}
+    "S:\\Grapevine\\GrpvNewBackend\\Grapevine-API\\grapevineData\\grapevineData.csproj": {}
   },
   "projects": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineData\\grapevineData.csproj": {
+    "S:\\Grapevine\\GrpvNewBackend\\Grapevine-API\\grapevineData\\grapevineData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineData\\grapevineData.csproj",
+        "projectUniqueName": "S:\\Grapevine\\GrpvNewBackend\\Grapevine-API\\grapevineData\\grapevineData.csproj",
         "projectName": "grapevineData",
-        "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineData\\grapevineData.csproj",
-        "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-        "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineData\\obj\\",
+        "projectPath": "S:\\Grapevine\\GrpvNewBackend\\Grapevine-API\\grapevineData\\grapevineData.csproj",
+        "packagesPath": "C:\\Users\\akshay\\.nuget\\packages\\",
+        "outputPath": "S:\\Grapevine\\GrpvNewBackend\\Grapevine-API\\grapevineData\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\akshay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,51 +34,22 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.1.66, )"
-            },
-            "Microsoft.Data.SqlClient": {
-              "target": "Package",
-              "version": "[6.1.3, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.22, )"
-            },
-            "Microsoft.Extensions.Configuration.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     }
