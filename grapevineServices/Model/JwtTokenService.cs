@@ -12,7 +12,7 @@ namespace grapevineServices.Model
         private readonly IConfiguration _config;
         public JwtTokenService(IConfiguration config) => _config = config;
 
-        public string GenerateToken(string username)
+        public async Task<string> GenerateToken(string username)
         {
             var jwtSettings = _config.GetSection("Jwt");
             var claims = new[]

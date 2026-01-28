@@ -8,6 +8,6 @@ namespace grapevineServices.Interfaces
 {
     public interface IJwtTokenService
     {
-        string GenerateToken(string username);
+        Task<string> GenerateToken(string username);
     }
 }
