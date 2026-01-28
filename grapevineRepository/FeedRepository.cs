@@ -1,4 +1,245 @@
-﻿using Azure.Core;
+﻿//using Azure.Core;
+//using Dapper;
+//using grapevineCommon.Model.Feed;
+//using grapevineData;
+//using grapevineData.Interfaces;
+//using grapevineRepository.Interfaces;
+//using Microsoft.Extensions.Options;
+//using System;
+//using System.Collections.Generic;
+//using System.Data;
+//using System.Linq;
+//using System.Net;
+//using System.Text;
+//using System.Threading.Tasks;
+//using static System.Runtime.InteropServices.JavaScript.JSType;
+
+//namespace grapevineRepository
+//{
+//    public class FeedRepository : IFeedRepository
+//    {
+//        private readonly IDapperExecutor _dapper;
+//        private StoredProcedureRequest storedProcedureRequest = null;
+
+//        public FeedRepository(IDapperExecutor dapper)
+//        {
+//            this._dapper = dapper;
+//        }
+
+//        public async Task<FeedResponse> GetFeedAsync(FeedRequest request)
+//        {
+//            var parameters = new DynamicParameters();
+//            parameters.Add("@WebsiteID", request.WebsiteID);
+//            parameters.Add("@LoginFeedChannelID", request.LoginFeedChannelID);
+//            parameters.Add("@FeedChannelID", request.FeedChannelID);
+//            parameters.Add("@ExcludeFeedChannelID", request.ExcludeFeedChannelID ? 1 : 0);
+//            parameters.Add("@contactFeedChannelID", request.ContactFeedChannelID);
+//            parameters.Add("@ExcludeContactID", request.ExcludeContactID ? 1 : 0);
+//            parameters.Add("@TaggedOnly", request.TaggedOnly);
+//            parameters.Add("@FeedBy", request.FeedBy);
+//            parameters.Add("@FeedID", request.FeedID);
+//            parameters.Add("@ObjectID", request.ObjectID);
+//            parameters.Add("@FeedTypeID", request.FeedTypeID);
+//            parameters.Add("@ObjectTypeID", request.ObjectTypeID);
+//            parameters.Add("@PageNo", request.PageNo);
+//            parameters.Add("@SearchString", request.SearchString);
+//            parameters.Add("@FeedChannelParticipantTypeID", request.FeedChannelParticipantTypeID);
+//            parameters.Add("@ActivityID", request.ActivityID);
+//            parameters.Add("@ListingID", request.ListingID);
+//            parameters.Add("@UniversalTransactionID", request.UniversalTransactionID);
+//            parameters.Add("@FeedVisibilityID", request.FeedVisibilityID);
+//            parameters.Add("@MinViewCount", request.MinViewCount);
+//            parameters.Add("@MaxViewCount", request.MaxViewCount);
+//            parameters.Add("@Isposted", request.IsPosted);
+//            parameters.Add("@DateUpto", request.DateUpto);
+//            parameters.Add("@Announcement", request.Announcement);
+//            parameters.Add("@LanguageID", request.LanguageID);
+//            parameters.Add("@Visible", request.Visible);
+//            parameters.Add("@Favourite", request.Favourite);
+//            parameters.Add("@ForYou", request.ForYou);
+//            parameters.Add("@SortOrder", request.SortOrder);
+//            parameters.Add("@Query", request.Query);
+//            parameters.Add("@SearchID", request.searchID, direction: ParameterDirection.Output);
+//            storedProcedureRequest = new StoredProcedureRequest
+//            {
+//                ProcedureName = "glivebooks.dbo.crm_get_Feed",
+//                Parameters = parameters
+//            };
+
+//            var feeds = await _dapper.ExecuteAsync<FeedItem>(storedProcedureRequest);
+//            feeds = await BindFeedDetails(feeds.ToList(),request.LoginFeedChannelID,request.WebsiteID);
+//            var searchId = parameters.Get<int>("@SearchID");
+
+//            return new FeedResponse
+//            {
+//                SearchID = searchId,
+//                Feeds = feeds.ToList()
+//            };
+//        }
+
+//        public async Task<List<FeedItem>> BindFeedDetails(List<FeedItem> feeds,int LoginFeedChannelID, int WebsiteID)
+//        {
+//            for(int i =0; i< feeds.Count; i++)
+//            {
+//                feeds[i]._Feed_Like_Reactions = await GetReactions(feeds[i].FeedID, feeds[i].ObjectID, LoginFeedChannelID, WebsiteID);
+//                feeds[i]._Feed_Comments = await GetComments(feeds[i].FeedID, "0", "2", "0", LoginFeedChannelID,WebsiteID,2);
+//                feeds[i]._GroupMembers = await GetTagMembers(feeds[i].FeedID, WebsiteID, feeds[i].FeedTagString,LoginFeedChannelID);
+//                feeds[i]._FeedLikeTypes = await getLikeTypes();
+//                //if (feeds[i].SharedFeedID != "0")
+//                //{
+//                //    var sharedfeed = await GetFeedAsync(new FeedRequest
+//                //    {
+//                //        WebsiteID = WebsiteID,
+//                //        LoginFeedChannelID = LoginFeedChannelID,
+//                //        FeedID = feeds[i].SharedFeedID,
+//                //    });
+//                //    if (sharedfeed.Feeds.Count > 0)
+//                //    {
+//                //        feeds[i]._SharedFeed = sharedfeed.Feeds.FirstOrDefault();
+//                //    }
+//                //}
+//            }
+//            return feeds;
+//        }
+
+//        public async Task<Feed_Like_Reactions> GetReactions(string FeedID, string ObjectID, int LoginFeedChannelID, int WebsiteID)
+//        {
+//            var parameters = new DynamicParameters();
+//            parameters.Add("@WebsiteID", WebsiteID);
+//            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
+//            parameters.Add("@FeedID", FeedID);
+//            parameters.Add("@ObjectID", ObjectID);
+//            storedProcedureRequest = new StoredProcedureRequest
+//            {
+//                ProcedureName = "glivebooks.dbo.crm_get_feed_lscs",
+//                Parameters = parameters
+//            };
+
+//            var (_Feed_Like_Reactions, _Feed_Like_Reactions1) = await _dapper.QueryMultipleAsync<Feed_Like_Reactions, Feed_Like_Reactions>(storedProcedureRequest);
+//            if (_Feed_Like_Reactions1.Any())
+//            {
+//                _Feed_Like_Reactions.FirstOrDefault().ExceptFriendList = _Feed_Like_Reactions1.FirstOrDefault().ExceptFriendList;
+//                _Feed_Like_Reactions.FirstOrDefault().SpecificFriendList = _Feed_Like_Reactions1.FirstOrDefault().SpecificFriendList;
+//                _Feed_Like_Reactions.FirstOrDefault().CustomListID = _Feed_Like_Reactions1.FirstOrDefault().CustomListID;
+//            }
+
+//            _Feed_Like_Reactions.FirstOrDefault().FeedID = FeedID;
+//            _Feed_Like_Reactions.FirstOrDefault().ObjectID = ObjectID;
+//            return _Feed_Like_Reactions.FirstOrDefault();
+//        }
+
+//        public async Task<List<Feed_Comments>> GetComments(string FeedID, string CommentID, string CommentCount, string ObjectID, int LoginFeedChannelID,int WebsiteID,int OptioniD)
+//        {
+//            List<Feed_Comments> _comments = new List<Feed_Comments>();
+//            var parameters = new DynamicParameters();
+//            parameters.Add("@WebsiteID", WebsiteID);
+//            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
+//            parameters.Add("@FeedID", FeedID);
+//            parameters.Add("@vParentCommentID", CommentID);
+//            parameters.Add("@ObjectID", ObjectID);
+//            parameters.Add("@OptioniD", OptioniD);
+//            storedProcedureRequest = new StoredProcedureRequest
+//            {
+//                ProcedureName = "glivebooks.dbo.crm_get_Feed_Details",
+//                Parameters = parameters
+//            };
+
+//            var (_Feed_Comments, _CommentsLike) = await _dapper.QueryMultipleAsync<Feed_Comments, CommentsLike>(storedProcedureRequest);
+//            _comments = _Feed_Comments.ToList();
+//            if (_comments.Count > 0)
+//            {
+//                int commentcount = 0;
+//                if (CommentCount != "All")
+//                {
+
+//                    commentcount = _comments.Count - int.Parse(CommentCount);
+//                    if (commentcount < 0 || commentcount == _comments.Count)
+//                    {
+//                        commentcount = 0;
+//                    }
+//                }
+//                for (int i = commentcount; i < _comments.Count; i++)
+//                {
+
+//                    var id = await GetComments(FeedID, _comments[i].CommentID.ToString(), CommentCount, "0", LoginFeedChannelID,WebsiteID,OptioniD);
+//                    foreach (var item in id)
+//                    {
+//                        item._List_Feed_Comments = await GetComments(FeedID, item.CommentID, CommentCount, "0", LoginFeedChannelID, WebsiteID, OptioniD);
+//                    }
+//                    _comments[i]._List_Feed_Comments = id;
+//                    _comments[i]._CommentsLike = GetAllCommentLike(_comments[i].CommentID.ToString(), _CommentsLike.ToList());
+//                    if (CommentCount != "All")
+//                    {
+//                        if (i == int.Parse(CommentCount) - 1)
+//                        {
+//                            break;
+//                        }
+//                    }
+
+//                }
+//            }
+//            return _comments;
+//        }
+//        public List<CommentsLike> GetAllCommentLike(string CommentID, List<CommentsLike> commentsLike)
+//        {
+//            List<CommentsLike> _CommentsLike = new List<CommentsLike>();
+//            if (commentsLike.Count > 0)
+//            {
+//                for (int i = 0; i < commentsLike.Count; i++)
+//                {
+//                    if (CommentID == commentsLike[i].CommentID.ToString())
+//                    {
+//                        _CommentsLike.Add(new CommentsLike()
+//                        {
+//                            CommentID = commentsLike[i].CommentID.ToString(),
+//                            FeedLikeIcon = commentsLike[i].FeedLikeIcon.ToString(),
+//                            FeedLikedbyContactID = commentsLike[i].FeedLikedbyContactID.ToString(),
+//                        });
+
+//                    }
+//                }
+//            }
+//            return _CommentsLike;
+//        }
+
+//        public async Task<List<GroupAdminMembers>> GetTagMembers(string FeedID, int WebsiteID, string FeedTagString,int LoginFeedChannelID)
+//        {
+//            string proc_name = "glivebooks.dbo.crm_get_FeedTargets";
+//            var parameters = new DynamicParameters();
+//            parameters.Add("@WebsiteID", WebsiteID);
+//            parameters.Add("@FeedID", FeedID);
+//            if (FeedTagString.Trim() != "")
+//            {
+//                parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
+//                proc_name = "crm_get_feed_taggedPeoplelist";
+//            }
+
+//            storedProcedureRequest = new StoredProcedureRequest
+//            {
+//                ProcedureName = proc_name,
+//                Parameters = parameters
+//            };
+
+//            var _GroupAdminMembers = await _dapper.ExecuteAsync<GroupAdminMembers>(storedProcedureRequest);
+
+
+//            return _GroupAdminMembers.ToList();
+//        }
+
+//        public async Task<List<FeedLikeTypes>> getLikeTypes()
+//        {
+//            storedProcedureRequest = new StoredProcedureRequest
+//            {
+//                ProcedureName = "glivebooks.dbo.crm_FeedLikeTypes"
+//            };
+//            var _FeedLikeTypes = await _dapper.ExecuteAsync<FeedLikeTypes>(storedProcedureRequest);            
+//            return _FeedLikeTypes.ToList();
+//        }
+
+//    }
+//}
+
+using Azure.Core;
 using Dapper;
 using grapevineCommon.Model.Feed;
 using grapevineData;
@@ -9,21 +250,18 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace grapevineRepository
 {
     public class FeedRepository : IFeedRepository
     {
         private readonly IDapperExecutor _dapper;
-        private StoredProcedureRequest storedProcedureRequest = null;
 
         public FeedRepository(IDapperExecutor dapper)
         {
-            this._dapper = dapper;
+            _dapper = dapper;
         }
 
         public async Task<FeedResponse> GetFeedAsync(FeedRequest request)
@@ -59,182 +297,165 @@ namespace grapevineRepository
             parameters.Add("@ForYou", request.ForYou);
             parameters.Add("@SortOrder", request.SortOrder);
             parameters.Add("@Query", request.Query);
-            parameters.Add("@SearchID", request.searchID, direction: ParameterDirection.Output);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@SearchID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed",
                 Parameters = parameters
             };
-            
+
             var feeds = await _dapper.ExecuteAsync<FeedItem>(storedProcedureRequest);
-            feeds = await BindFeedDetails(feeds.ToList(),request.LoginFeedChannelID,request.WebsiteID);
+            var feedList = feeds.ToList();
+
+            await BindFeedDetails(feedList, request.LoginFeedChannelID, request.WebsiteID);
+
             var searchId = parameters.Get<int>("@SearchID");
 
             return new FeedResponse
             {
                 SearchID = searchId,
-                Feeds = feeds.ToList()
+                Feeds = feedList
             };
         }
 
-        public async Task<List<FeedItem>> BindFeedDetails(List<FeedItem> feeds,int LoginFeedChannelID, int WebsiteID)
+        public async Task BindFeedDetails(List<FeedItem> feeds, int loginFeedChannelID, int websiteID)
         {
-            for(int i =0; i< feeds.Count; i++)
+            // Optimization: Get LikeTypes once rather than inside the loop
+            var likeTypes = await GetLikeTypes();
+
+            foreach (var feed in feeds)
             {
-                feeds[i]._Feed_Like_Reactions = await GetReactions(feeds[i].FeedID, feeds[i].ObjectID, LoginFeedChannelID, WebsiteID);
-                feeds[i]._Feed_Comments = await GetComments(feeds[i].FeedID, "0", "2", "0", LoginFeedChannelID,WebsiteID,2);
-                feeds[i]._GroupMembers = await GetTagMembers(feeds[i].FeedID, WebsiteID, feeds[i].FeedTagString,LoginFeedChannelID);
-                feeds[i]._FeedLikeTypes = await getLikeTypes();
-                //if (feeds[i].SharedFeedID != "0")
-                //{
-                //    var sharedfeed = await GetFeedAsync(new FeedRequest
-                //    {
-                //        WebsiteID = WebsiteID,
-                //        LoginFeedChannelID = LoginFeedChannelID,
-                //        FeedID = feeds[i].SharedFeedID,
-                //    });
-                //    if (sharedfeed.Feeds.Count > 0)
-                //    {
-                //        feeds[i]._SharedFeed = sharedfeed.Feeds.FirstOrDefault();
-                //    }
-                //}
+                feed._Feed_Like_Reactions = await GetReactions(feed.FeedID, feed.ObjectID, loginFeedChannelID, websiteID);
+                feed._Feed_Comments = await GetComments(feed.FeedID, "0", "2", "0", loginFeedChannelID, websiteID, 2);
+                feed._GroupMembers = await GetTagMembers(feed.FeedID, websiteID, feed.FeedTagString, loginFeedChannelID);
+                feed._FeedLikeTypes = likeTypes;
             }
-            return feeds;
         }
 
-        public async Task<Feed_Like_Reactions> GetReactions(string FeedID, string ObjectID, int LoginFeedChannelID, int WebsiteID)
+        public async Task<Feed_Like_Reactions> GetReactions(string feedID, string objectID, int loginFeedChannelID, int websiteID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@ObjectID", ObjectID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@ObjectID", objectID);
+
+            var request = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_lscs",
                 Parameters = parameters
             };
 
-            var (_Feed_Like_Reactions, _Feed_Like_Reactions1) = await _dapper.QueryMultipleAsync<Feed_Like_Reactions, Feed_Like_Reactions>(storedProcedureRequest);
-            if (_Feed_Like_Reactions1.Any())
+            // FIX: Added explicit casting to the deconstruction
+            var result = await _dapper.QueryMultipleAsync<Feed_Like_Reactions, Feed_Like_Reactions>(request);
+            var reactions = (IEnumerable<Feed_Like_Reactions>)result.Item1;
+            var reactionsExtra = (IEnumerable<Feed_Like_Reactions>)result.Item2;
+
+            var primaryReaction = reactions.FirstOrDefault();
+            var extraReaction = reactionsExtra.FirstOrDefault();
+
+            if (primaryReaction != null && extraReaction != null)
             {
-                _Feed_Like_Reactions.FirstOrDefault().ExceptFriendList = _Feed_Like_Reactions1.FirstOrDefault().ExceptFriendList;
-                _Feed_Like_Reactions.FirstOrDefault().SpecificFriendList = _Feed_Like_Reactions1.FirstOrDefault().SpecificFriendList;
-                _Feed_Like_Reactions.FirstOrDefault().CustomListID = _Feed_Like_Reactions1.FirstOrDefault().CustomListID;
+                primaryReaction.ExceptFriendList = extraReaction.ExceptFriendList;
+                primaryReaction.SpecificFriendList = extraReaction.SpecificFriendList;
+                primaryReaction.CustomListID = extraReaction.CustomListID;
             }
-            
-            _Feed_Like_Reactions.FirstOrDefault().FeedID = FeedID;
-            _Feed_Like_Reactions.FirstOrDefault().ObjectID = ObjectID;
-            return _Feed_Like_Reactions.FirstOrDefault();
+
+            if (primaryReaction != null)
+            {
+                primaryReaction.FeedID = feedID;
+                primaryReaction.ObjectID = objectID;
+            }
+
+            return primaryReaction;
         }
 
-        public async Task<List<Feed_Comments>> GetComments(string FeedID, string CommentID, string CommentCount, string ObjectID, int LoginFeedChannelID,int WebsiteID,int OptioniD)
+        public async Task<List<Feed_Comments>> GetComments(string feedID, string commentID, string commentCount, string objectID, int loginFeedChannelID, int websiteID, int optionID)
         {
-            List<Feed_Comments> _comments = new List<Feed_Comments>();
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@vParentCommentID", CommentID);
-            parameters.Add("@ObjectID", ObjectID);
-            parameters.Add("@OptioniD", OptioniD);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@vParentCommentID", commentID);
+            parameters.Add("@ObjectID", objectID);
+            parameters.Add("@OptioniD", optionID);
+
+            var request = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed_Details",
                 Parameters = parameters
             };
 
-            var (_Feed_Comments, _CommentsLike) = await _dapper.QueryMultipleAsync<Feed_Comments, CommentsLike>(storedProcedureRequest);
-            _comments = _Feed_Comments.ToList();
-            if (_comments.Count > 0)
+            // FIX: Explicit casting for Comments deconstruction
+            var result = await _dapper.QueryMultipleAsync<Feed_Comments, CommentsLike>(request);
+            var commentsData = (IEnumerable<Feed_Comments>)result.Item1;
+            var likesData = (IEnumerable<CommentsLike>)result.Item2;
+
+            var commentsList = commentsData.ToList();
+            var likesList = likesData.ToList();
+
+            if (commentsList.Count > 0)
             {
-                int commentcount = 0;
-                if (CommentCount != "All")
+                int limit = commentsList.Count;
+                if (commentCount != "All" && int.TryParse(commentCount, out int countVal))
                 {
-
-                    commentcount = _comments.Count - int.Parse(CommentCount);
-                    if (commentcount < 0 || commentcount == _comments.Count)
-                    {
-                        commentcount = 0;
-                    }
+                    if (countVal > 0 && countVal < commentsList.Count) limit = countVal;
                 }
-                for (int i = commentcount; i < _comments.Count; i++)
+
+                for (int i = 0; i < limit; i++)
                 {
+                    // Note: Be careful with recursion depth in production
+                    var subComments = await GetComments(feedID, commentsList[i].CommentID.ToString(), commentCount, "0", loginFeedChannelID, websiteID, optionID);
 
-                    var id = await GetComments(FeedID, _comments[i].CommentID.ToString(), CommentCount, "0", LoginFeedChannelID,WebsiteID,OptioniD);
-                    foreach (var item in id)
+                    foreach (var sub in subComments)
                     {
-                        item._List_Feed_Comments = await GetComments(FeedID, item.CommentID, CommentCount, "0", LoginFeedChannelID, WebsiteID, OptioniD);
-                    }
-                    _comments[i]._List_Feed_Comments = id;
-                    _comments[i]._CommentsLike = GetAllCommentLike(_comments[i].CommentID.ToString(), _CommentsLike.ToList());
-                    if (CommentCount != "All")
-                    {
-                        if (i == int.Parse(CommentCount) - 1)
-                        {
-                            break;
-                        }
+                        sub._List_Feed_Comments = await GetComments(feedID, sub.CommentID.ToString(), commentCount, "0", loginFeedChannelID, websiteID, optionID);
                     }
 
+                    commentsList[i]._List_Feed_Comments = subComments;
+                    commentsList[i]._CommentsLike = GetAllCommentLike(commentsList[i].CommentID.ToString(), likesList);
                 }
             }
-            return _comments;
-        }
-        public List<CommentsLike> GetAllCommentLike(string CommentID, List<CommentsLike> commentsLike)
-        {
-            List<CommentsLike> _CommentsLike = new List<CommentsLike>();
-            if (commentsLike.Count > 0)
-            {
-                for (int i = 0; i < commentsLike.Count; i++)
-                {
-                    if (CommentID == commentsLike[i].CommentID.ToString())
-                    {
-                        _CommentsLike.Add(new CommentsLike()
-                        {
-                            CommentID = commentsLike[i].CommentID.ToString(),
-                            FeedLikeIcon = commentsLike[i].FeedLikeIcon.ToString(),
-                            FeedLikedbyContactID = commentsLike[i].FeedLikedbyContactID.ToString(),
-                        });
-
-                    }
-                }
-            }
-            return _CommentsLike;
+            return commentsList;
         }
 
-        public async Task<List<GroupAdminMembers>> GetTagMembers(string FeedID, int WebsiteID, string FeedTagString,int LoginFeedChannelID)
+        public List<CommentsLike> GetAllCommentLike(string commentID, List<CommentsLike> commentsLike)
         {
-            string proc_name = "glivebooks.dbo.crm_get_FeedTargets";
+            return commentsLike.Where(x => x.CommentID.ToString() == commentID).ToList();
+        }
+
+        public async Task<List<GroupAdminMembers>> GetTagMembers(string feedID, int websiteID, string feedTagString, int loginFeedChannelID)
+        {
+            string procName = "glivebooks.dbo.crm_get_FeedTargets";
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@FeedID", FeedID);
-            if (FeedTagString.Trim() != "")
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@FeedID", feedID);
+
+            if (!string.IsNullOrWhiteSpace(feedTagString))
             {
-                parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-                proc_name = "crm_get_feed_taggedPeoplelist";
+                parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+                procName = "glivebooks.dbo.crm_get_feed_taggedPeoplelist"; // Added schema for consistency
             }
-                
-            storedProcedureRequest = new StoredProcedureRequest
+
+            var request = new StoredProcedureRequest
             {
-                ProcedureName = proc_name,
+                ProcedureName = procName,
                 Parameters = parameters
             };
 
-            var _GroupAdminMembers = await _dapper.ExecuteAsync<GroupAdminMembers>(storedProcedureRequest);
-
-
-            return _GroupAdminMembers.ToList();
+            var members = await _dapper.ExecuteAsync<GroupAdminMembers>(request);
+            return members.ToList();
         }
 
-        public async Task<List<FeedLikeTypes>> getLikeTypes()
+        public async Task<List<FeedLikeTypes>> GetLikeTypes()
         {
-            storedProcedureRequest = new StoredProcedureRequest
+            var request = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_FeedLikeTypes"
             };
-            var _FeedLikeTypes = await _dapper.ExecuteAsync<FeedLikeTypes>(storedProcedureRequest);            
-            return _FeedLikeTypes.ToList();
+            var types = await _dapper.ExecuteAsync<FeedLikeTypes>(request);
+            return types.ToList();
         }
-
     }
 }

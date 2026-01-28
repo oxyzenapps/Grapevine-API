@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj": {}
+    "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj": {}
   },
   "projects": {
-    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj": {
+    "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj",
         "projectName": "grapevineCommon",
-        "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj",
-        "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-        "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -60,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

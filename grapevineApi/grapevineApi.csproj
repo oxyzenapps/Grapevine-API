@@ -15,6 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\grapevineCommon\grapevineCommon.csproj" />
+    <ProjectReference Include="..\grapevineData\grapevineData.csproj" />
+    <ProjectReference Include="..\grapevineRepository\grapevineRepository.csproj" />
+    <ProjectReference Include="..\grapevineServices\grapevineServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="grapevineCommon">
       <HintPath>..\grapevineCommon\bin\Debug\net8.0\grapevineCommon.dll</HintPath>
     </Reference>

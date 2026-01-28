@@ -1,0 +1,220 @@
+[
+  {
+    "ContainingType": "grapevineApi.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "grapevineCommon.Model.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.FeedsController",
+    "Method": "GetFeed",
+    "RelativePath": "api/Feeds/GetFeed",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.Feed.FeedRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "DeleteAgency",
+    "RelativePath": "api/OxygenCrm/DeleteAgency",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.OHDeleteAgencyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "GetAllLeadsChild",
+    "RelativePath": "api/OxygenCrm/GetAllLeadsChild",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.GetAllleadschildRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "GetCPTaggingParameters",
+    "RelativePath": "api/OxygenCrm/GetCPTaggingParameters",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.CPTaggingParametersRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "GetLeadProjectSummary",
+    "RelativePath": "api/OxygenCrm/GetLeadProjectSummary",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.LeadProjectSummaryRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "GetMediaTypeAndMasters",
+    "RelativePath": "api/OxygenCrm/GetMediaTypeAndMasters",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.GetMediaTypeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "GetProjectLeads",
+    "RelativePath": "api/OxygenCrm/GetProjectLeads",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.GetProjectLeadRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "InsertCPTagging",
+    "RelativePath": "api/OxygenCrm/InsertCPTagging",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.InsertCPTaggingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.OxygenCrmController",
+    "Method": "ShowChannels",
+    "RelativePath": "api/OxygenCrm/ShowChannels",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.OxygenCrm.ShowChannelsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.WorkplaceController",
+    "Method": "GetCurrentLocation",
+    "RelativePath": "api/Workplace/location",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "websiteId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.WorkplaceController",
+    "Method": "SearchLocation",
+    "RelativePath": "api/Workplace/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "localityRequired",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "grapevineApi.Controllers.WorkplaceController",
+    "Method": "UpdateFilter",
+    "RelativePath": "api/Workplace/update-filter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "grapevineCommon.Model.Workplace.UpdateFilterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -491,19 +491,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HPHP\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\grapevineServices.csproj",
       "projectName": "grapevineServices",
-      "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\grapevineServices.csproj",
-      "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-      "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineServices\\obj\\",
+      "projectPath": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\grapevineServices.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -528,7 +533,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -567,7 +573,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
