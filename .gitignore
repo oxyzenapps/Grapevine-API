@@ -5,13 +5,3 @@
 /.vs/grapevineApiCode/FileContentIndex/merges
 /.vs/grapevineApiCode/FileContentIndex
 /.vs/grapevineApiCode/v17
-
-# .NET build output
-bin/
-obj/
-publish/
-
-# Visual Studio
-.vs/
-*.user
-*.suo
