@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj": {}
+    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj": {}
   },
   "projects": {
-    "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj": {
+    "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj",
+        "projectUniqueName": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj",
         "projectName": "grapevineCommon",
-        "projectPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\grapevineCommon.csproj",
+        "projectPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\grapevineCommon.csproj",
         "packagesPath": "C:\\Users\\HPHP\\.nuget\\packages\\",
-        "outputPath": "D:\\Office Projects\\Grapevine\\Grapevine-API\\grapevineCommon\\obj\\",
+        "outputPath": "D:\\Office Projects\\Grapevine\\grapevineApiCode\\grapevineCommon\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HPHP\\AppData\\Roaming\\NuGet\\NuGet.Config",

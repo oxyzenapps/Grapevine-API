@@ -10,15 +10,3 @@ D:\Office Projects\Grapevine\grapevineApiCode\grapevineCommon\obj\Debug\net8.0\r
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineCommon\obj\Debug\net8.0\grapevineCommon.pdb
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineCommon\obj\Debug\net8.0\ref\grapevineCommon.dll
 D:\Office Projects\Grapevine\grapevineApiCode\grapevineCommon\obj\Debug\net8.0\grapevineCommon.sourcelink.json
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\bin\Debug\net8.0\grapevineCommon.deps.json
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\bin\Debug\net8.0\grapevineCommon.dll
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\bin\Debug\net8.0\grapevineCommon.pdb
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.GeneratedMSBuildEditorConfig.editorconfig
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.AssemblyInfoInputs.cache
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.AssemblyInfo.cs
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.csproj.CoreCompileInputs.cache
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.sourcelink.json
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.dll
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\refint\grapevineCommon.dll
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\grapevineCommon.pdb
-D:\Office Projects\Grapevine\Grapevine-API\grapevineCommon\obj\Debug\net8.0\ref\grapevineCommon.dll
