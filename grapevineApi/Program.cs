@@ -158,6 +158,10 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<IDapperExecutor, DapperSqlExecutor>();
 builder.Services.AddScoped<ISqlExecutor, SqlExecutor>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+<<<<<<< HEAD
+=======
+builder.Services.AddScoped<DapperSqlExecutor>();
+>>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e
 
 // Workplace Module
 builder.Services.AddScoped<IWorkplaceRepository, WorkplaceRepository>();

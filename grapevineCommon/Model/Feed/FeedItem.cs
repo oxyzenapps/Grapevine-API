@@ -131,7 +131,7 @@ namespace grapevineCommon.Model.Feed
         public string Place { get; set; }
         public string PlaceID { get; set; }
         public string PlaceName { get; set; }
-        public string CItyName { get; set; }
+        public string City { get; set; }
         public string DisplayString { get; set; }
         public string CheckInString { get; set; }
         public int CheckedInCount { get; set; }
@@ -158,7 +158,7 @@ namespace grapevineCommon.Model.Feed
         public List<Feed_ObjectFilePath> _Feed_ObjectFilePath { get; set; }
         public string WebsiteID { get; set; }
         public string FeedObjectFilePath { get; set; }
-        public string OriginalFeedObjectFilePath { get; set; }
+        public string FeedObjectFilePathFull { get; set; }
         public string VideoImagePath { get; set; }
         public string MPDObjectFilePathFull { get; set; }
         public string HLSObjectFilePathFull { get; set; }
@@ -344,7 +344,7 @@ namespace grapevineCommon.Model.Feed
         public string FeedbyFeedChannelID { get; set; }
         public string ActivityTypeID { get; set; }
         public string ActivityID { get; set; }
-        public string ActivityImagePath { get; set; }
+        public string ActivityImagePathFull { get; set; }
         public string ActivityDescription { get; set; }
         public string ActivityDetails { get; set; }
         public string ActivityQuestion { get; set; }
@@ -361,9 +361,9 @@ namespace grapevineCommon.Model.Feed
         public string ExpiryDateTimeFormat { get; set; }
         public string AllowMultipleAnswers { get; set; }
         public string AddOptionbyOthers { get; set; }
-        public int GuestCanInviteFriends { get; set; }
+        public int GuestCanInviteFriends1 { get; set; }
         public int IsCohostInEvent { get; set; }
-        public string Attendees { get; set; }
+        public string Attendees1 { get; set; }
         public int PostToBeApprovedByAdmin { get; set; }
         public int OnlyAdminCanPostToWall { get; set; }
         public string ActiveStatus { get; set; }
@@ -472,7 +472,7 @@ namespace grapevineCommon.Model.Feed
         public string ListingValueUnitID { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
-        public string FeedChannelID { get; set; }
+        public string FeedChannel_ID { get; set; }
         public string FeedByContactID { get; set; }
         public string ListingTopicsID { get; set; }
         public string FeedChannelTitle { get; set; }
@@ -625,11 +625,11 @@ namespace grapevineCommon.Model.Feed
     public class EventCo_Hosts
     {
         public string ProfilePic { get; set; }
-        public string FeedChannelTitle { get; set; }
-        public string FeedChannelID { get; set; }
+        public string title { get; set; }
+        public string CoHostFeedCHannelID { get; set; }
         public string Email { get; set; }
         public int status { get; set; }
-        public int IsFriend { get; set; }
+        public int isFriend { get; set; }
     }
     public class BindJobFeedIDLocation
     {

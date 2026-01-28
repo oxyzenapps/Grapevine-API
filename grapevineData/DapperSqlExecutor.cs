@@ -273,10 +273,17 @@ namespace grapevineData
             var second = await multi.ReadAsync<T2>();
             return (first, second);
         }
+<<<<<<< HEAD
 
         public async Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request)
         {
             using var connection = new SqlConnection(_connStr);
+=======
+        public async Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request)
+        {
+            using var connection = new SqlConnection(_connStr);
+
+>>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e
             using var grid = await connection.QueryMultipleAsync(
                 request.ProcedureName,
                 request.Parameters,
@@ -284,11 +291,19 @@ namespace grapevineData
             );
 
             var resultSets = new List<IEnumerable<dynamic>>();
+<<<<<<< HEAD
+=======
+
+>>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e
             while (!grid.IsConsumed)
             {
                 var rows = await grid.ReadAsync();
                 resultSets.Add(rows);
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e
             return resultSets;
         }
     }

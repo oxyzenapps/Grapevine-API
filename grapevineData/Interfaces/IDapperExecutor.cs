@@ -43,8 +43,15 @@ namespace grapevineData.Interfaces
 
         // Fixed: Return type is now generic and scannable
         Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
+<<<<<<< HEAD
 
         // Added: Required for interface implementation
         IDbConnection GetConnection();
     }
 }
+=======
+        Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request);
+    }
+
+}
+>>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e
