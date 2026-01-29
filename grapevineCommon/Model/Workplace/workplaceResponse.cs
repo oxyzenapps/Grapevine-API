@@ -1,14 +1,13 @@
-﻿using System;
+﻿using grapevineCommon.Model.Workplace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace grapevineCommon.Model.Workplace
-{
-    using System.Collections.Generic;
 
-    namespace GrapevineCommon.Models.Workplace
+
+    namespace GrapevineCommon.Model.Workplace
     {
         public class WorkplaceLocationResponse
         {
@@ -46,5 +45,65 @@ namespace grapevineCommon.Model.Workplace
             public string SearchID { get; set; }
             public bool IsSuccess { get; set; }
         }
+
+        public class WorkplaceListResponse
+        {
+            public UIActionResult ActionResult { get; set; } = new UIActionResult();
+        }
+
+        public class UIActionResult
+        {
+            // This list will hold the JSON Data string, SearchID, and PageNo
+            public List<object> result { get; set; } = new List<object>();
+        }
+
+        // Specific item for Sale Count
+        public class SaleCountResponse
+        {
+            public int TotalCount { get; set; }
+            public string SearchID { get; set; }
+    }
+
+        
+
+
+        public class WorkplaceResponse
+        {
+            public List<WorkplaceItem> Items { get; set; }
+            public int SearchID { get; set; }
+            public bool IsSuccess { get; set; }
+            public string Message { get; set; }
+
+            public WorkplaceResponse()
+            {
+                Items = new List<WorkplaceItem>();
+                IsSuccess = true;
+                Message = string.Empty;
+            }
+        }
+
+        // To maintain compatibility with your existing structure
+        public class UI_ACTION_RESULT
+        {
+            public List<string> result { get; set; }
+
+            public UI_ACTION_RESULT()
+            {
+                result = new List<string>();
+            }
+        }
+
+    public class ProjectListResponse
+    {
+        public List<ProjectListItem> Projects { get; set; }
+        public int TotalCount { get; set; }
+        public int PageNo { get; set; }
+        public int PageSize { get; set; }
+        public bool HasMore { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
     }
 }
+
+
+
