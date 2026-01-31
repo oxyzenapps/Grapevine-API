@@ -1,3 +1,39 @@
+<<<<<<< HEAD
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db
+.vs/grapevineApiCode/config/applicationhost.config
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db-shm
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db-wal
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db-shm
+.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db-wal
+.vs/grapevineApiCode/DesignTimeBuild/.dtbcache.v2
+.vs/grapevineApiCode/FileContentIndex/02e4811d-d60a-4459-b5eb-2b970e066221.vsidx
+.vs/grapevineApiCode/FileContentIndex/369c7554-276f-47b7-8815-bf95f0f3c41f.vsidx
+.vs/grapevineApiCode/FileContentIndex/77963990-aa48-43bf-a228-aee40a56e38a.vsidx
+.vs/grapevineApiCode/FileContentIndex/ad269487-b79e-4d32-95c5-4b979e2fa193.vsidx
+.vs/grapevineApiCode/FileContentIndex/b4390cb6-21fc-49a6-9c16-eaebc8eded89.vsidx
+.vs/grapevineApiCode/v17/.futdcache.v2
+.vs/grapevineApiCode/v17/.suo
+/.vs/grapevineApiCode/DesignTimeBuild/.dtbcache.v2
+/.vs/grapevineApiCode/FileContentIndex
+/.vs/grapevineApiCode/v17/DocumentLayout.backup.json
+/.vs/grapevineApiCode/v17/DocumentLayout.json
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+/.vs/grapevineApiCode/FileContentIndex/1ff5259a-4880-4548-af12-21f7a5cffc59.vsidx
+/.vs/grapevineApiCode/FileContentIndex/6d52cb4a-5212-404c-8ab4-77fa27e2cc41.vsidx
+/.vs/grapevineApiCode/FileContentIndex/bf55577d-2a4a-4e52-a21c-5ce979e210af.vsidx
+/grapevineApi/obj/Debug/net8.0/grapevineApi.AssemblyInfo.cs
+/grapevineApi/obj/Debug/net8.0/grapevineApi.AssemblyInfoInputs.cache
+/grapevineApi/obj/Debug/net8.0/grapevineApi.csproj.AssemblyReference.cache
+/grapevineCommon/obj/Debug/net8.0/grapevineCommon.AssemblyInfo.cs
+/grapevineCommon/obj/Debug/net8.0/grapevineCommon.AssemblyInfoInputs.cache
+/grapevineData/obj/Debug/net8.0/grapevineData.AssemblyInfo.cs
+/grapevineData/obj/Debug/net8.0/grapevineData.AssemblyInfoInputs.cache
+/grapevineRepository/obj/Debug/net8.0/grapevineRepository.AssemblyInfo.cs
+/grapevineRepository/obj/Debug/net8.0/grapevineRepository.AssemblyInfoInputs.cache
+/grapevineRepository/obj/Debug/net8.0/grapevineRepository.csproj.AssemblyReference.cache
+=======
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
@@ -105,3 +141,34 @@ publish/
 >>>>>>> 1d59fd06eb048ca195d6bfcc7c56c56eaf27c2be
 /grapevineData/obj/Debug/net8.0/grapevineData.csproj.AssemblyReference.cache
 /grapevineServices/obj/grapevineServices.csproj.nuget.g.props
+>>>>>>> main
+=======
+/.vs/grapevineApiCode/DesignTimeBuild/.dtbcache.v2
+/.vs/grapevineApiCode/FileContentIndex
+/.vs/grapevineApiCode/v17/DocumentLayout.backup.json
+/.vs/grapevineApiCode/v17/DocumentLayout.json
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+/.vs/grapevineApiCode/DesignTimeBuild/.dtbcache.v2
+/grapevineApi/obj/Debug/net8.0/EndpointInfo/grapevineApi.json
+/grapevineApi/obj/Debug/net8.0/ref/grapevineApi.dll
+/grapevineApi/obj/Debug/net8.0/refint/grapevineApi.dll
+/grapevineApi/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+/grapevineApi/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+/grapevineCommon/bin/Debug/net8.0/grapevineCommon.dll
+/grapevineCommon/bin/Debug/net8.0/grapevineCommon.pdb
+/grapevineCommon/obj/Debug/net8.0/ref/grapevineCommon.dll
+/grapevineCommon/obj/Debug/net8.0/refint/grapevineCommon.dll
+/grapevineData/bin/Debug/net8.0/grapevineData.dll
+/grapevineData/bin/Debug/net8.0/grapevineData.pdb
+/grapevineServices/bin/Debug/net8.0/grapevineServices.pdb
+/grapevineRepository/bin/Debug/net8.0/grapevineRepository.pdb
+/grapevineData/obj/Debug/net8.0/ref/grapevineData.dll
+/grapevineData/obj/Debug/net8.0/refint/grapevineData.dll
+/grapevineRepository/obj/Debug/net8.0/ref/grapevineRepository.dll
+/grapevineRepository/obj/Debug/net8.0/refint/grapevineRepository.dll
+/grapevineServices/bin/Debug/net8.0/grapevineRepository.pdb
+/grapevineServices/bin/Debug/net8.0/grapevineServices.dll
+/grapevineServices/obj/Debug/net8.0/ref/grapevineServices.dll
+/grapevineServices/obj/Debug/net8.0/refint/grapevineServices.dll

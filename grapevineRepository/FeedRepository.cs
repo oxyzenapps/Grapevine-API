@@ -1,4 +1,5 @@
-﻿using Azure.Core;
+﻿
+using Azure.Core;
 using Dapper;
 using grapevineCommon.Model.Feed;
 using grapevineData;
@@ -10,22 +11,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace grapevineRepository
 {
     public class FeedRepository : IFeedRepository
     {
         private readonly IDapperExecutor _dapper;
-        private StoredProcedureRequest storedProcedureRequest = null;
 
         public FeedRepository(IDapperExecutor dapper)
         {
-            this._dapper = dapper;
+            _dapper = dapper;
         }
 
         public async Task<FeedResponse> GetFeedAsync(FeedRequest request)
@@ -61,280 +60,283 @@ namespace grapevineRepository
             parameters.Add("@ForYou", request.ForYou);
             parameters.Add("@SortOrder", request.SortOrder);
             parameters.Add("@Query", request.Query);
-            parameters.Add("@SearchID", request.searchID, direction: ParameterDirection.Output);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@SearchID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed",
                 Parameters = parameters
             };
-            
+
             var feeds = await _dapper.ExecuteAsync<FeedItem>(storedProcedureRequest);
-            feeds = await BindFeedDetails(feeds.ToList(),request.LoginFeedChannelID,request.WebsiteID);
+            var feedList = feeds.ToList();
+
+            await BindFeedDetails(feedList, request.LoginFeedChannelID, request.WebsiteID);
+
             var searchId = parameters.Get<int>("@SearchID");
 
             return new FeedResponse
             {
                 SearchID = searchId,
-                Feeds = feeds.ToList()
+                Feeds = feedList
             };
         }
 
-        public async Task<List<FeedItem>> BindFeedDetails(List<FeedItem> feeds,int LoginFeedChannelID, int WebsiteID)
+        public async Task BindFeedDetails(List<FeedItem> feeds, int loginFeedChannelID, int websiteID)
         {
-            for(int i =0; i< feeds.Count; i++)
+            // Optimization: Get LikeTypes once rather than inside the loop
+            var likeTypes = await GetLikeTypes();
+
+            foreach (var feed in feeds)
             {
-                feeds[i]._Feed_Like_Reactions = await GetReactions(feeds[i].FeedID, feeds[i].ObjectID, LoginFeedChannelID, WebsiteID);
-                feeds[i]._Feed_Comments = await GetComments(feeds[i].FeedID, "0", "2", "0", LoginFeedChannelID,WebsiteID,2);
-                feeds[i]._GroupMembers = await GetTagMembers(feeds[i].FeedID, WebsiteID, feeds[i].FeedTagString,LoginFeedChannelID);
-                feeds[i]._FeedLikeTypes = await getLikeTypes();
-                if (feeds[i].SharedFeedID != "0")
+                feed._Feed_Like_Reactions = await GetReactions(feed.FeedID, feed.ObjectID, loginFeedChannelID, websiteID);
+                feed._Feed_Comments = await GetComments(feed.FeedID, "0", "2", "0", loginFeedChannelID, websiteID, 2);
+                feed._GroupMembers = await GetTagMembers(feed.FeedID, websiteID, feed.FeedTagString, loginFeedChannelID);
+                feed._FeedLikeTypes = likeTypes;
+
+                if (feed.SharedFeedID != "0")
                 {
-                    feeds[i].SharedFeed = await GetSharedData(feeds[i].FeedID, LoginFeedChannelID, WebsiteID);
+                    feed.SharedFeed = await GetSharedData(feed.FeedID, loginFeedChannelID, websiteID);
                 }
-                if (feeds[i].FeedObjectType == "JSON")
+                if (feed.FeedObjectType == "JSON")
                 {
-                    feeds[i].FeedText_Json = GetData(feeds[i].FeedText);
+                    feed.FeedText_Json = GetData(feed.FeedText);
                 }
-                else if (feeds[i].MediaShow)
+                else if (feed.MediaShow)
                 {
-                    feeds[i]._FeedObjectFilePath = await Get_Feed_FileObjectPath(WebsiteID, feeds[i].FeedID, feeds[i].ObjectID, "0", "0", LoginFeedChannelID);
+                    feed._FeedObjectFilePath = await Get_Feed_FileObjectPath(websiteID, feed.FeedID, feed.ObjectID, "0", "0", loginFeedChannelID);
                 }
-                else if (feeds[i].FeedObjectType == "Location")
+                else if (feed.FeedObjectType == "Location")
                 {
-                    feeds[i]._crm_FeedLocation = await GetFeedLocation(feeds[i].FeedID);
+                    feed._crm_FeedLocation = await GetFeedLocation(feed.FeedID);
                 }
-                else if (feeds[i].FeedObjectType == "Webshare")
+                else if (feed.FeedObjectType == "Webshare")
                 {
-                    feeds[i]._SharedLinkRecord = await GetLinkShareRecord(WebsiteID, feeds[i].FeedID, "0");
+                    feed._SharedLinkRecord = await GetLinkShareRecord(websiteID, feed.FeedID, "0");
                 }
-                else if (feeds[i].FeedObjectType == "Poll"
-                            || feeds[i].FeedObjectType == "Appointments"
-                            || feeds[i].FeedObjectType == "Get Together"
-                            || feeds[i].FeedObjectType == "Party"
-                            || feeds[i].FeedObjectType == "Watch Party"
-                            || feeds[i].FeedObjectType == "Event"
-                            || feeds[i].FeedObjectType == "Live Meeting"
-                            || feeds[i].FeedObjectType == "Live Video Broadcast"
-                            || feeds[i].FeedObjectType == "Live Audio Broadcast"
-                            || feeds[i].FeedObjectType == "Other Online Events"
-                            )
+                else if (feed.FeedObjectType == "Poll"
+                            || feed.FeedObjectType == "Appointments"
+                            || feed.FeedObjectType == "Get Together"
+                            || feed.FeedObjectType == "Party"
+                            || feed.FeedObjectType == "Watch Party"
+                            || feed.FeedObjectType == "Event"
+                            || feed.FeedObjectType == "Live Meeting"
+                            || feed.FeedObjectType == "Live Video Broadcast"
+                            || feed.FeedObjectType == "Live Audio Broadcast"
+                            || feed.FeedObjectType == "Other Online Events")
                 {
                     string ActivityTypeID = "4";
-                    if (feeds[i].FeedObjectType == "Event")
+                    if (feed.FeedObjectType == "Event")
                     {
                         ActivityTypeID = "2";
                     }
-                    else if (feeds[i].FeedObjectType == "Other Online Events")
+                    else if (feed.FeedObjectType == "Other Online Events")
                     {
                         ActivityTypeID = "15";
                     }
-                    else if (feeds[i].FeedObjectType == "Live Audio Broadcast")
+                    else if (feed.FeedObjectType == "Live Audio Broadcast")
                     {
                         ActivityTypeID = "10";
                     }
-                    else if (feeds[i].FeedObjectType == "Live Video Broadcast")
+                    else if (feed.FeedObjectType == "Live Video Broadcast")
                     {
                         ActivityTypeID = "11";
                     }
-                    else if (feeds[i].FeedObjectType == "Poll")
+                    else if (feed.FeedObjectType == "Poll")
                     {
                         ActivityTypeID = "1";
                     }
-                    else if (feeds[i].FeedObjectType == "Appointments")
+                    else if (feed.FeedObjectType == "Appointments")
                     {
                         ActivityTypeID = "5";
                     }
-                    else if (feeds[i].FeedObjectType == "Get Together")
+                    else if (feed.FeedObjectType == "Get Together")
                     {
                         ActivityTypeID = "6";
                     }
-                    else if (feeds[i].FeedObjectType == "Party")
+                    else if (feed.FeedObjectType == "Party")
                     {
                         ActivityTypeID = "7";
                     }
-                    else if (feeds[i].FeedObjectType == "Watch Party")
+                    else if (feed.FeedObjectType == "Watch Party")
                     {
                         ActivityTypeID = "8";
                     }
-                    feeds[i]._ActivityPollDetails = await crm_get_feed_activities(feeds[i].FeedChannelID, feeds[i].FeedID, ActivityTypeID, "0",LoginFeedChannelID);
+                    feed._ActivityPollDetails = await CrmGetFeedActivities(feed.FeedChannelID, feed.FeedID, ActivityTypeID, "0", loginFeedChannelID);
                 }
-                else if (feeds[i].FeedObjectType == "URL")
+                else if (feed.FeedObjectType == "URL")
                 {
-                    string[] FileName = feeds[i].FeedText.Split('/');
+                    string[] FileName = feed.FeedText.Split('/');
                     string value = FileName[FileName.Length - 1];
-                    feeds[i].FileName = value;
+                    feed.FileName = value;
                 }
-                else if (feeds[i].FeedObjectType == "Jobs"
-                    || feeds[i].FeedObjectType == "Offers"
-                    || feeds[i].FeedObjectType == "Shop"
-                    || feeds[i].FeedObjectType == "Dating" 
-                    || feeds[i].FeedObjectType == "Real Estate")
+                else if (feed.FeedObjectType == "Jobs"
+                    || feed.FeedObjectType == "Offers"
+                    || feed.FeedObjectType == "Shop"
+                    || feed.FeedObjectType == "Dating"
+                    || feed.FeedObjectType == "Real Estate")
                 {
-                    feeds[i]._BindJobListingValueUnit = await BindJobListing("0", feeds[i].FeedID, LoginFeedChannelID, 0, 0, 0, 0, 0, 0);
+                    feed._BindJobListingValueUnit = await BindJobListing("0", feed.FeedID, loginFeedChannelID, 0, 0, 0, 0, 0, 0);
                 }
             }
-            return feeds;
         }
 
-        public async Task<Feed_Like_Reactions> GetReactions(string FeedID, string ObjectID, int LoginFeedChannelID, int WebsiteID)
+        public async Task<Feed_Like_Reactions> GetReactions(string feedID, string objectID, int loginFeedChannelID, int websiteID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@ObjectID", ObjectID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@ObjectID", objectID);
+
+            var request = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_lscs",
                 Parameters = parameters
             };
 
-            var (_Feed_Like_Reactions, _Feed_Like_Reactions1) = await _dapper.QueryMultipleAsync<Feed_Like_Reactions, Feed_Like_Reactions>(storedProcedureRequest);
-            if (_Feed_Like_Reactions1.Any())
+            var result = await _dapper.QueryMultipleAsync<Feed_Like_Reactions, Feed_Like_Reactions>(request);
+            var reactions = result.Item1;
+            var reactionsExtra = result.Item2;
+
+            var primaryReaction = reactions.FirstOrDefault();
+            var extraReaction = reactionsExtra.FirstOrDefault();
+
+            if (primaryReaction != null && extraReaction != null)
             {
-                _Feed_Like_Reactions.FirstOrDefault().ExceptFriendList = _Feed_Like_Reactions1.FirstOrDefault().ExceptFriendList;
-                _Feed_Like_Reactions.FirstOrDefault().SpecificFriendList = _Feed_Like_Reactions1.FirstOrDefault().SpecificFriendList;
-                _Feed_Like_Reactions.FirstOrDefault().CustomListID = _Feed_Like_Reactions1.FirstOrDefault().CustomListID;
+                primaryReaction.ExceptFriendList = extraReaction.ExceptFriendList;
+                primaryReaction.SpecificFriendList = extraReaction.SpecificFriendList;
+                primaryReaction.CustomListID = extraReaction.CustomListID;
             }
-            
-            _Feed_Like_Reactions.FirstOrDefault().FeedID = FeedID;
-            _Feed_Like_Reactions.FirstOrDefault().ObjectID = ObjectID;
-            return _Feed_Like_Reactions.FirstOrDefault();
+
+            if (primaryReaction != null)
+            {
+                primaryReaction.FeedID = feedID;
+                primaryReaction.ObjectID = objectID;
+            }
+
+            return primaryReaction;
         }
 
-        public async Task<List<Feed_Comments>> GetComments(string FeedID, string CommentID, string CommentCount, string ObjectID, int LoginFeedChannelID,int WebsiteID,int OptioniD)
+        public async Task<List<Feed_Comments>> GetComments(string feedID, string commentID, string commentCount, string objectID, int loginFeedChannelID, int websiteID, int optionID)
         {
-            List<Feed_Comments> _comments = new List<Feed_Comments>();
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@vParentCommentID", CommentID);
-            parameters.Add("@ObjectID", ObjectID);
-            parameters.Add("@OptioniD", OptioniD);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@vParentCommentID", commentID);
+            parameters.Add("@ObjectID", objectID);
+            parameters.Add("@OptioniD", optionID);
+
+            var request = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed_Details",
                 Parameters = parameters
             };
 
-            var (_Feed_Comments, _CommentsLike) = await _dapper.QueryMultipleAsync<Feed_Comments, CommentsLike>(storedProcedureRequest);
-            _comments = _Feed_Comments.ToList();
-            if (_comments.Count > 0)
+            var result = await _dapper.QueryMultipleAsync<Feed_Comments, CommentsLike>(request);
+            var commentsData = result.Item1;
+            var likesData = result.Item2;
+
+            var commentsList = commentsData.ToList();
+            var likesList = likesData.ToList();
+
+            if (commentsList.Count > 0)
             {
-                int commentcount = 0;
-                if (CommentCount != "All")
+                int limit = commentsList.Count;
+                if (commentCount != "All" && int.TryParse(commentCount, out int countVal))
                 {
-
-                    commentcount = _comments.Count - int.Parse(CommentCount);
-                    if (commentcount < 0 || commentcount == _comments.Count)
-                    {
-                        commentcount = 0;
-                    }
+                    if (countVal > 0 && countVal < commentsList.Count) limit = countVal;
                 }
-                for (int i = commentcount; i < _comments.Count; i++)
+
+                for (int i = 0; i < limit; i++)
                 {
+                    var subComments = await GetComments(feedID, commentsList[i].CommentID.ToString(), commentCount, "0", loginFeedChannelID, websiteID, optionID);
 
-                    var id = await GetComments(FeedID, _comments[i].CommentID.ToString(), CommentCount, "0", LoginFeedChannelID,WebsiteID,OptioniD);
-                    foreach (var item in id)
+                    foreach (var sub in subComments)
                     {
-                        item._List_Feed_Comments = await GetComments(FeedID, item.CommentID, CommentCount, "0", LoginFeedChannelID, WebsiteID, OptioniD);
-                    }
-                    _comments[i]._List_Feed_Comments = id;
-                    _comments[i]._CommentsLike = GetAllCommentLike(_comments[i].CommentID.ToString(), _CommentsLike.ToList());
-                    if (CommentCount != "All")
-                    {
-                        if (i == int.Parse(CommentCount) - 1)
-                        {
-                            break;
-                        }
+                        sub._List_Feed_Comments = await GetComments(feedID, sub.CommentID.ToString(), commentCount, "0", loginFeedChannelID, websiteID, optionID);
                     }
 
+                    commentsList[i]._List_Feed_Comments = subComments;
+                    commentsList[i]._CommentsLike = GetAllCommentLike(commentsList[i].CommentID.ToString(), likesList);
                 }
             }
-            return _comments;
-        }
-        public List<CommentsLike> GetAllCommentLike(string CommentID, List<CommentsLike> commentsLike)
-        {
-            List<CommentsLike> _CommentsLike = new List<CommentsLike>();
-            if (commentsLike.Count > 0)
-            {
-                for (int i = 0; i < commentsLike.Count; i++)
-                {
-                    if (CommentID == commentsLike[i].CommentID.ToString())
-                    {
-                        _CommentsLike.Add(new CommentsLike()
-                        {
-                            CommentID = commentsLike[i].CommentID.ToString(),
-                            FeedLikeIcon = commentsLike[i].FeedLikeIcon.ToString(),
-                            FeedLikedbyContactID = commentsLike[i].FeedLikedbyContactID.ToString(),
-                        });
-
-                    }
-                }
-            }
-            return _CommentsLike;
+            return commentsList;
         }
 
-        public async Task<List<GroupAdminMembers>> GetTagMembers(string FeedID, int WebsiteID, string FeedTagString,int LoginFeedChannelID)
+        public List<CommentsLike> GetAllCommentLike(string commentID, List<CommentsLike> commentsLike)
         {
-            string proc_name = "glivebooks.dbo.crm_get_FeedTargets";
+            return commentsLike.Where(x => x.CommentID.ToString() == commentID).ToList();
+        }
+
+        public async Task<List<GroupAdminMembers>> GetTagMembers(string feedID, int websiteID, string feedTagString, int loginFeedChannelID)
+        {
+            string procName = "glivebooks.dbo.crm_get_FeedTargets";
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@FeedID", FeedID);
-            if (FeedTagString.Trim() != "")
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@FeedID", feedID);
+
+            if (!string.IsNullOrWhiteSpace(feedTagString))
             {
-                parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-                proc_name = "glivebooks.dbo.crm_get_feed_taggedPeoplelist";
+                parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+                procName = "glivebooks.dbo.crm_get_feed_taggedPeoplelist";
             }
-                
-            storedProcedureRequest = new StoredProcedureRequest
+
+            var request = new StoredProcedureRequest
             {
-                ProcedureName = proc_name,
+                ProcedureName = procName,
                 Parameters = parameters
             };
 
-            var _GroupAdminMembers = await _dapper.ExecuteAsync<GroupAdminMembers>(storedProcedureRequest);
-
-
-            return _GroupAdminMembers.ToList();
+            var members = await _dapper.ExecuteAsync<GroupAdminMembers>(request);
+            return members.ToList();
         }
 
-        public async Task<List<FeedLikeTypes>> getLikeTypes()
+        public async Task<List<FeedLikeTypes>> GetLikeTypes()
         {
-            var _FeedLikeTypes = await _dapper.ExecuteTableFunctionAsync<FeedLikeTypes>("glivebooks.dbo.crm_FeedLikeTypes");            
-            return _FeedLikeTypes.ToList();
+            var request = new StoredProcedureRequest
+            {
+                ProcedureName = "glivebooks.dbo.crm_FeedLikeTypes"
+            };
+            var types = await _dapper.ExecuteAsync<FeedLikeTypes>(request);
+            return types.ToList();
         }
 
-        public async Task<FeedItem> GetSharedData(string FeedID,int LoginFeedChannelID,int WebsiteID)
+        public async Task<FeedItem> GetSharedData(string feedID, int loginFeedChannelID, int websiteID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed_Details",
                 Parameters = parameters
             };
-            var _FeedItem = await _dapper.ExecuteAsync<FeedItem>(storedProcedureRequest);
-            var singleFeed = _FeedItem.FirstOrDefault();
-            if (_FeedItem.Any())
+
+            var feedItems = await _dapper.ExecuteAsync<FeedItem>(storedProcedureRequest);
+            var singleFeed = feedItems.FirstOrDefault();
+
+            if (singleFeed != null)
             {
-                singleFeed._Feed_Like_Reactions = await GetReactions(singleFeed.FeedID, singleFeed.ObjectID, LoginFeedChannelID, WebsiteID);
-                singleFeed._Feed_Comments = await GetComments(singleFeed.FeedID, "0", "2", "0", LoginFeedChannelID, WebsiteID, 2);
-                singleFeed._GroupMembers = await GetTagMembers(singleFeed.FeedID, WebsiteID, singleFeed.FeedTagString, LoginFeedChannelID);
-                singleFeed._FeedLikeTypes = await getLikeTypes();
+                singleFeed._Feed_Like_Reactions = await GetReactions(singleFeed.FeedID, singleFeed.ObjectID, loginFeedChannelID, websiteID);
+                singleFeed._Feed_Comments = await GetComments(singleFeed.FeedID, "0", "2", "0", loginFeedChannelID, websiteID, 2);
+                singleFeed._GroupMembers = await GetTagMembers(singleFeed.FeedID, websiteID, singleFeed.FeedTagString, loginFeedChannelID);
+                singleFeed._FeedLikeTypes = await GetLikeTypes();
+
                 if (singleFeed.SharedFeedID != "0")
                 {
-                    singleFeed.SharedFeed = await GetSharedData(singleFeed.FeedID, LoginFeedChannelID, WebsiteID);
+                    singleFeed.SharedFeed = await GetSharedData(singleFeed.FeedID, loginFeedChannelID, websiteID);
                 }
+
                 if (singleFeed.FeedObjectType == "JSON")
                 {
                     singleFeed.FeedText_Json = GetData(singleFeed.FeedText);
                 }
                 else if (singleFeed.MediaShow)
                 {
-                    singleFeed._FeedObjectFilePath = await Get_Feed_FileObjectPath(WebsiteID, singleFeed.FeedID, singleFeed.ObjectID, "0", "0", LoginFeedChannelID);
+                    singleFeed._FeedObjectFilePath = await Get_Feed_FileObjectPath(websiteID, singleFeed.FeedID, singleFeed.ObjectID, "0", "0", loginFeedChannelID);
                 }
                 else if (singleFeed.FeedObjectType == "Location")
                 {
@@ -342,7 +344,7 @@ namespace grapevineRepository
                 }
                 else if (singleFeed.FeedObjectType == "Webshare")
                 {
-                    singleFeed._SharedLinkRecord = await GetLinkShareRecord(WebsiteID, singleFeed.FeedID, "0");
+                    singleFeed._SharedLinkRecord = await GetLinkShareRecord(websiteID, singleFeed.FeedID, "0");
                 }
                 else if (singleFeed.FeedObjectType == "Poll"
                             || singleFeed.FeedObjectType == "Appointments"
@@ -353,8 +355,7 @@ namespace grapevineRepository
                             || singleFeed.FeedObjectType == "Live Meeting"
                             || singleFeed.FeedObjectType == "Live Video Broadcast"
                             || singleFeed.FeedObjectType == "Live Audio Broadcast"
-                            || singleFeed.FeedObjectType == "Other Online Events"
-                            )
+                            || singleFeed.FeedObjectType == "Other Online Events")
                 {
                     string ActivityTypeID = "4";
                     if (singleFeed.FeedObjectType == "Event")
@@ -393,7 +394,7 @@ namespace grapevineRepository
                     {
                         ActivityTypeID = "8";
                     }
-                    singleFeed._ActivityPollDetails = await crm_get_feed_activities(singleFeed.FeedChannelID, singleFeed.FeedID, ActivityTypeID, "0", LoginFeedChannelID);
+                    singleFeed._ActivityPollDetails = await CrmGetFeedActivities(singleFeed.FeedChannelID, singleFeed.FeedID, ActivityTypeID, "0", loginFeedChannelID);
                 }
                 else if (singleFeed.FeedObjectType == "URL")
                 {
@@ -407,18 +408,18 @@ namespace grapevineRepository
                     || singleFeed.FeedObjectType == "Dating"
                     || singleFeed.FeedObjectType == "Real Estate")
                 {
-                    singleFeed._BindJobListingValueUnit = await BindJobListing("0", singleFeed.FeedID, LoginFeedChannelID, 0, 0, 0, 0, 0, 0);
+                    singleFeed._BindJobListingValueUnit = await BindJobListing("0", singleFeed.FeedID, loginFeedChannelID, 0, 0, 0, 0, 0, 0);
                 }
             }
-            return _FeedItem.FirstOrDefault();
+            return singleFeed;
         }
 
-        public EventDetail GetData(string Data)
+        public EventDetail GetData(string data)
         {
             EventDetail _EventDetail = new EventDetail();
             List<Listkeys> _Keys = new List<Listkeys>();
             List<ListValues> _ListValues = new List<ListValues>();
-            string[] value = Data.Split('[');
+            string[] value = data.Split('[');
             string[] value1;
             string[] value2;
 
@@ -456,229 +457,335 @@ namespace grapevineRepository
                                 }
                             }
                         }
-
                     }
                 }
             }
 
-
             _EventDetail._ListKeys = _Keys;
             _EventDetail._ListValues = _ListValues;
             return _EventDetail;
-
         }
 
-        public async Task<List<Feed_ObjectFilePath>> Get_Feed_FileObjectPath(int WebsiteID, string FeedID, string ObjectID, string ActivityID , string FeedObjectTypeID ,int LoginFeedChannelID)
+        public async Task<List<Feed_ObjectFilePath>> Get_Feed_FileObjectPath(int websiteID, string feedID, string objectID, string activityID, string feedObjectTypeID, int loginFeedChannelID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@ObjectID", ObjectID);
-            parameters.Add("@ActivityID", ActivityID);
-            parameters.Add("@FeedObjectTypeID", FeedObjectTypeID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@ObjectID", objectID);
+            parameters.Add("@ActivityID", activityID);
+            parameters.Add("@FeedObjectTypeID", feedObjectTypeID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_objects",
                 Parameters = parameters
             };
-            var _Feed_ObjectFilePath = await _dapper.ExecuteAsync<Feed_ObjectFilePath>(storedProcedureRequest);
-            var _FeedObject = _Feed_ObjectFilePath.ToList();
-            if (_Feed_ObjectFilePath.Any())
+
+            var feedObjectFilePaths = await _dapper.ExecuteAsync<Feed_ObjectFilePath>(storedProcedureRequest);
+            var feedObjects = feedObjectFilePaths.ToList();
+
+            if (feedObjectFilePaths.Any())
             {
-                for(int i=0;i<_FeedObject.Count;i++)
+                for (int i = 0; i < feedObjects.Count; i++)
                 {
-                    _FeedObject[i]._PhotosLikes = await GetLikesPhoto(FeedID, _FeedObject[i].ObjectID,LoginFeedChannelID,1,"",WebsiteID);
+                    feedObjects[i]._PhotosLikes = await GetLikesPhoto(feedID, feedObjects[i].ObjectID, loginFeedChannelID, 1, "", websiteID);
                 }
             }
-            return _FeedObject;
+            return feedObjects;
         }
 
-        public async Task<List<Feed_Likes>> GetLikesPhoto(string FeedID, string ObjectID,int LoginFeedChannelID,int OptioniD,string vParentCommentID,int WebsiteID)
+        public async Task<List<Feed_Likes>> GetLikesPhoto(string feedID, string objectID, int loginFeedChannelID, int optionID, string vParentCommentID, int websiteID)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@LoginID", "");
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@ObjectID", ObjectID);
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@ObjectID", objectID);
             parameters.Add("@vParentCommentID", vParentCommentID);
-            parameters.Add("@OptioniD", OptioniD);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@OptioniD", optionID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_objects",
                 Parameters = parameters
             };
-            var _Feed_Likes = await _dapper.ExecuteAsync<Feed_Likes>(storedProcedureRequest);
-            
-            return _Feed_Likes.ToList();
+
+            var feedLikes = await _dapper.ExecuteAsync<Feed_Likes>(storedProcedureRequest);
+            return feedLikes.ToList();
         }
 
-        public async Task<crm_FeedLocation> GetFeedLocation(string FeedID)
+        public async Task<crm_FeedLocation> GetFeedLocation(string feedID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@FeedID", FeedID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@FeedID", feedID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_location",
                 Parameters = parameters
             };
 
-            var _crm_FeedLocation = await _dapper.ExecuteAsync<crm_FeedLocation>(storedProcedureRequest);
-            
-            return _crm_FeedLocation.FirstOrDefault();
+            var feedLocations = await _dapper.ExecuteAsync<crm_FeedLocation>(storedProcedureRequest);
+            return feedLocations.FirstOrDefault();
         }
 
-        public async Task<SharedLinkRecord> GetLinkShareRecord(int WebsiteID,string FeedID, string ShowType)
+        public async Task<SharedLinkRecord> GetLinkShareRecord(int websiteID, string feedID, string showType)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@WebsiteID", WebsiteID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@HistoryFlag", ShowType);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@WebsiteID", websiteID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@HistoryFlag", showType);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_Feed_LinkShare",
                 Parameters = parameters
             };
+
             var results = await _dapper.QueryMultipleDynamicAsync(storedProcedureRequest);
 
-            SharedLinkRecord _SharedLinkRecord = new SharedLinkRecord();
-            _SharedLinkRecord = results[0].FirstOrDefault();
-            _SharedLinkRecord._List_SharedLinkRecord = results[1].FirstOrDefault();
-            WebShare_Info _WebShare_Info = new WebShare_Info();
-            if (ShowType == "1")
-            {
-                _WebShare_Info.List = GetFriendsImages(results[2].FirstOrDefault().List);
-                _WebShare_Info.ShareText = results[2].FirstOrDefault().ShareText;
-                _SharedLinkRecord._WebShare_Info = _WebShare_Info;
-            }
-            return _SharedLinkRecord;
-        }
-        public List<FriendsImages> GetFriendsImages(string Images)
-        {
+            SharedLinkRecord sharedLinkRecord = new SharedLinkRecord();
 
-            List<FriendsImages> _FriendsImages = new List<FriendsImages>();
-            if (Images != "")
+            if (results.Count > 0 && results[0].Any())
             {
-                string[] images = Images.Split(',');
-                for (int i = 0; i < images.Length; i++)
+                var firstResult = results[0].FirstOrDefault();
+                if (firstResult != null)
                 {
-                    if (images[i].Split('!').Length > 1)
-                    {
-                        string link = images[i].Split('!')[0];
-                        string name = images[i].Split('!')[1];
+                    var json = JsonSerializer.Serialize(firstResult);
+                    sharedLinkRecord = JsonSerializer.Deserialize<SharedLinkRecord>(json);
+                }
+            }
 
-                        _FriendsImages.Add(new FriendsImages()
+            if (results.Count > 1 && results[1].Any())
+            {
+                var secondResult = results[1].FirstOrDefault();
+                if (secondResult != null)
+                {
+                    // Handle second result set appropriately
+                }
+            }
+
+            WebShare_Info webShareInfo = new WebShare_Info();
+
+            if (showType == "1" && results.Count > 2 && results[2].Any())
+            {
+                var result2 = results[2].FirstOrDefault();
+                if (result2 != null)
+                {
+                    webShareInfo.List = GetFriendsImages(result2.List?.ToString() ?? "");
+                    webShareInfo.ShareText = result2.ShareText?.ToString() ?? "";
+                    sharedLinkRecord._WebShare_Info = webShareInfo;
+                }
+            }
+
+            return sharedLinkRecord;
+        }
+
+        public List<FriendsImages> GetFriendsImages(string images)
+        {
+            List<FriendsImages> friendsImages = new List<FriendsImages>();
+
+            if (!string.IsNullOrWhiteSpace(images))
+            {
+                string[] imageArray = images.Split(',');
+                for (int i = 0; i < imageArray.Length; i++)
+                {
+                    if (imageArray[i].Split('!').Length > 1)
+                    {
+                        string link = imageArray[i].Split('!')[0];
+                        string name = imageArray[i].Split('!')[1];
+
+                        friendsImages.Add(new FriendsImages()
                         {
                             Images = link,
                             Name = name,
                         });
-
                     }
                     else
                     {
-
-
-                        _FriendsImages.Add(new FriendsImages()
+                        friendsImages.Add(new FriendsImages()
                         {
-                            Images = images[i],
-                            //Name = name,
+                            Images = imageArray[i],
                         });
                     }
-
                 }
             }
 
-            return _FriendsImages;
+            return friendsImages;
         }
 
-        public async Task<ActivityPollDetails> crm_get_feed_activities(string FeedChannelID, string FeedID, string ActivityTypeID, string OptionID,int LoginFeedChannelID)
+        public async Task<ActivityPollDetails> CrmGetFeedActivities(string feedChannelID, string feedID, string activityTypeID, string optionID, int loginFeedChannelID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@FeedChannelID", FeedChannelID);
-            parameters.Add("@ActivityTypeID", ActivityTypeID);
-            parameters.Add("@OptionID", OptionID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@FeedChannelID", feedChannelID);
+            parameters.Add("@ActivityTypeID", activityTypeID);
+            parameters.Add("@OptionID", optionID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_activities",
                 Parameters = parameters
             };
+
             var result = await _dapper.QueryMultipleDynamicAsync(storedProcedureRequest);
-            var _activityPollDetails = result[0];
-            var _options = result[1].ToList();
-            var _EventCo_Hosts = result[2];
-            var _activityObj = _activityPollDetails.FirstOrDefault();
-            if (_activityPollDetails.Any())
+
+            ActivityPollDetails activityPollDetails = null;
+
+            if (result.Count > 0 && result[0].Any())
             {
-                _activityObj._EventCo_Hosts = _EventCo_Hosts.ToList().FindAll(x=> x.ActivityID == _activityObj.ActivityID);
-                _activityObj._PollOptions = _options.ToList().FindAll(x => x.ActivityID == _activityObj.ActivityID);
-                if(_activityObj._PollOptions.Any())
+                var firstResult = result[0].FirstOrDefault();
+                if (firstResult != null)
                 {
-                    foreach (var option in _activityObj._PollOptions)
+                    var json = JsonSerializer.Serialize(firstResult);
+                    activityPollDetails = JsonSerializer.Deserialize<ActivityPollDetails>(json);
+                }
+
+                if (activityPollDetails != null)
+                {
+                    if (result.Count > 1 && result[1].Any())
                     {
-                        option._PollOptionReaction = await GetAllPollOptionReaction(option.FeedChannelID, FeedID, ActivityTypeID, option.OptionID,LoginFeedChannelID);
+                        var pollOptionsJson = JsonSerializer.Serialize(result[1]);
+                        var allPollOptions = JsonSerializer.Deserialize<List<PollOptions>>(pollOptionsJson);
+
+                        // Check what property name PollOptions uses for ActivityID
+                        activityPollDetails._PollOptions = allPollOptions
+                            .Where(x => GetPropertyValue(x, "ActivityID")?.ToString() == activityPollDetails.ActivityID?.ToString())
+                            .ToList();
+
+                        if (activityPollDetails._PollOptions.Any())
+                        {
+                            foreach (var option in activityPollDetails._PollOptions)
+                            {
+                                option._PollOptionReaction = await GetAllPollOptionReaction(feedChannelID, feedID, activityTypeID, option.OptionID?.ToString(), loginFeedChannelID);
+                            }
+                        }
+                    }
+
+                    if (result.Count > 2 && result[2].Any())
+                    {
+                        var eventCoHostsJson = JsonSerializer.Serialize(result[2]);
+                        var allEventCoHosts = JsonSerializer.Deserialize<List<EventCo_Hosts>>(eventCoHostsJson);
+
+                        // Instead of filtering by ActivityID (which EventCo_Hosts doesn't have),
+                        // we need to check if EventCo_Hosts has a different property that relates to the activity
+                        // or if they should all be included without filtering
+                        // For now, let's include all EventCo_Hosts without filtering
+                        activityPollDetails._EventCo_Hosts = allEventCoHosts;
                     }
                 }
-                
             }
-            return _activityObj;
+
+            return activityPollDetails;
         }
 
-        public async Task<List<PollOptionReaction>> GetAllPollOptionReaction(string FeedChannelID, string FeedID, string ActivityTypeID, string OptionID,int LoginFeedChannelID)
+        // Helper method to get property value by name (in case property names differ)
+        private object GetPropertyValue(object obj, string propertyName)
+        {
+            if (obj == null) return null;
+
+            var property = obj.GetType().GetProperty(propertyName);
+            if (property != null)
+            {
+                return property.GetValue(obj);
+            }
+
+            // Try with different casing
+            property = obj.GetType().GetProperties()
+                .FirstOrDefault(p => string.Equals(p.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+
+            return property?.GetValue(obj);
+        }
+
+        public async Task<List<PollOptionReaction>> GetAllPollOptionReaction(string feedChannelID, string feedID, string activityTypeID, string optionID, int loginFeedChannelID)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@FeedChannelID", FeedChannelID);
-            parameters.Add("@ActivityTypeID", ActivityTypeID);
-            parameters.Add("@OptionID", OptionID);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@FeedChannelID", feedChannelID);
+            parameters.Add("@ActivityTypeID", activityTypeID);
+            parameters.Add("@OptionID", optionID);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_activities",
                 Parameters = parameters
             };
-            var result =await _dapper.ExecuteAsync<PollOptionReaction>(storedProcedureRequest);
 
+            var result = await _dapper.ExecuteAsync<PollOptionReaction>(storedProcedureRequest);
             return result.ToList();
-
         }
 
-        public async Task<List<BindJobListingValueUnit>> BindJobListing(string FeedChannelID, string FeedID,int LoginFeedChannelID,int ListingID,int ListingCategoryID,
-                                                        int ListingTopicID,int ListingContractTypeID,int RadiusKm,int Option)
+        public async Task<List<BindJobListingValueUnit>> BindJobListing(string feedChannelID, string feedID, int loginFeedChannelID, int listingID, int listingCategoryID,
+                                                        int listingTopicID, int listingContractTypeID, int radiusKm, int option)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@LoginFeedChannelID", LoginFeedChannelID);
-            parameters.Add("@FeedChannelID", FeedChannelID);
-            parameters.Add("@FeedID", FeedID);
-            parameters.Add("@ListingID", ListingID);
-            parameters.Add("@ListingCategoryID", ListingCategoryID);
-            parameters.Add("@ListingTopicID", ListingTopicID);
-            parameters.Add("@ListingContractTypeID", ListingContractTypeID);
-            parameters.Add("@RadiusKm", RadiusKm);
-            parameters.Add("@Option", Option);
-            storedProcedureRequest = new StoredProcedureRequest
+            parameters.Add("@LoginFeedChannelID", loginFeedChannelID);
+            parameters.Add("@FeedChannelID", feedChannelID);
+            parameters.Add("@FeedID", feedID);
+            parameters.Add("@ListingID", listingID);
+            parameters.Add("@ListingCategoryID", listingCategoryID);
+            parameters.Add("@ListingTopicID", listingTopicID);
+            parameters.Add("@ListingContractTypeID", listingContractTypeID);
+            parameters.Add("@RadiusKm", radiusKm);
+            parameters.Add("@Option", option);
+
+            var storedProcedureRequest = new StoredProcedureRequest
             {
                 ProcedureName = "glivebooks.dbo.crm_get_feed_lists",
                 Parameters = parameters
             };
-            var result = await _dapper.QueryMultipleDynamicAsync(storedProcedureRequest);
-            var _BindJobListingValueUnit = result[0].Select(x => (BindJobListingValueUnit)x).ToList();
-            var _BindJobFeedIDTable1 = result[1].Select(x => (BindJobFeedIDTable1)x).ToList();
-            var _BindJobFeedIDTable2 = result[2].Select(x => (BindJobFeedIDTable2)x).ToList();
-            var _BindJobFeedIDLocation = result[3].Select(x => (BindJobFeedIDLocation)x).ToList();
-            var _BindJobFeedIDTable4 = result[5].Select(x => (BindJobFeedIDTable4)x).ToList();
 
-            for(int i=0;i< _BindJobListingValueUnit.Count; i++)
+            var result = await _dapper.QueryMultipleDynamicAsync(storedProcedureRequest);
+
+            List<BindJobListingValueUnit> bindJobListingValueUnits = new List<BindJobListingValueUnit>();
+            List<BindJobFeedIDTable1> bindJobFeedIDTable1 = new List<BindJobFeedIDTable1>();
+            List<BindJobFeedIDTable2> bindJobFeedIDTable2 = new List<BindJobFeedIDTable2>();
+            List<BindJobFeedIDLocation> bindJobFeedIDLocations = new List<BindJobFeedIDLocation>();
+            List<BindJobFeedIDTable4> bindJobFeedIDTable4 = new List<BindJobFeedIDTable4>();
+
+            if (result.Count > 0 && result[0].Any())
             {
-                _BindJobListingValueUnit[i]._BindJobFeedIDLocation = _BindJobFeedIDLocation.FindAll(x => x.ListingID == _BindJobListingValueUnit[i].ListingID).FirstOrDefault();
-                _BindJobListingValueUnit[i]._BindJobFeedIDTable2 = _BindJobFeedIDTable2.FindAll(x => x.ListingID == _BindJobListingValueUnit[i].ListingID).FirstOrDefault();
-                _BindJobListingValueUnit[i]._BindJobFeedIDTable1 = _BindJobFeedIDTable1.FindAll(x => x.ListingID == _BindJobListingValueUnit[i].ListingID).FirstOrDefault();
-                _BindJobListingValueUnit[i]._BindJobFeedIDTable4 = _BindJobFeedIDTable4.FindAll(x => x.ListingID == _BindJobListingValueUnit[i].ListingID).FirstOrDefault();
+                var json0 = JsonSerializer.Serialize(result[0]);
+                bindJobListingValueUnits = JsonSerializer.Deserialize<List<BindJobListingValueUnit>>(json0);
             }
 
-            return _BindJobListingValueUnit;
+            if (result.Count > 1 && result[1].Any())
+            {
+                var json1 = JsonSerializer.Serialize(result[1]);
+                bindJobFeedIDTable1 = JsonSerializer.Deserialize<List<BindJobFeedIDTable1>>(json1);
+            }
+
+            if (result.Count > 2 && result[2].Any())
+            {
+                var json2 = JsonSerializer.Serialize(result[2]);
+                bindJobFeedIDTable2 = JsonSerializer.Deserialize<List<BindJobFeedIDTable2>>(json2);
+            }
+
+            if (result.Count > 3 && result[3].Any())
+            {
+                var json3 = JsonSerializer.Serialize(result[3]);
+                bindJobFeedIDLocations = JsonSerializer.Deserialize<List<BindJobFeedIDLocation>>(json3);
+            }
+
+            if (result.Count > 5 && result[5].Any())
+            {
+                var json5 = JsonSerializer.Serialize(result[5]);
+                bindJobFeedIDTable4 = JsonSerializer.Deserialize<List<BindJobFeedIDTable4>>(json5);
+            }
+
+            for (int i = 0; i < bindJobListingValueUnits.Count; i++)
+            {
+                bindJobListingValueUnits[i]._BindJobFeedIDLocation = bindJobFeedIDLocations.FindAll(x => x.ListingID == bindJobListingValueUnits[i].ListingID).FirstOrDefault();
+                bindJobListingValueUnits[i]._BindJobFeedIDTable2 = bindJobFeedIDTable2.FindAll(x => x.ListingID == bindJobListingValueUnits[i].ListingID).FirstOrDefault();
+                bindJobListingValueUnits[i]._BindJobFeedIDTable1 = bindJobFeedIDTable1.FindAll(x => x.ListingID == bindJobListingValueUnits[i].ListingID).FirstOrDefault();
+                bindJobListingValueUnits[i]._BindJobFeedIDTable4 = bindJobFeedIDTable4.FindAll(x => x.ListingID == bindJobListingValueUnits[i].ListingID).FirstOrDefault();
+            }
+
+            return bindJobListingValueUnits;
         }
     }
 }
