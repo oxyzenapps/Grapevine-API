@@ -19,6 +19,7 @@
 /.vs/grapevineApiCode/v17/DocumentLayout.backup.json
 /.vs/grapevineApiCode/v17/DocumentLayout.json
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /.vs/grapevineApiCode/FileContentIndex/1ff5259a-4880-4548-af12-21f7a5cffc59.vsidx
 /.vs/grapevineApiCode/FileContentIndex/6d52cb4a-5212-404c-8ab4-77fa27e2cc41.vsidx
 /.vs/grapevineApiCode/FileContentIndex/bf55577d-2a4a-4e52-a21c-5ce979e210af.vsidx
@@ -147,3 +148,27 @@ publish/
 /.vs/grapevineApiCode/v17/DocumentLayout.backup.json
 /.vs/grapevineApiCode/v17/DocumentLayout.json
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+/.vs/grapevineApiCode/DesignTimeBuild/.dtbcache.v2
+/grapevineApi/obj/Debug/net8.0/EndpointInfo/grapevineApi.json
+/grapevineApi/obj/Debug/net8.0/ref/grapevineApi.dll
+/grapevineApi/obj/Debug/net8.0/refint/grapevineApi.dll
+/grapevineApi/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+/grapevineApi/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+/grapevineCommon/bin/Debug/net8.0/grapevineCommon.dll
+/grapevineCommon/bin/Debug/net8.0/grapevineCommon.pdb
+/grapevineCommon/obj/Debug/net8.0/ref/grapevineCommon.dll
+/grapevineCommon/obj/Debug/net8.0/refint/grapevineCommon.dll
+/grapevineData/bin/Debug/net8.0/grapevineData.dll
+/grapevineData/bin/Debug/net8.0/grapevineData.pdb
+/grapevineServices/bin/Debug/net8.0/grapevineServices.pdb
+/grapevineRepository/bin/Debug/net8.0/grapevineRepository.pdb
+/grapevineData/obj/Debug/net8.0/ref/grapevineData.dll
+/grapevineData/obj/Debug/net8.0/refint/grapevineData.dll
+/grapevineRepository/obj/Debug/net8.0/ref/grapevineRepository.dll
+/grapevineRepository/obj/Debug/net8.0/refint/grapevineRepository.dll
+/grapevineServices/bin/Debug/net8.0/grapevineRepository.pdb
+/grapevineServices/bin/Debug/net8.0/grapevineServices.dll
+/grapevineServices/obj/Debug/net8.0/ref/grapevineServices.dll
+/grapevineServices/obj/Debug/net8.0/refint/grapevineServices.dll

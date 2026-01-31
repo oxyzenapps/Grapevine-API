@@ -14,15 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("grapevineServices")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25ef5c8794944b30b552e10410d4b4a0ba84e17a")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c1725129dcd06527aba92ba7899fb49274dc3c5")]
->>>>>>> Stashed changes
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c1725129dcd06527aba92ba7899fb49274dc3c5")]
->>>>>>> Stashed changes
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17db36add7500fc4cd1bdacd3eb76ec50e3b1d9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("grapevineServices")]
 [assembly: System.Reflection.AssemblyTitleAttribute("grapevineServices")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
