@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace grapevineServices.Interfaces
 {
-    public interface IJwtTokenService
+    public interface ILoginService
     {
-        Task<string> GenerateToken(string username);
+        Task<bool> LoginByMobile(string mobileNo);
     }
 }

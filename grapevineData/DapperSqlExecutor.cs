@@ -92,5 +92,25 @@ namespace grapevineData
             var second = await multi.ReadAsync<T2>();
             return (first, second);
         }
+        public async Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request)
+        {
+            using var connection = new SqlConnection(_connStr);
+
+            using var grid = await connection.QueryMultipleAsync(
+                request.ProcedureName,
+                request.Parameters,
+                commandType: CommandType.StoredProcedure
+            );
+
+            var resultSets = new List<IEnumerable<dynamic>>();
+
+            while (!grid.IsConsumed)
+            {
+                var rows = await grid.ReadAsync();
+                resultSets.Add(rows);
+            }
+
+            return resultSets;
+        }
     }
 }

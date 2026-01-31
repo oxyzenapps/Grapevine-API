@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace grapevineServices.Interfaces
+namespace grapevineRepository.Interfaces
 {
-    public interface IJwtTokenService
+    public interface ILoginRepository
     {
-        Task<string> GenerateToken(string username);
+        Task<bool> LoginByMobile(string mobileNo);
     }
 }

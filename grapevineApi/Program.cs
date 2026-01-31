@@ -62,12 +62,14 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<ISqlExecutor, SqlExecutor>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IFeedsService, FeedsService>();
 builder.Services.AddScoped<DapperSqlExecutor>();
 
 builder.Services.AddScoped<IDapperExecutor, DapperSqlExecutor>();
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 builder.Services.AddScoped<IFeedsService, FeedsService>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
