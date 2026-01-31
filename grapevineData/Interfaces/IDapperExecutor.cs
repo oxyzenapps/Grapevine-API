@@ -26,6 +26,69 @@
 //    }
 //}
 
+//using Dapper;
+//using System.Collections.Generic;
+//using System.Data;
+//using System.Threading.Tasks;
+
+//namespace grapevineData.Interfaces
+//{
+//    public interface IDapperExecutor
+//    {
+//        Task<IEnumerable<T>> ExecuteAsync<T>(StoredProcedureRequest request);
+//        Task ExecuteAsync(StoredProcedureRequest request);
+//        Task<T> ExecuteScalarFunctionAsync<T>(string functionName, object parameters = null);
+//        Task<IEnumerable<T>> ExecuteTableFunctionAsync<T>(string functionName, object parameters = null);
+//        Task<T> ExecuteTableFunctionSingleAsync<T>(string functionName, object parameters = null);
+
+//        // Fixed: Return type is now generic and scannable
+//        Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
+
+
+//        // Added: Required for interface implementation
+//        IDbConnection GetConnection();
+//    }
+//}
+
+//        Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request);
+//    }
+
+//}
+
+//usiDapperng ;
+//using System.Collections.Generic;
+//using System.Data;
+//using System.Threading.Tasks;
+
+//namespace grapevineData.Interfaces
+//{
+//    // Added this class definition so the interface recognizes the type
+//    public class StoredProcedureRequest
+//    {
+//        public string ProcedureName { get; set; }
+//        public object Parameters { get; set; }
+//    }
+
+//    public interface IDapperExecutor
+//    {
+//        IDbConnection GetConnection();
+
+//        Task<IEnumerable<T>> ExecuteAsync<T>(StoredProcedureRequest request);
+
+//        Task ExecuteAsync(StoredProcedureRequest request);
+
+//        Task<T> ExecuteScalarFunctionAsync<T>(string functionName, object parameters = null);
+
+//        Task<IEnumerable<T>> ExecuteTableFunctionAsync<T>(string functionName, object parameters = null);
+
+//        Task<T> ExecuteTableFunctionSingleAsync<T>(string functionName, object parameters = null);
+
+//        Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
+
+//        // This is now properly inside the interface block
+//        Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request);
+//    }
+//}
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
@@ -33,25 +96,21 @@ using System.Threading.Tasks;
 
 namespace grapevineData.Interfaces
 {
+    public class StoredProcedureRequest
+    {
+        public string ProcedureName { get; set; } = string.Empty;
+        public object? Parameters { get; set; }
+    }
+
     public interface IDapperExecutor
     {
+        IDbConnection GetConnection();
         Task<IEnumerable<T>> ExecuteAsync<T>(StoredProcedureRequest request);
         Task ExecuteAsync(StoredProcedureRequest request);
-        Task<T> ExecuteScalarFunctionAsync<T>(string functionName, object parameters = null);
-        Task<IEnumerable<T>> ExecuteTableFunctionAsync<T>(string functionName, object parameters = null);
-        Task<T> ExecuteTableFunctionSingleAsync<T>(string functionName, object parameters = null);
-
-        // Fixed: Return type is now generic and scannable
+        Task<T> ExecuteScalarFunctionAsync<T>(string functionName, object? parameters = null);
+        Task<IEnumerable<T>> ExecuteTableFunctionAsync<T>(string functionName, object? parameters = null);
+        Task<T> ExecuteTableFunctionSingleAsync<T>(string functionName, object? parameters = null);
         Task<(IEnumerable<T1>, IEnumerable<T2>)> QueryMultipleAsync<T1, T2>(StoredProcedureRequest request);
-<<<<<<< HEAD
-
-        // Added: Required for interface implementation
-        IDbConnection GetConnection();
-    }
-}
-=======
         Task<List<IEnumerable<dynamic>>> QueryMultipleDynamicAsync(StoredProcedureRequest request);
     }
-
 }
->>>>>>> e726883805c84feba0eeba7af247fb27cd7ed66e

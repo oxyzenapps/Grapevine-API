@@ -1,12 +1,262 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineapi\\controllers\\workplacecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|solutionrelative:grapevineapi\\controllers\\workplacecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineservices\\model\\workplaceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|solutionrelative:grapevineservices\\model\\workplaceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinerepository\\workplacerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|solutionrelative:grapevinerepository\\workplacerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinecommon\\model\\workplace\\workplaceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|solutionrelative:grapevinecommon\\model\\workplace\\workplaceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineservices\\interfaces\\iworkplaceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|solutionrelative:grapevineservices\\interfaces\\iworkplaceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinerepository\\interfaces\\iworkplacerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|solutionrelative:grapevinerepository\\interfaces\\iworkplacerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinecommon\\model\\workplace\\workplacerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|solutionrelative:grapevinecommon\\model\\workplace\\workplacerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinecommon\\model\\workplace\\workplaceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1EBEE0D-8B79-4551-9940-7C374DEFC513}|grapevineCommon\\grapevineCommon.csproj|solutionrelative:grapevinecommon\\model\\workplace\\workplaceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|solutionrelative:grapevineapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1082452-D93A-48EE-A784-B3C3DA54A469}|grapevineApi\\grapevineApi.csproj|solutionrelative:grapevineapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevineservices\\model\\oxygencrmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A863F97E-E623-44A9-AB2A-C694D7238FF0}|grapevineServices\\grapevineServices.csproj|solutionrelative:grapevineservices\\model\\oxygencrmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinerepository\\oxygencrmrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|solutionrelative:grapevinerepository\\oxygencrmrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinerepository\\feedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48DA0165-7CAE-4814-B8CA-4A42CB08B350}|grapevineRepository\\grapevineRepository.csproj|solutionrelative:grapevinerepository\\feedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05D8981A-C6E9-4C28-94F5-53A01A9FFD57}|grapevineData\\grapevineData.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinedata\\storedprocedurerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05D8981A-C6E9-4C28-94F5-53A01A9FFD57}|grapevineData\\grapevineData.csproj|solutionrelative:grapevinedata\\storedprocedurerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05D8981A-C6E9-4C28-94F5-53A01A9FFD57}|grapevineData\\grapevineData.csproj|c:\\users\\admin\\project folder\\grapevine-api\\grapevinedata\\dappersqlexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05D8981A-C6E9-4C28-94F5-53A01A9FFD57}|grapevineData\\grapevineData.csproj|solutionrelative:grapevinedata\\dappersqlexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "grapevineApi\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "grapevineApi\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T09:51:49.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "OxygenCrmService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Model\\OxygenCrmService.cs",
+              "RelativeDocumentMoniker": "grapevineServices\\Model\\OxygenCrmService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Model\\OxygenCrmService.cs",
+              "RelativeToolTip": "grapevineServices\\Model\\OxygenCrmService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T09:51:41.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorkplaceController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Controllers\\WorkplaceController.cs",
+              "RelativeDocumentMoniker": "grapevineApi\\Controllers\\WorkplaceController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Controllers\\WorkplaceController.cs",
+              "RelativeToolTip": "grapevineApi\\Controllers\\WorkplaceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T06:51:05.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WorkplaceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\WorkplaceRepository.cs",
+              "RelativeDocumentMoniker": "grapevineRepository\\WorkplaceRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\WorkplaceRepository.cs",
+              "RelativeToolTip": "grapevineRepository\\WorkplaceRepository.cs",
+              "ViewState": "AgIAAJgBAAAAAAAAAAAcwN0BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T06:39:10.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "workplaceResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\workplaceResponse.cs",
+              "RelativeDocumentMoniker": "grapevineCommon\\Model\\Workplace\\workplaceResponse.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\workplaceResponse.cs",
+              "RelativeToolTip": "grapevineCommon\\Model\\Workplace\\workplaceResponse.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAQwHMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T06:25:47.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WorkplaceItem.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\WorkplaceItem.cs",
+              "RelativeDocumentMoniker": "grapevineCommon\\Model\\Workplace\\WorkplaceItem.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\WorkplaceItem.cs",
+              "RelativeToolTip": "grapevineCommon\\Model\\Workplace\\WorkplaceItem.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAIwIQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T06:15:02.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IWorkplaceService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Interfaces\\IWorkplaceService.cs",
+              "RelativeDocumentMoniker": "grapevineServices\\Interfaces\\IWorkplaceService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Interfaces\\IWorkplaceService.cs",
+              "RelativeToolTip": "grapevineServices\\Interfaces\\IWorkplaceService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:28:58.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Program.cs",
+              "RelativeDocumentMoniker": "grapevineApi\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineApi\\Program.cs",
+              "RelativeToolTip": "grapevineApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:27:22.432Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IWorkplaceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\Interfaces\\IWorkplaceRepository.cs",
+              "RelativeDocumentMoniker": "grapevineRepository\\Interfaces\\IWorkplaceRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\Interfaces\\IWorkplaceRepository.cs",
+              "RelativeToolTip": "grapevineRepository\\Interfaces\\IWorkplaceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:19:40.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WorkplaceService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Model\\WorkplaceService.cs",
+              "RelativeDocumentMoniker": "grapevineServices\\Model\\WorkplaceService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineServices\\Model\\WorkplaceService.cs",
+              "RelativeToolTip": "grapevineServices\\Model\\WorkplaceService.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAmwJ4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T04:54:07.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WorkplaceRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\WorkplaceRequest.cs",
+              "RelativeDocumentMoniker": "grapevineCommon\\Model\\Workplace\\WorkplaceRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineCommon\\Model\\Workplace\\WorkplaceRequest.cs",
+              "RelativeToolTip": "grapevineCommon\\Model\\Workplace\\WorkplaceRequest.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAQwGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:13:16.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OxygenCrmRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\OxygenCrmRepository.cs",
+              "RelativeDocumentMoniker": "grapevineRepository\\OxygenCrmRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\OxygenCrmRepository.cs",
+              "RelativeToolTip": "grapevineRepository\\OxygenCrmRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:24:10.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FeedRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\FeedRepository.cs",
+              "RelativeDocumentMoniker": "grapevineRepository\\FeedRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineRepository\\FeedRepository.cs",
+              "RelativeToolTip": "grapevineRepository\\FeedRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:21:59.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "StoredProcedureRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineData\\StoredProcedureRequest.cs",
+              "RelativeDocumentMoniker": "grapevineData\\StoredProcedureRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineData\\StoredProcedureRequest.cs",
+              "RelativeToolTip": "grapevineData\\StoredProcedureRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:18:16.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DapperSqlExecutor.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineData\\DapperSqlExecutor.cs",
+              "RelativeDocumentMoniker": "grapevineData\\DapperSqlExecutor.cs",
+              "ToolTip": "C:\\Users\\Admin\\Project Folder\\Grapevine-API\\grapevineData\\DapperSqlExecutor.cs",
+              "RelativeToolTip": "grapevineData\\DapperSqlExecutor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T05:14:39.002Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

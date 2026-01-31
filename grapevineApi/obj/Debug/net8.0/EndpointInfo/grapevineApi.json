@@ -67,7 +67,7 @@
         }
       }
     },
-    "/api/OxygenCrm/GetProjectLeads": {
+    "/api/OxygenCrm/GetProjectLead": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -129,7 +129,7 @@
         }
       }
     },
-    "/api/OxygenCrm/GetLeadProjectSummary": {
+    "/api/OxygenCrm/crm_get_Lead_Project_summary": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -160,7 +160,7 @@
         }
       }
     },
-    "/api/OxygenCrm/DeleteAgency": {
+    "/api/OxygenCrm/OH_Delete_Agency": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -191,7 +191,7 @@
         }
       }
     },
-    "/api/OxygenCrm/ShowChannels": {
+    "/api/OxygenCrm/crm_get_activity_Channel": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -222,7 +222,7 @@
         }
       }
     },
-    "/api/OxygenCrm/GetCPTaggingParameters": {
+    "/api/OxygenCrm/GET_CP_tagging_parameters": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/api/OxygenCrm/InsertCPTagging": {
+    "/api/OxygenCrm/insert_lead_CP_tagging": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -284,7 +284,7 @@
         }
       }
     },
-    "/api/OxygenCrm/GetMediaTypeAndMasters": {
+    "/api/OxygenCrm/ RE_getMediaType": {
       "post": {
         "tags": [
           "OxygenCrm"
@@ -315,7 +315,7 @@
         }
       }
     },
-    "/api/Workplace/location": {
+    "/api/Workplace/GetCurrentLocationProgram": {
       "get": {
         "tags": [
           "Workplace"
@@ -344,7 +344,7 @@
         }
       }
     },
-    "/api/Workplace/update-filter": {
+    "/api/Workplace/UpdateFilterparameter": {
       "post": {
         "tags": [
           "Workplace"
@@ -375,7 +375,7 @@
         }
       }
     },
-    "/api/Workplace/search": {
+    "/api/Workplace/ode_get_location_search": {
       "get": {
         "tags": [
           "Workplace"
@@ -403,6 +403,366 @@
           }
         }
       }
+    },
+    "/api/Workplace/OH_get_search_sale_List": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "listingStatusId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "feedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "myFeedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/OH_get_search_agencies_List": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "pageno",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "feedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "listingStatusId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "4"
+            }
+          },
+          {
+            "name": "myFeedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/OH_get_search_Developers_List": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "pageno",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "feedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "listingStatusId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "4"
+            }
+          },
+          {
+            "name": "myFeedChannelId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/OH_get_buyers_also_liked": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "LoginFeedchannelID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SearchforID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SearchText",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/OH_get_top_localities": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "searchId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/crm_Insert_Feed_Likes": {
+      "post": {
+        "tags": [
+          "Workplace"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedLikeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedLikeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedLikeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/SaveProjectResponse": {
+      "post": {
+        "tags": [
+          "Workplace"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectResponseRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectResponseRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectResponseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Workplace/OH_Get_Next_Lead_Associate": {
+      "get": {
+        "tags": [
+          "Workplace"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -413,6 +773,32 @@
           "entityFeedChannelID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FeedLikeRequest": {
+        "type": "object",
+        "properties": {
+          "feedID": {
+            "type": "string",
+            "nullable": true
+          },
+          "commentID": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedLikeTypeID": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectID": {
+            "type": "string",
+            "nullable": true
+          },
+          "loginFeedChannelID": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -886,6 +1272,36 @@
           "agencyFeedChannelID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectResponseRequest": {
+        "type": "object",
+        "properties": {
+          "projectID": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseFeedChannelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseStatusID": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseText": {
+            "type": "string",
+            "nullable": true
+          },
+          "associateFeedChannelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseChannelID": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

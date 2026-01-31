@@ -18,11 +18,7 @@ namespace grapevineApi.Controllers
             _oxygenCrmService = oxygenCrmService;
         }
 
-        // ───────────────────────────────────────────────
-        // Lead Related Endpoints
-        // ───────────────────────────────────────────────
-
-        [HttpPost("GetProjectLeads")]
+            [HttpPost("GetProjectLead")]
         public async Task<IActionResult> GetProjectLeads([FromBody] GetProjectLeadRequest request)
         {
             var result = await _oxygenCrmService.GetProjectLeadsAsync(request);
@@ -36,25 +32,21 @@ namespace grapevineApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("GetLeadProjectSummary")]
+        [HttpPost("crm_get_Lead_Project_summary")]
         public async Task<IActionResult> GetLeadProjectSummary([FromBody] LeadProjectSummaryRequest request)
         {
             var result = await _oxygenCrmService.GetLeadProjectSummaryAsync(request);
             return Ok(result);
         }
 
-        // ───────────────────────────────────────────────
-        // Agency / Channel Related Endpoints
-        // ───────────────────────────────────────────────
-
-        [HttpPost("DeleteAgency")]
+        [HttpPost("OH_Delete_Agency")]
         public async Task<IActionResult> DeleteAgency([FromBody] OHDeleteAgencyRequest request)
         {
             var result = await _oxygenCrmService.DeleteAgencyAsync(request);
             return Ok(result);
         }
 
-        [HttpPost("ShowChannels")]
+        [HttpPost("crm_get_activity_Channel")]
         public async Task<IActionResult> ShowChannels([FromBody] ShowChannelsRequest request)
         {
             // Even though request is empty, keeping consistency
@@ -62,29 +54,24 @@ namespace grapevineApi.Controllers
             return Ok(result);
         }
 
-        // ───────────────────────────────────────────────
-        // Tagging / Configuration Endpoints
-        // ───────────────────────────────────────────────
+        
 
-        [HttpPost("GetCPTaggingParameters")]
+        [HttpPost("GET_CP_tagging_parameters")]
         public async Task<IActionResult> GetCPTaggingParameters([FromBody] CPTaggingParametersRequest request)
         {
             var result = await _oxygenCrmService.GetCPTaggingParametersAsync(request);
             return Ok(result);
         }
 
-        [HttpPost("InsertCPTagging")]
+        [HttpPost("insert_lead_CP_tagging")]
         public async Task<IActionResult> InsertCPTagging([FromBody] InsertCPTaggingRequest request)
         {
             var result = await _oxygenCrmService.InsertOrUpdateCPTaggingAsync(request);
             return Ok(result);
         }
 
-        // ───────────────────────────────────────────────
-        // Master Data / Dropdowns
-        // ───────────────────────────────────────────────
-
-        [HttpPost("GetMediaTypeAndMasters")]
+        
+        [HttpPost(" RE_getMediaType")]
         public async Task<IActionResult> GetMediaTypeAndMasters([FromBody] GetMediaTypeRequest request)
         {
             var result = await _oxygenCrmService.GetMediaTypeAndRelatedMastersAsync(request);

@@ -1,15 +1,10 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace grapevineData
+namespace grapevineData.Interfaces
 {
-    public class StoredProcedureRequest
+    public interface IStoredProcedureRequest
     {
-        public string ProcedureName { get; set; }
-        public DynamicParameters Parameters { get; set; }
+        string ProcedureName { get; set; }
+        object Parameters { get; set; }
     }
 }
