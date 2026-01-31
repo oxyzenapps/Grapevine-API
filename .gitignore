@@ -103,3 +103,5 @@ publish/
 /grapevineApi/Properties/PublishProfiles
 /grapevineApi/grapevineApi.csproj.user
 >>>>>>> 1d59fd06eb048ca195d6bfcc7c56c56eaf27c2be
+/grapevineData/obj/Debug/net8.0/grapevineData.csproj.AssemblyReference.cache
+/grapevineServices/obj/grapevineServices.csproj.nuget.g.props
