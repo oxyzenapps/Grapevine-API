@@ -9,18 +9,28 @@ namespace grapevineApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IJwtTokenService _tokenService;
-        public AuthController(IJwtTokenService tokenService) => _tokenService = tokenService;
+        private readonly ILoginService _loginService;
+        public AuthController(IJwtTokenService tokenService, ILoginService loginService)
+        {
+            _tokenService = tokenService;
+            _loginService = loginService;
+        }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromQuery] string mobileNo)
         {
             // Replace with real user validation
-            if (model.Username == "test" && model.Password == "password")
+            bool isExists = await _loginService.LoginByMobile(mobileNo);
+            if (isExists)
             {
-                var token = _tokenService.GenerateToken(model.Username);
+                var token = await _tokenService.GenerateToken(mobileNo);
                 return Ok(new { token });
             }
-            return Unauthorized();
+            else
+            {
+                return Unauthorized();
+            }
+            
         }
     }
 

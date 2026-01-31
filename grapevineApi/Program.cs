@@ -264,6 +264,9 @@ builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 // Existing Feeds Module
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 builder.Services.AddScoped<IFeedsService, FeedsService>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
