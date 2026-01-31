@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/grapevineApiCode/config/applicationhost.config
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db-shm
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/CodeChunks.db-wal
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db-shm
+/.vs/grapevineApiCode/CopilotIndices/17.14.1561.44479/SemanticSymbols.db-wal
+/.vs/grapevineApiCode/FileContentIndex/ad43e000-1c8b-4ff3-a410-2ec2e77a1e9f.vsidx
