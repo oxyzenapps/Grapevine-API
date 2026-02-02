@@ -7,6 +7,7 @@ using grapevineRepository.Interfaces;
 using grapevineService.Interfaces;
 using grapevineServices.Interfaces;
 using grapevineServices.Model;
+using grapevineServices.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -76,6 +77,7 @@ builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 builder.Services.AddScoped<IFeedsService, FeedsService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<UtilityService, UtilityService>();
 
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
