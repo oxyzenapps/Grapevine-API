@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\grapevineCommon\grapevineCommon.csproj" />
+    <ProjectReference Include="..\grapevineData\grapevineData.csproj" />
     <ProjectReference Include="..\grapevineRepository\grapevineRepository.csproj" />
   </ItemGroup>
 
