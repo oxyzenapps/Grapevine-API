@@ -14,12 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="grapevineCommon">
-      <HintPath>..\grapevineCommon\bin\Debug\net8.0\grapevineCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="grapevineRepository">
-      <HintPath>..\grapevineRepository\bin\Debug\net8.0\grapevineRepository.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\grapevineCommon\grapevineCommon.csproj" />
+    <ProjectReference Include="..\grapevineRepository\grapevineRepository.csproj" />
   </ItemGroup>
 
 </Project>
