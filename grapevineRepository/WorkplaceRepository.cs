@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using grapevineCommon.Model.Workplace;
 using GrapevineCommon.Model.Workplace;
-using grapevineData;
+
 using grapevineData.Interfaces;
 using grapevineRepository.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -28,7 +28,7 @@ namespace grapevineRepository
             parameters.Add("@WebsiteID", websiteId);
             parameters.Add("@ContactID", contactId);
 
-            var request = new StoredProcedureRequest
+            var request = new grapevineData.Interfaces.StoredProcedureRequest
             {
                 ProcedureName = "ode.dbo.ode_get_current_location",
                 Parameters = parameters

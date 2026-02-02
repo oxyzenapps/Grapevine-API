@@ -186,3 +186,6 @@ publish/
 /grapevineRepository/obj/grapevineRepository.csproj.nuget.g.props
 /grapevineRepository/obj/project.assets.json
 /grapevineRepository/obj/project.nuget.cache
+/grapevineApi/obj/Debug/net8.0/grapevineApi.GlobalUsings.g.cs
+/grapevineServices/obj/Debug/net8.0/grapevineServices.GlobalUsings.g.cs
+/grapevineApi/grapevineApi.csproj.user
