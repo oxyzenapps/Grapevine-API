@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -171,23 +172,67 @@ namespace grapevineApi.Controllers
 
                 if (!string.IsNullOrWhiteSpace(error))
                     JsonConvert.DeserializeObject(error);
-                //dynamic obj  = JsonConvert.DeserializeObject(output);
-                //string base64 = obj?.screenshot;
-                //base64 = base64.Substring(base64.IndexOf(",") + 1);
-                //byte[] imageBytes = Convert.FromBase64String(base64);
 
-                //// Get Downloads folder
-                //string downloadsPath = Path.Combine(
-                //    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                //    "Downloads"
-                //);
+                return Ok(output);
+            }
+        }
 
-                //// Ensure folder exists (usually does)
-                //Directory.CreateDirectory(downloadsPath);
+        [Route("lands/in-mh/Index2")]
+        [HttpGet]
+        public async Task<IActionResult> Index2(string District, string Taluka, string Village, string SurveyNumber, string HissaNumber, string MobileNo, string Language,string TabText,
+            string ToYear, string FromYear, string FromPageNo, string Last_Page, string Last_Year)
+        {
+            //var exePath = @"D:\Office Projects\Grapevine\Grapevine_website\BhulekhExtractor\BhulekhExtractor.exe";
+            var exePath = Path.Combine(
+            _env.ContentRootPath,
+            "BhulekhExtractor",
+            "publish",
+            "BhulekhExtractor.exe"
+);
+            string url = "https://freesearchigrservice.maharashtra.gov.in/";
+            //District = await TransliterateToMarathi(District);
+            //Taluka = await TransliterateToMarathi(Taluka);
+            //Village = await TransliterateToMarathi(Village);
+            var payload = new ScrapeRequest
+            {
+                District = District,
+                Taluka = Taluka,
+                Village = Village,
+                SurveyNumber = SurveyNumber,
+                HissaNumber = HissaNumber,
+                MobileNo = MobileNo,
+                Language = Language,
+                Url = url,
+                UrlType = "Index2",
+                TabText = TabText,
+                ToYear = ToYear,
+                FromYear = FromYear,
+                FromPageNo = FromPageNo,
+                Last_Page = Last_Page,
+                Last_Year = Last_Year
+            };
+            var json = JsonConvert.SerializeObject(payload);
+            string escapedJson = json.Replace("\"", "\\\"");
+            var psi = new ProcessStartInfo
+            {
+                FileName = exePath,
+                Arguments = $"\"{escapedJson}\"",   // ✅ quoted
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            using (var process = Process.Start(psi))
+            {
+                var outputTask = process.StandardOutput.ReadToEndAsync();
+                var errorTask = process.StandardError.ReadToEndAsync();
+                process.WaitForExit();
 
-                //string filePath = Path.Combine(downloadsPath, "Report.pdf");
+                var output = await outputTask;
+                var error = await errorTask;
 
-                //await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
+                if (!string.IsNullOrWhiteSpace(error))
+                    JsonConvert.DeserializeObject(error);
 
                 return Ok(output);
             }
