@@ -171,6 +171,23 @@ namespace grapevineApi.Controllers
 
                 if (!string.IsNullOrWhiteSpace(error))
                     JsonConvert.DeserializeObject(error);
+                //dynamic obj  = JsonConvert.DeserializeObject(output);
+                //string base64 = obj?.screenshot;
+                //base64 = base64.Substring(base64.IndexOf(",") + 1);
+                //byte[] imageBytes = Convert.FromBase64String(base64);
+
+                //// Get Downloads folder
+                //string downloadsPath = Path.Combine(
+                //    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                //    "Downloads"
+                //);
+
+                //// Ensure folder exists (usually does)
+                //Directory.CreateDirectory(downloadsPath);
+
+                //string filePath = Path.Combine(downloadsPath, "Report.pdf");
+
+                //await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
 
                 return Ok(output);
             }
@@ -187,6 +204,12 @@ namespace grapevineApi.Controllers
             public string MobileNo { get; set; } = "";
             public string Language { get; set; } = "";
             public string UrlType { get; set; } = "";
+            public string TabText { get; set; } = "";
+            public string ToYear { get; set; } = "";
+            public string FromYear { get; set; } = "";
+            public string FromPageNo { get; set; } = "";
+            public string Last_Page { get; set; } = "";
+            public string Last_Year { get; set; } = "";
         }
 
         [NonAction]

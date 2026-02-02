@@ -172,3 +172,17 @@ publish/
 /grapevineServices/bin/Debug/net8.0/grapevineServices.dll
 /grapevineServices/obj/Debug/net8.0/ref/grapevineServices.dll
 /grapevineServices/obj/Debug/net8.0/refint/grapevineServices.dll
+/.vs/grapevineApiCode/v17/.suo
+/.vs/grapevineApiCode/v17/DocumentLayout.json
+/.vs/ProjectEvaluation/grapevineapicode.metadata.v9.bin
+/.vs/ProjectEvaluation/grapevineapicode.projects.v9.bin
+/grapevineCommon/obj/grapevineCommon.csproj.nuget.dgspec.json
+/grapevineCommon/obj/grapevineCommon.csproj.nuget.g.props
+/grapevineCommon/obj/project.assets.json
+/grapevineCommon/obj/project.nuget.cache
+/grapevineData/bin/Debug/net8.0/grapevineData.deps.json
+/grapevineRepository/bin/Debug/net8.0/grapevineRepository.deps.json
+/grapevineRepository/obj/grapevineRepository.csproj.nuget.dgspec.json
+/grapevineRepository/obj/grapevineRepository.csproj.nuget.g.props
+/grapevineRepository/obj/project.assets.json
+/grapevineRepository/obj/project.nuget.cache
