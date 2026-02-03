@@ -23,7 +23,7 @@ namespace grapevineApi.Controllers
 			int AdvanceID = 0)
 		{
 			string sqlQuery =
-				$"exec ode.dbo.[ode_insert_Company_executive_advances] " +
+				$"ode.dbo.[ode_insert_Company_executive_advances] " +
 				$"@Action='Get Executive Summary'," +
 				$"@CompanyFeedChannelID={CompanyFeedChannelID}," +
 				$"@ExecutiveFeedChannelID={ExecutiveFeedChannelID}," +
@@ -50,7 +50,7 @@ namespace grapevineApi.Controllers
 			string EMI = "")
 		{
 			string sqlQuery =
-				$"exec ode.dbo.[ode_insert_Company_executive_advances] " +
+				$"ode.dbo.[ode_insert_Company_executive_advances] " +
 				$"@Action='Insert Emp Advance'," +
 				$"@CompanyFeedChannelID={CompanyFeedChannelID}," +
 				$"@ExecutiveFeedChannelID={ExecutiveFeedChannelID}," +
@@ -84,7 +84,7 @@ namespace grapevineApi.Controllers
 			string interest = InterestRatePA.ToString(CultureInfo.InvariantCulture);
 
 			string sqlQuery =
-				$"exec ode.dbo.[ode_insert_Company_advance_providing_company] " +
+				$"ode.dbo.[ode_insert_Company_advance_providing_company] " +
 				$"@Action='Insert Advance Providing Company'," +
 				$"@CompanyFeedChannelID={CompanyFeedChannelID}," +
 				$"@AdvancebyCompanyFeedChannelID={AdvancebyCompanyFeedChannelID}," +

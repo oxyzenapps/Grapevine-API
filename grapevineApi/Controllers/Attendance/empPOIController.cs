@@ -25,7 +25,7 @@ namespace grapevineApi.Controllers
 			string Comments = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_POI]" +
+				"ode.dbo.[ode_insert_Company_executive_POI]" +
 				"@Action='Insert EMP POI'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -50,7 +50,7 @@ namespace grapevineApi.Controllers
 			string Comments = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_POI]" +
+				"ode.dbo.[ode_insert_Company_executive_POI]" +
 				"@Action='Insert EMP POI'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -76,7 +76,7 @@ namespace grapevineApi.Controllers
 			string StartDate = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_POI]" +
+				"ode.dbo.[ode_insert_Company_executive_POI]" +
 				"@Action='Get Emp POI'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -97,7 +97,7 @@ namespace grapevineApi.Controllers
 			string StartDate = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_POI]" +
+				"ode.dbo.[ode_insert_Company_executive_POI]" +
 				"@Action='Get Emp POI'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +

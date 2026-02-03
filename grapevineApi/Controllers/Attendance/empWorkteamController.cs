@@ -26,7 +26,7 @@ using System.Data;
             int CompanyPayrollTeamID = 0)
         {
             string sqlQuery =
-                "exec ode.dbo.[ode_insert_company_Executive_workteam] " +
+                "ode.dbo.[ode_insert_company_Executive_workteam] " +
                 "@Action='Insert Executive Workteam'," +
                 "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
                 "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
@@ -54,7 +54,7 @@ using System.Data;
             int CompanyPayrollTeamID = 0)
         {
             string sqlQuery =
-                "exec ode.dbo.[ode_insert_company_Executive_workteam] " +
+                "ode.dbo.[ode_insert_company_Executive_workteam] " +
                 "@Action='get Executive Workteam'," +
                 "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
                 "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
@@ -81,7 +81,7 @@ using System.Data;
             int CompanyPayrollTeamID = 0)
         {
             string sqlQuery =
-                "exec ode.dbo.[ode_insert_company_Executive_workteam] " +
+                "ode.dbo.[ode_insert_company_Executive_workteam] " +
                 "@Action='delete Executive Workteam'," +
                 "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
                 "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
