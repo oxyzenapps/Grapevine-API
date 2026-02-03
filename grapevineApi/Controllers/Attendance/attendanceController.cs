@@ -6,11 +6,11 @@ namespace grapevineApi.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class AttendanceController : ControllerBase
+	public class attendanceController : ControllerBase
 	{
 		private readonly UtilityService _utilityService;
 
-		public AttendanceController(UtilityService utilityService)
+		public attendanceController(UtilityService utilityService)
 		{
 			_utilityService = utilityService;
 		}
@@ -43,7 +43,7 @@ namespace grapevineApi.Controllers
 							 TimeLogTypeID == "-1" ? "Check-out" : " ";
 
 			string sqlQuery =
-				"exec ode.dbo.ode_insert_company_executive_attendance " +
+				"ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='log'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -68,7 +68,7 @@ namespace grapevineApi.Controllers
 			bool printVisitCard = false)
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_insert_company_executive_attendance " +
+				"ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='get log'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -114,7 +114,7 @@ namespace grapevineApi.Controllers
 			int ManagerFeedChannelID = 0)
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_get_company_employee_attendance " +
+				"ode.dbo.ode_get_company_employee_attendance " +
 				"@Action='Get Monthly Attendance'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ManagerFeedChannelID='{ManagerFeedChannelID}'," +
@@ -128,8 +128,8 @@ namespace grapevineApi.Controllers
 		// ================= GET CURRENCY =================
 		[HttpPost("getCurrencyList")]
 		public async Task<IActionResult> getCurrencyList()
-		{
-			var result = await _utilityService.GetDataResultAsync("exec glivebooks.dbo.BindCurrency");
+		{ 
+			var result = await _utilityService.GetDataResultAsync("glivebooks.dbo.BindCurrency");
 			if (result.errors.Any()) return BadRequest(result.errors);
 			return Ok(result.result);
 		}
@@ -139,7 +139,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> getCompanyAttendanceStatus()
 		{
 			var result = await _utilityService
-				.GetDataResultAsync("exec ode.dbo.ode_get_CompanyAttendanceStatus");
+				.GetDataResultAsync("ode.dbo.ode_get_CompanyAttendanceStatus");
 
 			if (result.errors.Any()) return BadRequest(result.errors);
 			return Ok(result.result);

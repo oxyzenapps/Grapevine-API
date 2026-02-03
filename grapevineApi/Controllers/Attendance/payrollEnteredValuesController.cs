@@ -23,7 +23,7 @@ namespace grapevineApi.Controllers
 			int PageSize = 20)
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.Crm_Insert_payment_ledger " +
+				"glivebooks.dbo.Crm_Insert_payment_ledger " +
 				"@Action='Get'," +
 				"@EntityFeedChannelID='" + EntityFeedChannelID + "'," +
 				"@DocumentTypeID='" + DocumentTypeID + "'," +
@@ -44,7 +44,7 @@ namespace grapevineApi.Controllers
 			int DocumentTypeID = 0)
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_insert_general_ledger " +
+				"glivebooks.dbo.crm_insert_general_ledger " +
 				"@Action='Get outstanding'," +
 				"@EntityFeedChannelID='" + EntityFeedChannelID + "'," +
 				"@DocumentTypeID='" + DocumentTypeID + "'";
@@ -67,7 +67,7 @@ namespace grapevineApi.Controllers
 			int Pending = 0)
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_insert_general_ledger " +
+				"glivebooks.dbo.crm_insert_general_ledger " +
 				"@Action='Get Ledger'," +
 				"@EntityFeedChannelID='" + EntityFeedChannelID + "'," +
 				"@DocumentTypeID='" + DocumentTypeID + "'," +
@@ -103,7 +103,7 @@ namespace grapevineApi.Controllers
 			string SDocumentID = "")
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_Insert_payment_settlement " +
+				"glivebooks.dbo.crm_Insert_payment_settlement " +
 				"@Action='insert'," +
 				"@EntityFeedChannelID='" + EntityFeedChannelID + "'," +
 				"@currency='" + currency + "'," +
@@ -148,7 +148,7 @@ namespace grapevineApi.Controllers
 			string SDocumentID = "")
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_Insert_payment_settlement " +
+				"glivebooks.dbo.crm_Insert_payment_settlement " +
 				"@Action='Get settlement For FeedChannel'," +
 				"@EntityFeedChannelID='" + EntityFeedChannelID + "'," +
 				"@currency='" + currency + "'," +

@@ -26,7 +26,7 @@ namespace grapevineApi.Controllers
 		{
 			string sqlQuery =
 				"declare @ReturnValue int=0; " +
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
 				"@TemplateID='" + TemplateID + "'," +
@@ -51,7 +51,7 @@ namespace grapevineApi.Controllers
 		)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Get Employee Document'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -74,7 +74,7 @@ namespace grapevineApi.Controllers
 		)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Release Employee Document'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -96,7 +96,7 @@ namespace grapevineApi.Controllers
 		)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Delete Employee Document'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -126,7 +126,7 @@ namespace grapevineApi.Controllers
 		)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Insert'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@TemplateID='" + TemplateID + "'," +
@@ -150,7 +150,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> GetExecutiveDocumentTemplate(int CompanyFeedChannelID = 0, int TemplateID = 0)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Get'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@TemplateID='" + TemplateID + "'";
@@ -167,7 +167,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> DeleteExecutiveDocumentTemplate(int CompanyFeedChannelID = 0, int TemplateID = 0)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Delete'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@TemplateID='" + TemplateID + "'";
@@ -184,7 +184,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> GetEmployeeDocumentTypes(int CompanyFeedChannelID = 0)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Get Employee Document Types'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'";
 
@@ -205,7 +205,7 @@ namespace grapevineApi.Controllers
 		)
 		{
 			string sqlQuery =
-				"exec ode.dbo.[ode_insert_Company_executive_document_template] " +
+				"ode.dbo.[ode_insert_Company_executive_document_template] " +
 				"@Action='Get Template for Employee'," +
 				"@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 				"@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +

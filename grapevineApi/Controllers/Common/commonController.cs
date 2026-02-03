@@ -1,7 +1,7 @@
 ﻿using grapevineServices.Services;
 using Microsoft.AspNetCore.Mvc;
- 
-namespace grapevineApi.Controllers
+
+namespace grapevineApi.Controllers.Common
 {
 	[ApiController]
 	[Route("api/[controller]")]
@@ -21,7 +21,7 @@ namespace grapevineApi.Controllers
 			int WhereOneCanPostOnly = 0, int PageId = 1, int PageSize = 20, string SortOption = "")
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_feed_search_grapevine " +
+				"glivebooks.dbo.crm_feed_search_grapevine " +
 				$"@WebsiteID='{WebsiteID}'," +
 				$"@LoginID='{LoginID}'," +
 				$"@LoginFeedCHannelID='{LoginFeedChannelID}'," +
@@ -45,7 +45,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> getFeedUserPreferences(int LoginID = 0)
 		{
 			string sqlQuery =
-				$"exec glivebooks.dbo.crm_get_Feed_UserPreferences @LoginID='{LoginID}'";
+				$"glivebooks.dbo.crm_get_Feed_UserPreferences @LoginID='{LoginID}'";
 
 			var result = await _utilityService.GetDataResultAsync(sqlQuery);
 			if (result.errors.Count > 0) return BadRequest(result.errors);
@@ -62,7 +62,7 @@ namespace grapevineApi.Controllers
 			int LastUsedEntityFeedChannelID = 0)
 		{
 			string sqlQuery =
-				"exec glivebooks.dbo.crm_update_feed_user_preferences " +
+				"glivebooks.dbo.crm_update_feed_user_preferences " +
 				$"@LoginID='{LoginID}'," +
 				$"@FeedByID='{FeedByID}'," +
 				$"@LastUsedMediaButtonID='{LastUsedMediaButtonID}'," +
@@ -90,7 +90,7 @@ namespace grapevineApi.Controllers
 			int FeedChannelID = 0, int PageID = 1, int PageSize = 20, int OnlyOneAddress = 1)
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_get_company_details " +
+				"ode.dbo.ode_get_company_details " +
 				$"@LoginID='{LoginID}'," +
 				$"@Applicant_id='{Applicant_id}'," +
 				$"@FilterName='{FilterName}'," +

@@ -26,7 +26,7 @@ namespace grapevineApi.Controllers
 			string PresenceStatusID = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_get_company_employee_attendance " +
+				"ode.dbo.ode_get_company_employee_attendance " +
 				"@Action='Get EveryOne On A Day'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ManagerFeedChannelID='{ManagerFeedChannelID}'," +
@@ -50,7 +50,7 @@ namespace grapevineApi.Controllers
 			string ToDate = "")
 		{
 			string sqlQuery =
-				"Declare @ReturnValue int=0; exec ode.dbo.ode_insert_company_executive_attendance " +
+				"Declare @ReturnValue int=0; ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='Apply Leave'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -77,7 +77,7 @@ namespace grapevineApi.Controllers
 			string FromDate = "")
 		{
 			string sqlQuery =
-				"Declare @ReturnValue int=0; exec ode.dbo.ode_insert_company_executive_attendance " +
+				"Declare @ReturnValue int=0; ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='Update Leave'," +
 				$"@AdminFeedChannelID='{AdminFeedChannelID}'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
@@ -102,7 +102,7 @@ namespace grapevineApi.Controllers
 			string FromDate = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_insert_company_executive_attendance " +
+				"ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='Get Leave'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -123,7 +123,7 @@ namespace grapevineApi.Controllers
 			string PresenceDate = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_get_company_employee_attendance " +
+				"ode.dbo.ode_get_company_employee_attendance " +
 				"@Action='Get All Leaves'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ManagerFeedChannelID='{ManagerFeedChannelID}'," +
@@ -144,7 +144,7 @@ namespace grapevineApi.Controllers
 			string FromDate = "")
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_insert_company_executive_attendance " +
+				"ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='Delete Leave'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -160,7 +160,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> getLeaveType(int CompanyFeedChannelID = 0, int ExecutiveFeedChannelID = 0)
 		{
 			string sqlQuery =
-				"exec ode.dbo.ode_insert_company_executive_attendance " +
+				"ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='Get Leave Type'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'";
