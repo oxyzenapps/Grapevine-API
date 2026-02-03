@@ -28,7 +28,7 @@ namespace grapevineApi.Controllers
 			bool Print = false
 		)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Get Executive Pay roll'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -58,7 +58,7 @@ namespace grapevineApi.Controllers
 		[HttpPost("savePayrollEnteredValue")]
 		public async Task<IActionResult> savePayrollEnteredValue([FromBody] dynamic data)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Insert'," +
 							  "@CompanyFeedChannelID='" + data.CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + data.ExecutiveFeedChannelID + "'," +
@@ -88,7 +88,7 @@ namespace grapevineApi.Controllers
 			string YearMonth = ""
 		)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Get'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -115,7 +115,7 @@ namespace grapevineApi.Controllers
 			string YearMonth = ""
 		)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Delete'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -142,7 +142,7 @@ namespace grapevineApi.Controllers
 			decimal BasicPay
 		)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Insert company Pay Scale'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -161,7 +161,7 @@ namespace grapevineApi.Controllers
 		[HttpGet("getCompanyPayScale")]
 		public async Task<IActionResult> getCompanyPayScale(int CompanyFeedChannelID, int ExecutiveFeedChannelID, int PayScaleID)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Get company Pay Scale'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -178,7 +178,7 @@ namespace grapevineApi.Controllers
 		[HttpDelete("deleteCompanyPayScale")]
 		public async Task<IActionResult> deleteCompanyPayScale(int CompanyFeedChannelID, int ExecutiveFeedChannelID, int PayScaleID)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Delete company Pay Scale'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -196,7 +196,7 @@ namespace grapevineApi.Controllers
 		[HttpGet("getPayComponents")]
 		public async Task<IActionResult> getPayComponents(int CompanyFeedChannelID = 0, int ExecutiveFeedChannelID = 0)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Get Pay Components'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'";
@@ -221,7 +221,7 @@ namespace grapevineApi.Controllers
 			decimal MaxValue
 		)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_company_Pay_Scales] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Insert company Pay Scale Component'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +

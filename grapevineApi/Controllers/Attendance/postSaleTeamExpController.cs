@@ -23,7 +23,7 @@ namespace grapevineApi.Controllers
 			int MediaID = 0, string Description = "", string Claims = "", int ClaimedByFeedChannelID = 0,
 			int ExpenseDistributionMethodID = 0, string TeamExpenses = "")
 		{
-			string sqlQuery = "declare @DistributionRecID int= 0; dbo.[crm_insert_sales_team_expenses] " +
+			string sqlQuery = "declare @DistributionRecID int= 0; exec dbo.[crm_insert_sales_team_expenses] " +
 							  "@Action='insert'," +
 							  $"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}',@EntityFeedChannelID='{EntityFeedChannelID}'," +
 							  $"@WorkteamID='{WorkteamID}',@ExpenseDateTime='{ExpenseDateTime}',@ExpenseAccountHead='{ExpenseAccountHead}'," +
@@ -49,7 +49,7 @@ namespace grapevineApi.Controllers
 			int ExpenseDistributionMethodID = 0, string TeamExpenses = "", int DistributionRecID = 0,
 			int SalesTeamExpenseTransactionID = 0)
 		{
-			string sqlQuery = "dbo.[crm_insert_sales_team_expenses] " +
+			string sqlQuery = "exec dbo.[crm_insert_sales_team_expenses] " +
 							  "@Action='Update Team Expenses'," +
 							  $"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}',@EntityFeedChannelID='{EntityFeedChannelID}'," +
 							  $"@WorkteamID='{WorkteamID}',@ExpenseDateTime='{ExpenseDateTime}',@ExpenseAccountHead='{ExpenseAccountHead}'," +
@@ -73,7 +73,7 @@ namespace grapevineApi.Controllers
 			int ExpenseDistributionMethodID = 0, string TeamExpenses = "", int DistributionRecID = 0,
 			int SalesTeamExpenseTransactionID = 0)
 		{
-			string sqlQuery = "dbo.[crm_insert_sales_team_expenses] " +
+			string sqlQuery = "exec dbo.[crm_insert_sales_team_expenses] " +
 							  "@Action='Update Executive Expenses'," +
 							  $"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}',@EntityFeedChannelID='{EntityFeedChannelID}'," +
 							  $"@WorkteamID='{WorkteamID}',@ExpenseDateTime='{ExpenseDateTime}',@ExpenseAccountHead='{ExpenseAccountHead}'," +
@@ -96,7 +96,7 @@ namespace grapevineApi.Controllers
 			string ExpenseAccountHead = "", string Approved = "", string NotApproved = "",
 			string Paid = "", string NotPaid = "", bool Print = false)
 		{
-			string sqlQuery = "dbo.[crm_insert_sales_team_expenses] " +
+			string sqlQuery = "exec dbo.[crm_insert_sales_team_expenses] " +
 							  "@Action='get Team expenses'," +
 							  $"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}',@LoginFeedChannelID='{LoginFeedChannelID}'," +
 							  $"@EntityFeedChannelID='{EntityFeedChannelID}',@WorkteamID='{WorkteamID}'," +
