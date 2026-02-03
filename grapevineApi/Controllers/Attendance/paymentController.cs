@@ -29,7 +29,7 @@ namespace grapevineApi.Controllers
 		[HttpPost("savePayrollEnteredValue")]
 		public async Task<IActionResult> savePayrollEnteredValue([FromBody] PayrollEnteredValueDto data)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Insert'," +
 							  "@CompanyFeedChannelID='" + data.CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + data.ExecutiveFeedChannelID + "'," +
@@ -58,7 +58,7 @@ namespace grapevineApi.Controllers
 			int GroupID = 0,
 			string YearMonth = "")
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Get'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -84,7 +84,7 @@ namespace grapevineApi.Controllers
 			int GroupID = 0,
 			string YearMonth = "")
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_executive_Payroll_Entered_values] " +
 							  "@Action='Delete'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
@@ -105,7 +105,7 @@ namespace grapevineApi.Controllers
 		[HttpGet("getPayrollGroupList")]
 		public async Task<IActionResult> getPayrollGroupList(int CompanyFeedChannelID = 0, int GroupID = 0)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_paycomponent_group] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_paycomponent_group] " +
 							  "@Action='Get'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@GroupID='" + GroupID + "'";
@@ -121,7 +121,7 @@ namespace grapevineApi.Controllers
 		[HttpGet("getPayrollComponentList")]
 		public async Task<IActionResult> getPayrollComponentList(int CompanyFeedChannelID = 0, int GroupID = 0, int PayComponentID = 0)
 		{
-			string sqlQuery = "ode.dbo.[ode_insert_Company_paycomponent_group_details] " +
+			string sqlQuery = "exec ode.dbo.[ode_insert_Company_paycomponent_group_details] " +
 							  "@Action='Get'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@PayComponentID='" + PayComponentID + "'," +

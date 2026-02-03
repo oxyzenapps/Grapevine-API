@@ -26,7 +26,7 @@ namespace grapevineApi.Controllers
 			string Expired)
 		{
 			string sqlQuery =
-				"ode.dbo.[ode_insert_Company_Policy_documents] " +
+				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='insert'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@DocumentFileName='{DocumentFileName}'," +
@@ -48,7 +48,7 @@ namespace grapevineApi.Controllers
 			string EffectivDate)
 		{
 			string sqlQuery =
-				"ode.dbo.[ode_insert_Company_Policy_documents] " +
+				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='get'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@AddressID='{AddressID}'," +
@@ -68,7 +68,7 @@ namespace grapevineApi.Controllers
 			string PolicyTitle = "")
 		{
 			string sqlQuery =
-				"ode.dbo.[ode_insert_Company_Policy_documents] " +
+				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='Delete'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@AddressID='{AddressID}'," +

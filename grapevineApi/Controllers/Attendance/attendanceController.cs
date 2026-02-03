@@ -6,19 +6,21 @@ namespace grapevineApi.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class attendanceController : ControllerBase
+	public class AttendanceController : ControllerBase
 	{
 		private readonly UtilityService _utilityService;
 
-		public attendanceController(UtilityService utilityService)
+		public AttendanceController(UtilityService utilityService)
 		{
 			_utilityService = utilityService;
 		}
 
 		// ================= COMPANY ATTENDANCE ADMIN =================
 		[HttpPost("companyAttendenceAdmin")]
-		public async Task<IActionResult> companyAttendenceAdmin(int CompanyFeedChannelID = 0, int ExecutiveFeedChannelID = 0)
+		public async Task<IActionResult> companyAttendenceAdmin([FromBody] System.Text.Json.JsonElement body)
 		{
+			int CompanyFeedChannelID = body.GetProperty("CompanyFeedChannelID").GetInt32();
+			int ExecutiveFeedChannelID = body.GetProperty("ExecutiveFeedChannelID").GetInt32();
 			string sqlQuery =
 				$"select ode.dbo.ode_is_company_attendance_admin({CompanyFeedChannelID},{ExecutiveFeedChannelID})";
 
@@ -43,7 +45,7 @@ namespace grapevineApi.Controllers
 							 TimeLogTypeID == "-1" ? "Check-out" : " ";
 
 			string sqlQuery =
-				"ode.dbo.ode_insert_company_executive_attendance " +
+				"exec ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='log'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -68,7 +70,7 @@ namespace grapevineApi.Controllers
 			bool printVisitCard = false)
 		{
 			string sqlQuery =
-				"ode.dbo.ode_insert_company_executive_attendance " +
+				"exec ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='get log'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
@@ -114,7 +116,7 @@ namespace grapevineApi.Controllers
 			int ManagerFeedChannelID = 0)
 		{
 			string sqlQuery =
-				"ode.dbo.ode_get_company_employee_attendance " +
+				"exec ode.dbo.ode_get_company_employee_attendance " +
 				"@Action='Get Monthly Attendance'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ManagerFeedChannelID='{ManagerFeedChannelID}'," +
@@ -128,8 +130,8 @@ namespace grapevineApi.Controllers
 		// ================= GET CURRENCY =================
 		[HttpPost("getCurrencyList")]
 		public async Task<IActionResult> getCurrencyList()
-		{ 
-			var result = await _utilityService.GetDataResultAsync("glivebooks.dbo.BindCurrency");
+		{
+			var result = await _utilityService.GetDataResultAsync("exec glivebooks.dbo.BindCurrency");
 			if (result.errors.Any()) return BadRequest(result.errors);
 			return Ok(result.result);
 		}
@@ -139,7 +141,7 @@ namespace grapevineApi.Controllers
 		public async Task<IActionResult> getCompanyAttendanceStatus()
 		{
 			var result = await _utilityService
-				.GetDataResultAsync("ode.dbo.ode_get_CompanyAttendanceStatus");
+				.GetDataResultAsync("exec ode.dbo.ode_get_CompanyAttendanceStatus");
 
 			if (result.errors.Any()) return BadRequest(result.errors);
 			return Ok(result.result);

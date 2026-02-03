@@ -105,7 +105,7 @@ namespace grapevineServices.Services
 					Parameters = parameters
 				};
 
-				var datasets = await _db.QueryMultipleDynamicAsync(request);
+				var datasets = await _db.QueryMultipleSqlAsync(request);
 
 				int index = 1;
 				foreach (var set in datasets)
