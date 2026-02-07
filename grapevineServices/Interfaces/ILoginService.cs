@@ -8,6 +8,6 @@ namespace grapevineServices.Interfaces
 {
     public interface ILoginService
     {
-        Task<bool> LoginByMobile(string mobileNo);
+        Task<(string message, string FeedChannelID)> LoginByMobile(string mobileNo);
     }
 }

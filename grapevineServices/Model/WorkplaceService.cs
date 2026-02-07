@@ -1,4 +1,5 @@
-﻿using grapevineCommon.Model.Workplace;
+﻿using grapevineCommon.Model.OxygenCrm;
+using grapevineCommon.Model.Workplace;
 using GrapevineCommon.Model.Workplace;
 using grapevineRepository.Interfaces;
 using grapevineService.Interfaces;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -137,6 +139,36 @@ namespace grapevineServices.Model
                     .ToList();
             }
             return JsonSerializer.Serialize(dict);
+        }
+
+        public async Task<string> GetFeedChannelDetails(string feedChannelId)
+        {
+            var data = await _repo.GetFeedChannelDetails(feedChannelId);
+            return data;
+        }
+
+        public async Task<string> GetWorkteamMembers(string WorkteamId,string FeedChannelID)
+        {
+            var data = await _repo.GetWorkteamMembers(WorkteamId, FeedChannelID);
+            return data;
+        }
+        public async Task<string> GetWorkteamDetails(string SearchString,string FeedChannelID)
+        {
+            var data = await _repo.GetWorkteamDetails(SearchString, FeedChannelID);
+            return data;
+        }
+
+        public async Task<CRM_Lead> CreateLead(string project_id, string Salutation, string FirstName, string LastName,
+                                    string Email, string country_code, string Mobile, string Tagtypedata, string SalesChannelID,
+                                    string AssociateFeedChannelID, string Source, string MediaID, string EntityFeedChannelID,
+                                    string AgencyFeedChannelID, string AgencyContactFeedChanelID, string LeadFeedChannelID,
+                                    string Language, string MessageText)
+        {
+            var data = await _repo.CreateLead("9", "", "10", "", "CRM", "12", "Center", MessageText, Tagtypedata, Mobile, "", "", "", FirstName + " " + LastName, Email,
+                "", "", "", "", "", "", project_id
+               , country_code, "", "", "", "", AssociateFeedChannelID, SalesChannelID, "", Source, MediaID, EntityFeedChannelID
+               , "", "", "", "", "", "", "", "", "", "", AgencyFeedChannelID, AgencyContactFeedChanelID, Salutation, LeadFeedChannelID, Language);
+            return data;
         }
     }
 

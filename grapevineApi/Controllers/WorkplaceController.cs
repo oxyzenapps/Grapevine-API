@@ -1,4 +1,5 @@
-﻿using grapevineCommon.Model.Workplace;
+﻿using grapevineCommon.Model;
+using grapevineCommon.Model.Workplace;
 using grapevineService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -110,7 +111,78 @@ namespace grapevineApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("crm_feed_Get_FeedChannel_Details")]
+        public async Task<IActionResult> crm_feed_Get_FeedChannel_Details(string FeedChannelID)
+        {
+            try
+            {
+                var result = await _service.GetFeedChannelDetails(FeedChannelID);
+                var ok = ApiResponse<string>.Success(result, "Feed channel details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode,ok);
+            }
+            catch(Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving feed channel details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+           
+        }
 
+        [HttpGet("GetWorkteamMembers")]
+        public async Task<IActionResult> GetWorkteamMembers(string WorkteamID,string FeedChannelID)
+        {
+            try
+            {
+                var result = await _service.GetWorkteamMembers(WorkteamID,FeedChannelID);
+                var ok = ApiResponse<string>.Success(result, "Workteam Member details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam Member details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
+
+        [HttpPost("GetWorkteamDetails")]
+        public async Task<IActionResult> GetWorkteamDetails(string SearchString, string FeedChannelID)
+        {
+            try
+            {
+                var result = await _service.GetWorkteamDetails(SearchString, FeedChannelID);
+                var ok = ApiResponse<string>.Success(result, "Workteam details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
+
+        [HttpPost("CreateLead")]
+        public async Task<IActionResult> CreateLead(string project_id, string Salutation, string FirstName, string LastName,
+                                    string Email, string country_code, string Mobile, string Tagtypedata, string SalesChannelID,
+                                    string AssociateFeedChannelID, string Source, string MediaID, string EntityFeedChannelID,
+                                    string AgencyFeedChannelID, string AgencyContactFeedChanelID, string LeadFeedChannelID,
+                                    string Language, string MessageText)
+        {
+            try
+            {
+                var result = await _service.CreateLead(project_id, Salutation,  FirstName,  LastName,
+                                     Email,  country_code,  Mobile,  Tagtypedata,  SalesChannelID,
+                                     AssociateFeedChannelID,  Source,  MediaID,  EntityFeedChannelID,
+                                     AgencyFeedChannelID,  AgencyContactFeedChanelID,  LeadFeedChannelID,
+                                     Language,  MessageText);
+                var ok = ApiResponse<grapevineCommon.Model.OxygenCrm.CRM_Lead>.Success(result, "Lead created successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<grapevineCommon.Model.OxygenCrm.CRM_Lead>.Error($"An error occurred while retrieving Workteam details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
     }
 
  }

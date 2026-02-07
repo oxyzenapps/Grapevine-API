@@ -1,5 +1,6 @@
 ﻿
 
+using grapevineCommon.Model.OxygenCrm;
 using grapevineCommon.Model.Workplace;
 //using grapevineCommon.Model.Workplace.GrapevineCommon.Models.Workplace;
 using GrapevineCommon.Model.Workplace;
@@ -29,6 +30,14 @@ namespace grapevineService.Interfaces
         Task<int> AddFeedLike(FeedLikeRequest request);
         Task<int> CreateProjectResponse(ProjectResponseRequest request);
         Task<IEnumerable<ProjectAssociateResponse>> GetAssociates(string projectId, string projectTypeId);
+        Task<string> GetFeedChannelDetails(string feedChannelId);
+        Task<string> GetWorkteamMembers(string WorkteamId, string FeedChannelID);
+        Task<string> GetWorkteamDetails(string SearchString, string FeedChannelID);
+        Task<CRM_Lead> CreateLead(string project_id, string Salutation, string FirstName, string LastName,
+                                    string Email, string country_code, string Mobile, string Tagtypedata, string SalesChannelID,
+                                    string AssociateFeedChannelID, string Source, string MediaID, string EntityFeedChannelID,
+                                    string AgencyFeedChannelID, string AgencyContactFeedChanelID, string LeadFeedChannelID,
+                                    string Language, string MessageText);
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using grapevineCommon.Model.Workplace;
+﻿using grapevineCommon.Model.OxygenCrm;
+using grapevineCommon.Model.Workplace;
 using GrapevineCommon.Model.Workplace;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +30,18 @@ namespace grapevineRepository.Interfaces
         Task<int> InsertFeedLike(FeedLikeRequest request);
         Task<int> SaveProjectResponse(ProjectResponseRequest request);
         Task<IEnumerable<ProjectAssociateResponse>> GetNextLeadAssociate(string projectId, string projectTypeId);
+        Task<string> GetFeedChannelDetails(string FeedChannelID);
+        Task<string> GetWorkteamMembers(string WorkteamId, string CompanyFeedChannelID);
+        Task<string> GetWorkteamDetails(string SearchString, string CompanyFeedChannelID);
+        Task<CRM_Lead> CreateLead(string WebsiteID, string ContactID, string Interaction_TypeID, string URL, string PageName, string Form_ButtonID, string Placement
+            , string Interaction_Message, string Tagtypedata, string CallerPhoneNumber, string ThreadTitle, string ContactText, string RatingParameter, string Name
+            , string Email, string ReceiverContactID, string CallStatus, string CallDuration, string Calltoken, string CallRecordingURL, string NextThreadID
+            , string project_id, string country_code, string WishlistName, string PrivacySetting, string ThreadType, string RootNode, string AssociateFeedChannelID
+            , string LeadSalesChannelID, string fbid, string Source, string MediaID, string EntityFeedChannelID, string ActivitySubTypeID, string ActivityChannelID
+            , string ActivityDescription, string ActivityStatusID, string schedule_date, string StartTime, string EndTime, string ActivityThreadScheduling_StatusID
+            , string Enddate, string ActivityTagtypedata, string AgencyFeedChannelID, string AgencyContactFeedChanelID, string Salutation = ""
+            , string LeadFeedChannelID = "", string Language = "", string PropertyID = null, string ListingID = null
+            , string Seperator = null, string Triplet_Separator = null);
 
     }
 }

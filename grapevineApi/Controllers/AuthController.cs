@@ -20,17 +20,17 @@ namespace grapevineApi.Controllers
         public async Task<IActionResult> Login([FromQuery] string mobileNo)
         {
             // Replace with real user validation
-            bool isExists = await _loginService.LoginByMobile(mobileNo);
-            if (isExists)
+            var (message, FeedChannelID) = await _loginService.LoginByMobile(mobileNo);
+            if (message.Contains("Old User") || message.Contains("New User"))
             {
                 var token = await _tokenService.GenerateToken(mobileNo);
-                return Ok(new { token });
+                return Ok(new { token = token, FeedChannelID = FeedChannelID });
             }
             else
             {
                 return Unauthorized();
             }
-            
+
         }
     }
 

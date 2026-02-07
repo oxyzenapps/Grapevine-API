@@ -18,7 +18,7 @@ namespace grapevineServices.Model
             _loginRepository = loginRepository;
         }
 
-        public async Task<bool> LoginByMobile(string mobileNo)
+        public async Task<(string message,string FeedChannelID)> LoginByMobile(string mobileNo)
         {
             return await _loginRepository.LoginByMobile(mobileNo);
         }

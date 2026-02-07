@@ -32,6 +32,8 @@ namespace grapevineApi.Controllers
             District = await TransliterateToMarathi(District);
             Taluka = await TransliterateToMarathi(Taluka);
             Village = await TransliterateToMarathi(Village);
+            HissaNumber = await EnglishToHindiSmart(HissaNumber);
+
             var payload = new ScrapeRequest
             {
                 District = District,
@@ -138,6 +140,7 @@ namespace grapevineApi.Controllers
             District = await TransliterateToMarathi(District);
             Taluka = await TransliterateToMarathi(Taluka);
             Village = await TransliterateToMarathi(Village);
+            
             var payload = new ScrapeRequest
             {
                 District = District,
@@ -182,6 +185,27 @@ namespace grapevineApi.Controllers
         public async Task<IActionResult> Index2(string District, string Taluka, string Village, string SurveyNumber, string HissaNumber, string MobileNo, string Language,string TabText,
             string ToYear, string FromYear, string FromPageNo, string Last_Page, string Last_Year)
         {
+            if (String.IsNullOrWhiteSpace(FromYear))
+            {
+                FromYear= DateTime.Now.Year.ToString();
+            }
+            if (String.IsNullOrWhiteSpace(ToYear))
+            {
+                ToYear = (DateTime.Now.Year + 10).ToString();
+            }
+            if (String.IsNullOrWhiteSpace(FromPageNo))
+            {
+                FromPageNo = "1";
+            }
+            if(String.IsNullOrWhiteSpace(Last_Page))
+            {
+                Last_Page = "0";
+            }
+            if(String.IsNullOrWhiteSpace(Last_Year))
+            {
+                    Last_Year = "0";
+            }
+            
             //var exePath = @"D:\Office Projects\Grapevine\Grapevine_website\BhulekhExtractor\BhulekhExtractor.exe";
             var exePath = Path.Combine(
             _env.ContentRootPath,
@@ -256,7 +280,60 @@ namespace grapevineApi.Controllers
             public string Last_Page { get; set; } = "";
             public string Last_Year { get; set; } = "";
         }
+        [NonAction]
+        public static async Task<string> EnglishToHindiSmart(string text)
+        {
+            // Case: 1/A or 58/B type
+            var match = System.Text.RegularExpressions.Regex.Match(text, @"^(\d+)\/([A-Za-z])$");
 
+            if (match.Success)
+            {
+                string numberPart = match.Groups[1].Value;
+                string letterPart = match.Groups[2].Value.ToUpper();
+
+                // Manual mapping A-Z → Hindi
+                var map = new Dictionary<string, string>()
+        {
+            {"A","अ"},{"B","ब"},{"C","क"},{"D","द"},{"E","इ"},
+            {"F","फ"},{"G","ग"},{"H","ह"},{"I","इ"},{"J","ज"},
+            {"K","क"},{"L","ल"},{"M","म"},{"N","न"},{"O","ओ"},
+            {"P","प"},{"Q","क"},{"R","र"},{"S","स"},{"T","त"},
+            {"U","उ"},{"V","व"},{"W","व"},{"X","क्स"},{"Y","य"},{"Z","ज"}
+        };
+
+                string hindiLetter = map.ContainsKey(letterPart) ? map[letterPart] : letterPart;
+
+                return $"{numberPart}/{hindiLetter}";
+            }
+
+            // Otherwise normal phonetic conversion
+            using var client = new HttpClient();
+
+            string url = $"https://inputtools.google.com/request?text={Uri.EscapeDataString(text)}&itc=hi-t-i0-und&num=1";
+
+            var response = await client.GetStringAsync(url);
+            var json = Newtonsoft.Json.Linq.JArray.Parse(response);
+
+            if (json[0].ToString() != "SUCCESS")
+                return text;
+
+            string hindi = json[1][0][1][0].ToString();
+
+            // Convert Hindi digits back to English
+            hindi = hindi
+                .Replace("०", "0")
+                .Replace("१", "1")
+                .Replace("२", "2")
+                .Replace("३", "3")
+                .Replace("४", "4")
+                .Replace("५", "5")
+                .Replace("६", "6")
+                .Replace("७", "7")
+                .Replace("८", "8")
+                .Replace("९", "9");
+
+            return hindi;
+        }
         [NonAction]
         public async Task<string> TransliterateToMarathi(string text)
         {

@@ -1,14 +1,17 @@
 ﻿using Dapper;
+using grapevineCommon.Model.OxygenCrm;
 using grapevineCommon.Model.Workplace;
 using GrapevineCommon.Model.Workplace;
 
 using grapevineData.Interfaces;
 using grapevineRepository.Interfaces;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace grapevineRepository
@@ -473,6 +476,127 @@ namespace grapevineRepository
             {
                 return await conn.QueryAsync<ProjectAssociateResponse>("oxyzen_homes.dbo.OH_Get_Next_Lead_Associate", p, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        public async Task<string> GetFeedChannelDetails(string FeedChannelID)
+        {
+            var data = await _dapper.ExecuteTableFunctionAsync<dynamic>("glivebooks.dbo.[crm_feed_Get_FeedChannel_Details]", new { FeedChannelID });
+            string json = JsonConvert.SerializeObject(data);
+            return json;
+
+        }
+
+        public async Task<string> GetWorkteamMembers(string WorkteamId, string CompanyFeedChannelID)
+        {
+            var p = new DynamicParameters();
+            p.Add("@EntityFeedChannelID", CompanyFeedChannelID);
+            p.Add("@Workteamid", WorkteamId);
+            p.Add("@RoleLevel", "0");
+            p.Add("@Onroll", "1");
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<dynamic>("glivebooks.dbo.crm_get_feed_workteam_members", p, commandType: CommandType.StoredProcedure);
+                string json = JsonConvert.SerializeObject(data);
+                return json;
+            }
+        }
+
+        public async Task<string> GetWorkteamDetails(string SearchString, string CompanyFeedChannelID)
+        {
+            var p = new DynamicParameters();
+            p.Add("@EntityFeedChannelID", CompanyFeedChannelID);
+            p.Add("@SearchString", SearchString);
+            p.Add("@Action", "Get");
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<dynamic>("glivebooks.dbo.crm_insert_Feed_Workteam", p, commandType: CommandType.StoredProcedure);
+                string json = JsonConvert.SerializeObject(data);
+                return json;
+            }
+        }
+
+        public async Task<CRM_Lead> CreateLead(string WebsiteID, string ContactID, string Interaction_TypeID, string URL, string PageName, string Form_ButtonID, string Placement
+            , string Interaction_Message, string Tagtypedata, string CallerPhoneNumber, string ThreadTitle, string ContactText, string RatingParameter, string Name
+            , string Email, string ReceiverContactID, string CallStatus, string CallDuration, string Calltoken, string CallRecordingURL, string NextThreadID
+            , string project_id, string country_code, string WishlistName, string PrivacySetting, string ThreadType, string RootNode, string AssociateFeedChannelID
+            , string LeadSalesChannelID, string fbid, string Source, string MediaID, string EntityFeedChannelID, string ActivitySubTypeID, string ActivityChannelID
+            , string ActivityDescription, string ActivityStatusID, string schedule_date, string StartTime, string EndTime, string ActivityThreadScheduling_StatusID
+            , string Enddate, string ActivityTagtypedata, string AgencyFeedChannelID, string AgencyContactFeedChanelID, string Salutation = ""
+            , string LeadFeedChannelID = "", string Language = "", string PropertyID = null, string ListingID = null
+            , string Seperator = null, string Triplet_Separator = null)
+        {
+            var Crm = new CRM_Lead();
+            var p = new DynamicParameters();
+
+            // INPUT PARAMETERS
+            p.Add("@triplet_separator", Triplet_Separator);
+            p.Add("@separator", Seperator);
+            p.Add("@Property_ID", PropertyID);
+            p.Add("@listing_ID", ListingID);
+            p.Add("@WebsiteID", WebsiteID);
+            p.Add("@ContactID", ContactID);
+            p.Add("@Interaction_TypeID", Interaction_TypeID);
+            p.Add("@URL", URL);
+            p.Add("@PageName", PageName);
+            p.Add("@Form_ButtonID", Form_ButtonID);
+            p.Add("@Placement", Placement);
+            p.Add("@Interaction_Message", Interaction_Message);
+            p.Add("@Tagtypedata", Tagtypedata);
+            p.Add("@CallerPhoneNumber", CallerPhoneNumber);
+            p.Add("@ThreadTitle", ThreadTitle);
+            p.Add("@ContactText", ContactText);
+            p.Add("@RatingParameter", RatingParameter);
+            p.Add("@Name", Name);
+            p.Add("@Email", Email);
+            p.Add("@ReceiverContactID", ReceiverContactID);
+            p.Add("@CallStatus", CallStatus);
+            p.Add("@CallDuration", CallDuration);
+            p.Add("@Calltoken", Calltoken);
+            p.Add("@CallRecordingURL", CallRecordingURL);
+            p.Add("@NextThreadID", NextThreadID);
+            p.Add("@project_id", project_id);
+            p.Add("@country_code", country_code);
+            p.Add("@WishlistName", WishlistName);
+            p.Add("@PrivacySetting", PrivacySetting);
+            p.Add("@ThreadType", ThreadType);
+            p.Add("@RootNode", RootNode);
+            p.Add("@AssociateFeedChannelID", AssociateFeedChannelID);
+            p.Add("@LeadSalesChannelID", LeadSalesChannelID);
+            p.Add("@fbid", fbid);
+            p.Add("@Source", Source);
+            p.Add("@MediaID", MediaID);
+            p.Add("@EntityFeedChannelID", EntityFeedChannelID);
+            p.Add("@AgencyFeedChannelID", AgencyFeedChannelID);
+            p.Add("@AgencyContactFeedChanelID", AgencyContactFeedChanelID);
+            p.Add("@ActivitySubTypeID", ActivitySubTypeID);
+            p.Add("@ActivityChannelID", ActivityChannelID);
+            p.Add("@ActivityDescription", ActivityDescription);
+            p.Add("@ActivityStatusID", ActivityStatusID);
+            p.Add("@schedule_date", schedule_date);
+            p.Add("@StartTime", StartTime);
+            p.Add("@EndTime", EndTime);
+            p.Add("@ActivityThreadScheduling_StatusID", ActivityThreadScheduling_StatusID);
+            p.Add("@Enddate", Enddate);
+            p.Add("@Salutation", Salutation);
+            p.Add("@LeadFeedChannelID", LeadFeedChannelID);
+            p.Add("@language", Language);
+            p.Add("@ActivityTagtypedata", ActivityTagtypedata);
+
+            // OUTPUT PARAMETERS
+            p.Add("@LeadThreadID", dbType: DbType.String, size: 100, direction: ParameterDirection.Output);
+            p.Add("@ApplicantId", dbType: DbType.String, size: 100, direction: ParameterDirection.Output);
+            p.Add("@LeadthreadMsg", dbType: DbType.String, size: 100, direction: ParameterDirection.Output);
+            p.Add("@activitythreadID", dbType: DbType.String, size: 100, direction: ParameterDirection.Output);
+
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<dynamic>("oxyzen_homes.dbo.CreateLead ", p, commandType: CommandType.StoredProcedure);
+                Crm.LeadThreadID = p.Get<string>("@LeadThreadID");
+                Crm.ApplicantId = p.Get<string>("@ApplicantId");
+                Crm.LeadThreadMsg = p.Get<string>("@LeadthreadMsg");
+                Crm.ActivityThreadID = p.Get<string>("@activitythreadID");
+                return Crm;
+            }   
         }
     }
 }

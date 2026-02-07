@@ -53,9 +53,18 @@ namespace grapevineData
 
         public async Task<IEnumerable<T>> ExecuteTableFunctionAsync<T>(string functionName, object? parameters = null)
         {
-            using var conn = new SqlConnection(_connStr);
-            var sql = $"SELECT * FROM {functionName}";
-            return await conn.QueryAsync<T>(sql, parameters);
+            using var con = new SqlConnection(_connStr);
+
+            var paramNames = "";
+            if (parameters != null)
+            {
+                var props = parameters.GetType().GetProperties();
+                paramNames = string.Join(",", props.Select(p => "@" + p.Name));
+            }
+
+            string sql = $"select * from {functionName}({paramNames})";
+
+            return await con.QueryAsync<T>(sql, parameters);
         }
 
         public async Task<T> ExecuteTableFunctionSingleAsync<T>(string functionName, object? parameters = null)
@@ -98,6 +107,12 @@ namespace grapevineData
 
             return resultSets;
         }
+        public async Task<IEnumerable<T>> QueryAsync<T>(string sql, object? parameters = null)
+        {
+            using var con = GetConnection();
+            return await con.QueryAsync<T>(sql, parameters);
+        }
+    }
 		public async Task<List<IEnumerable<dynamic>>> QueryMultipleSqlAsync(StoredProcedureRequest request)
 		{
 			using var connection = new SqlConnection(_connStr);
