@@ -190,5 +190,8 @@ publish/
 /grapevineServices/obj/Debug/net8.0/grapevineServices.GlobalUsings.g.cs
 /grapevineApi/grapevineApi.csproj.user
 /.vs/grapevineApiCode/v17/.futdcache.v2
+<<<<<<< Updated upstream
 /.vs/grapevineApiCode/v17/.futdcache.v2
 /grapevineServices/bin/Debug/net8.0/grapevineServices.deps.json
+=======
+>>>>>>> Stashed changes
