@@ -111,9 +111,9 @@ namespace grapevineData
         {
             using var con = GetConnection();
             return await con.QueryAsync<T>(sql, parameters);
+
         }
-    }
-		public async Task<List<IEnumerable<dynamic>>> QueryMultipleSqlAsync(StoredProcedureRequest request)
+        public async Task<List<IEnumerable<dynamic>>> QueryMultipleSqlAsync(StoredProcedureRequest request)
 		{
 			using var connection = new SqlConnection(_connStr);
 			using var grid = await connection.QueryMultipleAsync(
