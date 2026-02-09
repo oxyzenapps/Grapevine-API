@@ -170,6 +170,24 @@ namespace grapevineServices.Model
                , "", "", "", "", "", "", "", "", "", "", AgencyFeedChannelID, AgencyContactFeedChanelID, Salutation, LeadFeedChannelID, Language);
             return data;
         }
+
+        public async Task<string> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername)
+        {
+            var data = await _repo.GetCompanyDetails(CompanyFeedChannelID, FeedChannelID, EmployeeOnly, Filtername);
+            return data;
+        }
+
+        public async Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID)
+        {
+            var data = await _repo.GetProjectDetails(ProjectName, DeveloperFeedChannelID, ProjectID);
+            return data;
+        }
+
+        public async Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID)
+        {
+            var data = await _repo.GetCompanyExecutive(CompanyFeedChannelID, FeedChannelID);
+            return data;
+        }
     }
 
     // --- Auxiliary Classes and Interfaces ---

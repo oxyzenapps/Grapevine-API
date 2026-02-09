@@ -478,6 +478,57 @@ namespace grapevineRepository
             }
         }
 
+        public async Task<string> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername)
+        {
+            var p = new DynamicParameters();
+            p.Add("@LoginFeedChannelID", FeedChannelID);
+            p.Add("@FeedChannelID", CompanyFeedChannelID);
+            p.Add("@OnlyOneAddress", "1");
+            p.Add("@EmployeeOnly", EmployeeOnly);
+            p.Add("@Filtername", Filtername);
+
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<ProjectAssociateResponse>("ode.dbo.ode_get_company_details", p, commandType: CommandType.StoredProcedure);
+                string json = JsonConvert.SerializeObject(data);
+                return json;
+            }
+
+           
+        }
+
+        public async Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID)
+        {
+            var p = new DynamicParameters();
+            p.Add("@ProjectName", ProjectName);
+            p.Add("@DeveloperFeedChannelID", DeveloperFeedChannelID);
+            p.Add("@ProjectID", ProjectID);
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<ProjectAssociateResponse>("oxyzen_homes.dbo.OH_get_projects", p, commandType: CommandType.StoredProcedure);
+                string json = JsonConvert.SerializeObject(data);
+                return json;
+            }
+
+
+        }
+
+        public async Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID)
+        {
+            var p = new DynamicParameters();
+            p.Add("@EntityFeedChannelID", CompanyFeedChannelID);
+            p.Add("@FeedChannelID", FeedChannelID);
+
+            using (var conn = _dapper.GetConnection())
+            {
+                var data = await conn.QueryAsync<ProjectAssociateResponse>("ode.dbo.ode_Get_CompanyExecutives", p, commandType: CommandType.StoredProcedure);
+                string json = JsonConvert.SerializeObject(data);
+                return json;
+            }
+
+
+        }
+
         public async Task<string> GetFeedChannelDetails(string FeedChannelID)
         {
             var data = await _dapper.ExecuteTableFunctionAsync<dynamic>("glivebooks.dbo.[crm_feed_Get_FeedChannel_Details]", new { FeedChannelID });

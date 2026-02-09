@@ -183,6 +183,54 @@ namespace grapevineApi.Controllers
                 return StatusCode(error.StatusCode, error);
             }
         }
+
+        [HttpGet("GetCompanyDetails")]
+        public async Task<IActionResult> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername)
+        {
+            try
+            {
+                var result = await _service.GetCompanyDetails(CompanyFeedChannelID, FeedChannelID, EmployeeOnly, Filtername);
+                var ok = ApiResponse<string>.Success(result, "Workteam Member details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam Member details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
+
+        [HttpGet("GetProjectDetails")]
+        public async Task<IActionResult> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID)
+        {
+            try
+            {
+                var result = await _service.GetProjectDetails(ProjectName, DeveloperFeedChannelID, ProjectID);
+                var ok = ApiResponse<string>.Success(result, "Workteam Member details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam Member details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
+
+        [HttpGet("GetCompanyExecutive")]
+        public async Task<IActionResult> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID)
+        {
+            try
+            {
+                var result = await _service.GetCompanyExecutive(CompanyFeedChannelID, FeedChannelID);
+                var ok = ApiResponse<string>.Success(result, "Workteam Member details retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch (Exception ex)
+            {
+                var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam Member details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
     }
 
  }

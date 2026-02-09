@@ -43,5 +43,9 @@ namespace grapevineRepository.Interfaces
             , string LeadFeedChannelID = "", string Language = "", string PropertyID = null, string ListingID = null
             , string Seperator = null, string Triplet_Separator = null);
 
+        Task<string> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername);
+        Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID);
+        Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID);
+
     }
 }

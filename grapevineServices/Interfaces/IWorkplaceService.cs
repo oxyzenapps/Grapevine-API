@@ -39,5 +39,9 @@ namespace grapevineService.Interfaces
                                     string AgencyFeedChannelID, string AgencyContactFeedChanelID, string LeadFeedChannelID,
                                     string Language, string MessageText);
 
+        Task<string> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername);
+        Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID);
+        Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID);
+
     }
 }
