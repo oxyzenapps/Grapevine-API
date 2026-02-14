@@ -111,7 +111,7 @@ namespace grapevineApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("crm_feed_Get_FeedChannel_Details")]
+        [HttpGet("GetUserDetails")]
         public async Task<IActionResult> crm_feed_Get_FeedChannel_Details(string FeedChannelID)
         {
             try
@@ -228,6 +228,22 @@ namespace grapevineApi.Controllers
             catch (Exception ex)
             {
                 var error = ApiResponse<string>.Error($"An error occurred while retrieving Workteam Member details: {ex.Message}", 500, "Internal Server Error", null, false);
+                return StatusCode(error.StatusCode, error);
+            }
+        }
+
+        [HttpGet("execproc")]
+        public async Task<IActionResult> execproc(string ProcedureName,string ParametersList)
+        {
+            try
+            {
+                var result = await _service.execproc(ProcedureName, ParametersList);
+                var ok = ApiResponse<dynamic>.Success(result, "execproc retrieved successfully", 200, "OK", true);
+                return StatusCode(ok.StatusCode, ok);
+            }
+            catch(Exception ex)
+            {
+                var error = ApiResponse<dynamic>.Error($"An error occurred while execproc details: {ex.Message}", 500, "Internal Server Error", null, false);
                 return StatusCode(error.StatusCode, error);
             }
         }

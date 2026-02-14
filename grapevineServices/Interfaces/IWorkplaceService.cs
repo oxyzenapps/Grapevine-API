@@ -43,5 +43,7 @@ namespace grapevineService.Interfaces
         Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID);
         Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID);
 
+        Task<dynamic> execproc(string ProcedureName, string ParametersList);
+
     }
 }

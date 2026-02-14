@@ -18,6 +18,11 @@ namespace grapevineRepository
 {
     public class WorkplaceRepository : IWorkplaceRepository
     {
+        public class UI_ACTION_RESULT
+        {
+            public Dictionary<string, object> result { get; set; } = new();
+            public List<string> errors { get; set; } = new();
+        }
         private readonly IDapperExecutor _dapper;
 
         public WorkplaceRepository(IDapperExecutor dapper)
@@ -648,6 +653,80 @@ namespace grapevineRepository
                 Crm.ActivityThreadID = p.Get<string>("@activitythreadID");
                 return Crm;
             }   
+        }
+
+        public async Task<UI_ACTION_RESULT> GetDataResultAsync(
+            string storedProcedure,
+            DynamicParameters parameters = null)
+        {
+            var result = new UI_ACTION_RESULT();
+
+            if (string.IsNullOrWhiteSpace(storedProcedure))
+            {
+                result.errors.Add("Invalid stored procedure name.");
+                return result;
+            }
+
+            try
+            {
+                var request = new StoredProcedureRequest
+                {
+                    ProcedureName = storedProcedure,
+                    Parameters = parameters
+                };
+
+                var datasets = await _dapper.QueryMultipleSqlAsync(request);
+
+                int index = 1;
+                foreach (var set in datasets)
+                {
+                    result.result[$"dataset{index}"] = ConvertRows(set);
+                    index++;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.errors.Add(ex.Message);
+            }
+
+            return result;
+        }
+        private List<Dictionary<string, object>> ConvertRows(IEnumerable<dynamic> rows)
+        {
+            var list = new List<Dictionary<string, object>>();
+
+            foreach (IDictionary<string, object> row in rows)
+            {
+                var dict = new Dictionary<string, object>();
+
+                foreach (var col in row)
+                {
+                    dict[ToCamelCase(col.Key)] =
+                        col.Value is DateTime dt ? dt.ToString("o") : col.Value;
+                }
+
+                list.Add(dict);
+            }
+
+            return list;
+        }
+        private string ToCamelCase(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return input;
+
+            var parts = input.Split('_', StringSplitOptions.RemoveEmptyEntries)
+                             .Select(p => char.ToUpper(p[0]) + p.Substring(1).ToLower());
+
+            var pascal = string.Join("", parts);
+            return char.ToLower(pascal[0]) + pascal.Substring(1);
+        }
+
+        public async Task<UI_ACTION_RESULT> execproc(string ProcedureName, string ParametersList)
+        {
+            string sqlQuery = "exec " + ProcedureName + " " + ParametersList;
+            var data = await GetDataResultAsync(sqlQuery);
+            return data;
         }
     }
 }

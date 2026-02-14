@@ -4,6 +4,7 @@ using GrapevineCommon.Model.Workplace;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using static grapevineRepository.WorkplaceRepository;
 
 namespace grapevineRepository.Interfaces
 {
@@ -46,6 +47,7 @@ namespace grapevineRepository.Interfaces
         Task<string> GetCompanyDetails(string CompanyFeedChannelID, string FeedChannelID, string EmployeeOnly, string Filtername);
         Task<string> GetProjectDetails(string ProjectName, string DeveloperFeedChannelID, string ProjectID);
         Task<string> GetCompanyExecutive(string CompanyFeedChannelID, string FeedChannelID);
+        Task<UI_ACTION_RESULT> execproc(string ProcedureName, string ParametersList);
 
     }
 }

@@ -188,6 +188,12 @@ namespace grapevineServices.Model
             var data = await _repo.GetCompanyExecutive(CompanyFeedChannelID, FeedChannelID);
             return data;
         }
+
+        public async Task<dynamic> execproc(string ProcedureName, string ParametersList)
+        {
+            var data = await _repo.execproc(ProcedureName,ParametersList);
+            return data.result;
+        }
     }
 
     // --- Auxiliary Classes and Interfaces ---
