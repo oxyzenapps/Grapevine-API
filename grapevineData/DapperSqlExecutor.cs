@@ -112,10 +112,31 @@ namespace grapevineData
 			while (!grid.IsConsumed)
 			{
 				var rows = await grid.ReadAsync();
-				resultSets.Add(rows);
+
+				var fixedRows = rows.Select(row =>
+				{
+					var dict = (IDictionary<string, object>)row;
+					var newDict = new Dictionary<string, object>();
+
+					int colIndex = 1;
+
+					foreach (var kv in dict)
+					{
+						var key = string.IsNullOrWhiteSpace(kv.Key)
+							? $"column{colIndex++}"
+							: kv.Key;
+
+						newDict[key] = kv.Value;
+					}
+
+					return (dynamic)newDict;
+				});
+
+				resultSets.Add(fixedRows);
 			}
 
 			return resultSets;
 		}
+
 	}
 }
