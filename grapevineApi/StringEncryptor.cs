@@ -4,7 +4,7 @@ using System;
 
 namespace grapevineApi
 {
-    public class StringEncryptor : grapevineService.Interfaces.IStringEncryptor
+    public class StringEncryptor : IStringEncryptor
     {
         public string Encrypt(string clearText)
         {

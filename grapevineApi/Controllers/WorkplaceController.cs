@@ -28,12 +28,12 @@ namespace grapevineApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("UpdateFilterparameter")]
-        public async Task<IActionResult> UpdateFilter([FromBody] UpdateFilterRequest request)
-        {
-            var searchId = await _service.UpdateFilterAsync(request);
-            return Ok(new { SearchID = searchId });
-        }
+        //[HttpPost("UpdateFilterparameter")]
+        //public async Task<IActionResult> UpdateFilter([FromBody] UpdateFilterRequest request)
+        //{
+        //    var searchId = await _service.UpdateFilterAsync(request);
+        //    return Ok(new { SearchID = searchId });
+        //}
 
         [HttpGet("ode_get_location_search")]
         public async Task<IActionResult> SearchLocation(string query, string localityRequired = "0")
@@ -233,11 +233,11 @@ namespace grapevineApi.Controllers
         }
 
         [HttpGet("execproc")]
-        public async Task<IActionResult> execproc(string ProcedureName,string ParametersList)
+        public async Task<IActionResult> execproc(string ProcedureName,string? ParametersList)
         {
             try
             {
-                var result = await _service.execproc(ProcedureName, ParametersList);
+                var result = await _service.execproc(ProcedureName, !string.IsNullOrEmpty(ParametersList) ? ParametersList:"" );
                 var ok = ApiResponse<dynamic>.Success(result, "execproc retrieved successfully", 200, "OK", true);
                 return StatusCode(ok.StatusCode, ok);
             }

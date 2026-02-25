@@ -3,6 +3,7 @@ using grapevineCommon.Model.Workplace;
 using GrapevineCommon.Model.Workplace;
 using grapevineRepository.Interfaces;
 using grapevineService.Interfaces;
+using grapevineServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -198,18 +199,5 @@ namespace grapevineServices.Model
 
     // --- Auxiliary Classes and Interfaces ---
 
-    public interface IStringEncryptor
-    {
-        string Encrypt(string plainText);
-        string Decrypt(string encryptedText);
-    }
-
-    public class StringEncryptor : IStringEncryptor
-    {
-        public string Encrypt(string plainText) =>
-            Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));
-
-        public string Decrypt(string encryptedText) =>
-            Encoding.UTF8.GetString(Convert.FromBase64String(encryptedText));
-    }
+    
 }

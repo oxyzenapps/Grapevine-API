@@ -18,12 +18,12 @@ namespace grapevineApi.Controllers
             _service = service;
         }
 
-        [HttpPost("UpdateFilterparameter")]
-        public async Task<IActionResult> UpdateFilter([FromBody] UpdateFilterRequest request)
-        {
-            var searchId = await _service.UpdateFilterAsync(request, "cookie_ssn_here");
-            return Ok(searchId);
-        }
+        //[HttpPost("UpdateFilterparameter")]
+        //public async Task<IActionResult> UpdateFilter([FromBody] UpdateFilterRequest request)
+        //{
+        //    var searchId = await _service.UpdateFilterAsync(request, "cookie_ssn_here");
+        //    return Ok(searchId);
+        //}
 
         [HttpGet("OH_get_search_sale_List_count")]
         public async Task<IActionResult> GetSaleListCount(string pageNo, string searchId, string sort, string listingStatusId, string feedChannelId, string myFeedChannelId)
