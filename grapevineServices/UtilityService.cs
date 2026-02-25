@@ -132,8 +132,28 @@ namespace grapevineServices.Services
 
 			return d.ToString(format);
 		}
+		public string stringToHtmlString(string html)
+		{
+			if (string.IsNullOrEmpty(html) == false)
+			{
+				String quot = "'";
+				//string quot = new string(chars);
+				html = html.Replace("&quot;", quot);
+				html = html.Replace("&#39;", "'");
+				html = html.Replace("&lt;", "<");
+				html = html.Replace("&gt;", ">");
+				html = html.Replace("&amp;", "&");
+			}
+			else
+			{
+				html = null;
+			}
 
- 
+			return html;
+
+		}
+
+
 
 
 	}
