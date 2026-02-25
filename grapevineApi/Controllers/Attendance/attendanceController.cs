@@ -31,19 +31,42 @@ namespace grapevineApi.Controllers
 		}
 
 		// ================= INSERT LOG =================
-		[HttpPost("insertLog")]
-		public async Task<IActionResult> insertLog([FromBody] System.Text.Json.JsonElement body)
+		public class InsertLogRequest
 		{
-			string LogDateTime = body.GetProperty("LogDateTime").GetString() ?? "";
-			int CompanyFeedChannelID = body.GetProperty("CompanyFeedChannelID").GetInt32();
-			int ExecutiveFeedChannelID = body.GetProperty("ExecutiveFeedChannelID").GetInt32();
-			int FeedID = body.GetProperty("FeedID").GetInt32();
-			int PlaceID = body.GetProperty("PlaceID").GetInt32();
-			string TimeLogTypeID = body.GetProperty("TimeLogTypeID").GetString() ?? "";
-			string lat = body.GetProperty("lat").GetString() ?? "";
-			string lng = body.GetProperty("lng").GetString() ?? "";
-			string LogText = TimeLogTypeID == "1" ? "Check-in" :
-							 TimeLogTypeID == "-1" ? "Check-out" : " ";
+			public string LogDateTime { get; set; } = "";
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public int ExecutiveFeedChannelID { get; set; } = 0;
+			public int FeedID { get; set; } = 0;
+			public int PlaceID { get; set; } = 0;
+			public string TimeLogTypeID { get; set; } = "";
+			public string lat { get; set; } = "";
+			public string lng { get; set; } = "";
+		}
+
+		[HttpPost("insertLog")]
+		public async Task<IActionResult> insertLog([FromBody] InsertLogRequest request)
+		{
+			string LogDateTime = request.LogDateTime;
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			int ExecutiveFeedChannelID = request.ExecutiveFeedChannelID;
+			int FeedID = request.FeedID;
+			int PlaceID = request.PlaceID;
+			string TimeLogTypeID = request.TimeLogTypeID;
+			string lat = request.lat;
+			string lng = request.lng;
+
+			string LogText = "";
+
+			if (TimeLogTypeID == "1")
+			{
+				LogText = "Check-in";
+			}
+			else if (TimeLogTypeID == "-1")
+			{
+				LogText = "Check-out";
+			}
+
+			string formattedLogDateTime = _utilityService.FormatDate(LogDateTime, false, "MM-dd-yyyy hh:mm tt");
 
 			string sqlQuery =
 				"exec ode.dbo.ode_insert_company_executive_attendance " +
@@ -54,6 +77,7 @@ namespace grapevineApi.Controllers
 				$"@PlaceID='{PlaceID}'," +
 				$"@TimeLogTypeID='{TimeLogTypeID}'," +
 				$"@LogText='{LogText}'," +
+				$"@LogDateTime='{formattedLogDateTime}'," +
 				$"@lat='{lat}'," +
 				$"@lng='{lng}'";
 
@@ -63,20 +87,30 @@ namespace grapevineApi.Controllers
 		}
 
 		// ================= GET LOG =================
-		[HttpPost("getLog")]
-		public async Task<IActionResult> getLog([FromBody] System.Text.Json.JsonElement body)
+		public class GetLogRequest
 		{
-			string LogDateTime = body.GetProperty("LogDateTime").GetString() ?? "";
-			int CompanyFeedChannelID = body.GetProperty("CompanyFeedChannelID").GetInt32();
-			int ExecutiveFeedChannelID = body.GetProperty("ExecutiveFeedChannelID").GetInt32();
-			bool printVisitCard = body.GetProperty("printVisitCard").GetBoolean();
+			public string LogDateTime { get; set; } = "";
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public int ExecutiveFeedChannelID { get; set; } = 0;
+			public bool printVisitCard { get; set; } = false;
+		}
+
+		[HttpPost("getLog")]
+		public async Task<IActionResult> getLog([FromBody] GetLogRequest request)
+		{
+			string LogDateTime = request.LogDateTime;
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			int ExecutiveFeedChannelID = request.ExecutiveFeedChannelID;
+			bool printVisitCard = request.printVisitCard;
+
+			string formattedLogDateTime = _utilityService.FormatDate(LogDateTime, false, "MM-dd-yyyy hh:mm tt");
+
 			string sqlQuery =
 				"exec ode.dbo.ode_insert_company_executive_attendance " +
 				"@Action='get log'," +
 				$"@CompanyFeedChannelID='{CompanyFeedChannelID}'," +
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
-				$"@LogDateTime='{LogDateTime}'";
-
+				$"@LogDateTime='{formattedLogDateTime}'";
 			if (printVisitCard)
 			{
 				return Ok("pending");
