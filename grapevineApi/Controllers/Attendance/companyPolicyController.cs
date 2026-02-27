@@ -16,15 +16,27 @@ namespace grapevineApi.Controllers
 			_utilityService = utilityService;
 		}
 
-		[HttpPost("insertCompanyPolicy")]
-		public async Task<IActionResult> insertCompanyPolicy(
-			int CompanyFeedChannelID,
-			string DocumentFileName,
-			string EffectivDate,
-			int AddressID,
-			string PolicyTitle,
-			string Expired)
+		public class InsertCompanyPolicyRequest
 		{
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public string DocumentFileName { get; set; } = "";
+			public string EffectivDate { get; set; } = "";
+			public int AddressID { get; set; } = 0;
+			public string PolicyTitle { get; set; } = "";
+			public string Expired { get; set; } = "";
+		}
+
+		[HttpPost("insertCompanyPolicy")]
+		public async Task<IActionResult> insertCompanyPolicy([FromBody] InsertCompanyPolicyRequest request)
+		{
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			string DocumentFileName = request.DocumentFileName;
+			string EffectivDate = request.EffectivDate;
+			int AddressID = request.AddressID;
+			string PolicyTitle = request.PolicyTitle;
+			string Expired = request.Expired;
+
+			 
 			string sqlQuery =
 				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='insert'," +
@@ -41,12 +53,20 @@ namespace grapevineApi.Controllers
 			return Ok(result.result);
 		}
 
-		[HttpPost("getCompanyPolicy")]
-		public async Task<IActionResult> getCompanyPolicy(
-			int CompanyFeedChannelID,
-			int AddressID,
-			string EffectivDate)
+		public class GetCompanyPolicyRequest
 		{
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public int AddressID { get; set; } = 0;
+			public string EffectivDate { get; set; } = "";
+		}
+
+		[HttpPost("getCompanyPolicy")]
+		public async Task<IActionResult> getCompanyPolicy([FromBody] GetCompanyPolicyRequest request)
+		{
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			int AddressID = request.AddressID;
+			string EffectivDate = request.EffectivDate;
+
 			string sqlQuery =
 				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='get'," +
@@ -59,14 +79,22 @@ namespace grapevineApi.Controllers
 
 			return Ok(result.result);
 		}
+		public class DeleteCompanyPolicyRequest
+		{
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public int AddressID { get; set; } = 0;
+			public string EffectivDate { get; set; } = "";
+			public string PolicyTitle { get; set; } = "";
+		}
 
 		[HttpPost("deleteCompanyPolicy")]
-		public async Task<IActionResult> deleteCompanyPolicy(
-			int CompanyFeedChannelID,
-			int AddressID,
-			string EffectivDate = "",
-			string PolicyTitle = "")
+		public async Task<IActionResult> deleteCompanyPolicy([FromBody] DeleteCompanyPolicyRequest request)
 		{
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			int AddressID = request.AddressID;
+			string EffectivDate = request.EffectivDate;
+			string PolicyTitle = request.PolicyTitle;
+
 			string sqlQuery =
 				"exec ode.dbo.[ode_insert_Company_Policy_documents] " +
 				"@Action='Delete'," +
