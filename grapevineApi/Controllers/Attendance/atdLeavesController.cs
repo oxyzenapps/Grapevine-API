@@ -418,8 +418,8 @@ namespace grapevineApi.Controllers
 			public int LeaveTypeID { get; set; } = 0;
 			public int MaxLimitDays { get; set; } = 0;
 			public int LimitMonths { get; set; } = 0;
-			public bool Calculated { get; set; } = false;
-			public bool CarryForward { get; set; } = false;
+			public int Calculated { get; set; } = 0;
+			public int CarryForward { get; set; } = 0;
 			public int MaxCarryForwardLeaveDays { get; set; } = 0;
 			public int MaxCarryForwardMonhts { get; set; } = 0;
 		}
@@ -432,8 +432,8 @@ namespace grapevineApi.Controllers
 			int LeaveTypeID = request.LeaveTypeID;
 			int MaxLimitDays = request.MaxLimitDays;
 			int LimitMonths = request.LimitMonths;
-			bool Calculated = request.Calculated;
-			bool CarryForward = request.CarryForward;
+			int Calculated = request.Calculated;
+			int CarryForward = request.CarryForward;
 			int MaxCarryForwardLeaveDays = request.MaxCarryForwardLeaveDays;
 			int MaxCarryForwardMonhts = request.MaxCarryForwardMonhts;
 
