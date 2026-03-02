@@ -121,6 +121,42 @@ namespace grapevineApi.Controllers
 
 			return Ok(result.result);
 		}
+		public class InsertFeedLikesRequest
+		{
+			public int Website_ID { get; set; } = 0;
+			public int FeedID { get; set; } = 0;
+			public int CommentID { get; set; } = 0;
+			public int ObjectID { get; set; } = 0;
+			public int FeedLikeTypeID { get; set; } = 0;
+			public int FeedLikedByContactID { get; set; } = 0;
+		}
+
+		[HttpPost("insertFeedLike")]
+		public async Task<IActionResult> insertFeedLike([FromBody] InsertFeedLikesRequest request)
+		{
+			int Website_ID = request.Website_ID;
+			int FeedID = request.FeedID;
+			int CommentID = request.CommentID;
+			int ObjectID = request.ObjectID;
+			int FeedLikeTypeID = request.FeedLikeTypeID;
+			int FeedLikedByContactID = request.FeedLikedByContactID;
+
+			string sqlQuery =
+				"exec glivebooks.dbo.crm_Insert_Feed_Likes " +
+				$"@Website_ID='{Website_ID}'," +
+				$"@FeedID='{FeedID}'," +
+				$"@CommentID='{CommentID}'," +
+				$"@ObjectID='{ObjectID}'," +
+				$"@FeedLikeTypeID='{FeedLikeTypeID}'," +
+				$"@FeedLikedByContactID='{FeedLikedByContactID}'";
+
+			var result = await _utilityService.GetDataResultAsync(sqlQuery);
+
+			if (result.errors.Any())
+				return BadRequest(result.errors);
+
+			return Ok(result.result);
+		}
 
 	}
 }
