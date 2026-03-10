@@ -68,8 +68,8 @@ namespace grapevineApi.Controllers
 				$"@ExecutiveFeedChannelID='{ExecutiveFeedChannelID}'," +
 				$"@LeaveTypeID='{LeaveTypeID}'," +
 				$"@LeaveReason=N'{LeaveReason.Replace("'", "''")}'," +
-				$"@ToDate='{_utilityService.FormatDate(ToDate)}'," +
-				$"@FromDate='{_utilityService.FormatDate(FromDate)}'," +
+				$"@ToDate='{ToDate}'," +
+				$"@FromDate='{FromDate}'," +
 				"@ReturnValue=@ReturnValue output; select @ReturnValue as ReturnValue";
 
 			var result = await _utilityService.GetDataResultAsync(sqlQuery);
