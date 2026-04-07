@@ -127,8 +127,15 @@ namespace grapevineServices.Services
 			if (!DateTime.TryParse(date, out var d))
 				return string.Empty;
 
+			// Check if input contains time
+			bool hasTime = date.Contains(":");
+
 			if (forceFirstDay)
 				d = new DateTime(d.Year, d.Month, 1);
+
+			// If time exists, append time format
+			if (hasTime)
+				return d.ToString(format + " hh:mm tt");
 
 			return d.ToString(format);
 		}
