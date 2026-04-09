@@ -135,7 +135,8 @@ namespace grapevineServices.Services
 
 			// If time exists, append time format
 			if (hasTime)
-				return d.ToString(format + " hh:mm tt");
+				//return d.ToString(format + " hh:mm tt");
+				return d.ToString(format);
 
 			return d.ToString(format);
 		}
