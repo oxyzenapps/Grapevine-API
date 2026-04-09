@@ -121,31 +121,30 @@ namespace grapevineServices.Services
 
 			return result;
 		}
-
 		public string FormatDate(string date, bool forceFirstDay = false, string format = "MM-dd-yyyy")
 		{
 			if (!DateTime.TryParse(date, out var d))
 				return string.Empty;
 
-			// Check if input contains time
-			bool hasTime = date.Contains(":");
-
 			if (forceFirstDay)
 				d = new DateTime(d.Year, d.Month, 1);
 
-			// If time exists, append time format
-			if (hasTime)
-				//return d.ToString(format + " hh:mm tt");
-				return d.ToString(format);
+			bool hasTime = d.TimeOfDay.TotalSeconds > 0;
 
-			return d.ToString(format);
+			string finalFormat = format;
+
+			if (hasTime)
+				finalFormat = $"{format} hh:mm tt"; // safe append
+
+			return d.ToString(finalFormat);
 		}
+		 
 		public string stringToHtmlString(string html)
 		{
 			if (string.IsNullOrEmpty(html) == false)
 			{
 				String quot = "'";
-				//string quot = new string(chars);
+				//string quot = new str ing(chars);
 				html = html.Replace("&quot;", quot);
 				html = html.Replace("&#39;", "'");
 				html = html.Replace("&lt;", "<");
