@@ -133,6 +133,24 @@ namespace grapevineServices.Services
 
 			string finalFormat = format;
 
+			// Only append time if NOT already included
+			if (hasTime && !format.Contains("hh") && !format.Contains("HH"))
+				finalFormat = $"{format} hh:mm tt";
+
+			return d.ToString(finalFormat);
+		}
+		public string FormatDateqq(string date, bool forceFirstDay = false, string format = "MM-dd-yyyy")
+		{
+			if (!DateTime.TryParse(date, out var d))
+				return string.Empty;
+
+			if (forceFirstDay)
+				d = new DateTime(d.Year, d.Month, 1);
+
+			bool hasTime = d.TimeOfDay.TotalSeconds > 0;
+
+			string finalFormat = format;
+
 			if (hasTime)
 				finalFormat = $"{format} hh:mm tt"; // safe append
 
