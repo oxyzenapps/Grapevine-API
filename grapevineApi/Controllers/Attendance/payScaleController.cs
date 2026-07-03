@@ -16,23 +16,36 @@ namespace grapevineApi.Controllers
 		}
 
 		// ===================== EXECUTIVE PAYROLL =====================
-		[HttpGet("getExePayroll")]
-		public async Task<IActionResult> getExePayroll(
-			int CompanyFeedChannelID = 0,
-			int ExecutiveFeedChannelID = 0,
-			string YearMonth = "",
-			string Approved = "",
-			string NotApproved = "",
-			string Paid = "",
-			string NotPaid = "",
-			bool Print = false
-		)
+		public class GetExePayrollRequest
 		{
+			public string LogDateTime { get; set; } = "";
+			public string NotPaid { get; set; } = "";
+			public string Paid { get; set; } = "";
+			public string NotApproved { get; set; } = "";
+			public string Approved { get; set; } = "";
+			public string YearMonth { get; set; } = "";
+			public int CompanyFeedChannelID { get; set; } = 0;
+			public int ExecutiveFeedChannelID { get; set; } = 0;
+			public bool Print { get; set; } = false;
+		}
+		[HttpPost("getExePayroll")]
+		 public async Task<IActionResult> getExePayroll([FromBody] GetExePayrollRequest request)
+		{
+			int CompanyFeedChannelID = request.CompanyFeedChannelID;
+			int ExecutiveFeedChannelID = request.ExecutiveFeedChannelID;
+			string YearMonth = request.YearMonth;
+			string Approved = request.Approved;
+			string NotApproved = request.NotApproved;
+			string Paid = request.Paid;
+			string NotPaid = request.NotPaid;
+			bool Print = request.Print;
+			string formattedDate = _utilityService.FormatDate(YearMonth, true, "MM-dd-yyyy hh:mm tt");
+
 			string sqlQuery = "exec ode.dbo.[ode_insert_company_Pay_Scales] " +
 							  "@Action='Get Executive Pay roll'," +
 							  "@CompanyFeedChannelID='" + CompanyFeedChannelID + "'," +
 							  "@ExecutiveFeedChannelID='" + ExecutiveFeedChannelID + "'," +
-							  "@YearMonth='" + YearMonth + "'," +
+							  "@YearMonth='" + formattedDate + "'," +
 							  "@Approved='" + Approved + "'," +
 							  "@NotApproved='" + NotApproved + "'," +
 							  "@Paid='" + Paid + "'," +
